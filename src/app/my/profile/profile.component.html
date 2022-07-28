@@ -1,0 +1,347 @@
+<div class="container mt-2">
+      <div class="row">
+            <div class="col"><span (click)="back()"
+                        style="cursor: pointer;"><i class="fa fa-chevron-left fa-2x text-muted"></i></span> </div>
+            <div class="col-md text-center mb-3  wow fadeInUp"><h1 [ngStyle]="{'color': colorService.darkBackground}">Profile</h1></div>
+            <div class="col"></div>
+      </div>
+      <div class="row"
+           *ngIf="!user">
+            <div class="col">
+                  <div class="alert alert-danger"
+                       role="alert">Session expired. No information found. Please log in.</div>
+            </div>
+      </div>
+      <div class="row"
+           *ngIf="user">
+            <div class="col order-sm-first order-last">
+                  <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onName()"
+                                    *ngIf="(user && !user.first_name)">No First Name</span>
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onName()"
+                                    *ngIf="user && user.first_name"><strong>First Name:</strong>
+                                    {{user.first_name}}</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onName()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onName()"
+                                    *ngIf="user && !user.last_name">No First Name</span>
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onName()"
+                                    *ngIf="user && user.last_name"><strong>Last Name:</strong> {{user.last_name}}</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onName()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                  </ul>
+                  <ul class="list-group mb-3">
+                        <li *ngIf="user && !(user.user_type == 'practitioner')"
+                            class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onUserType()"
+                                    *ngIf="user && !user.user_type">Are you a practitioner?</span>
+                              <span class="p-2 text-capitalize"
+                                    style="cursor: pointer;"
+                                    (click)="onUserType()"
+                                    *ngIf="user && user.user_type">
+                                    {{user.user_type}}</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onUserType()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+
+                        <li *ngIf="user && !(user.user_type == 'practitioner')"
+                            class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onCompanyName()"
+                                    *ngIf="user && !user.company_name">No Company Name</span>
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onCompanyName()"
+                                    *ngIf="user && user.company_name"><strong>Company Name:</strong>
+                                    {{user.company_name}}</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onCompanyName()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li *ngIf="(settingService.settings.site_type === 'practitioner') && user && (user.user_type === 'practitioner')"
+                            class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onPracName()"
+                                    *ngIf="user && !user.practitioner_name">Practitioner Name</span>
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onPracName()"
+                                    *ngIf="user && user.practitioner_name"><strong>Practitioner Name:</strong>
+                                    {{user.practitioner_name}}</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onPracName()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li *ngIf="settingService.settings.site_type === 'practitioner' && user && (user.user_type === 'practitioner')"
+                            class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onPracName()"
+                                    *ngIf="user && !(user.user_type == 'practitioner')">Practitioner NPI</span>
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onPracName()"
+                                    *ngIf="user && (user.user_type == 'practitioner')"><strong>Practitioner NPI:</strong> {{user.npi}}</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onPracName()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li *ngIf="settingService.settings.site_type === 'practitioner' && user && (user.user_type === 'practitioner')"
+                            class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onPracName()"
+                                    *ngIf="user && !user.customer_id">Practitioner Number</span>
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onPracName()"
+                                    *ngIf="user && user.customer_id"><strong>Practitioner Number:</strong>
+                                    {{user.customer_id}}</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onPracName()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                  </ul>
+                  <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onEmail()"
+                                    *ngIf="user && user.email"><strong>Email:</strong> {{user.email}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onEmail()"
+                                    *ngIf="user && !user.email"> No email found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onEmail()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                  </ul>
+                  <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onPhone()"
+                                    *ngIf="user && user.phone_number"><strong>Phone:</strong>
+                                    {{user.phone_number}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onPhone()"
+                                    *ngIf="user && !user.phone_number"> No phone number found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onPhone()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                  </ul>
+                  <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"
+                                    *ngIf="user && user.address1"><strong>Address 1:</strong> {{user.address1}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"
+                                    *ngIf="user && !user.address1">No address 1 found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    *ngIf="user && user.address2"><strong>Address 2:</strong> {{user.address2}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    *ngIf="user && !user.address2">No address 2 found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"
+                                    *ngIf="user && user.city"><strong>City:</strong> {{user.city}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"
+                                    *ngIf="user && !user.city">No city found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"
+                                    *ngIf="user && user.province"><strong>Province:</strong> {{user.province}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"
+                                    *ngIf="user && !user.province">No province found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    *ngIf="user && user.zip"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"><strong>Zip Code:</strong> {{user.zip}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"
+                                    *ngIf="user && !user.zip">No zip code found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"
+                                    *ngIf="user && user.country"><strong>Country:</strong> {{user.country}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"
+                                    *ngIf="user && !user.country">No country found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                  </ul>
+                  <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onDob()"
+                                    *ngIf="user && user.dob"><strong>Date of Birth:</strong> {{user.dob}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onDob()"
+                                    *ngIf="user && !user.dob">No date of birth found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onDob()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onGender()"
+                                    *ngIf="user && user.gender"><strong>Gender at Birth:</strong> {{user.gender}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onGender()"
+                                    *ngIf="user && !user.gender">No gender found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onGender()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                  </ul>
+                  <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onPaymentInfo()"
+                                    *ngIf="user && user.cc_name_on_card"><strong>Name on Card:</strong>
+                                    {{user.cc_name_on_card}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onPaymentInfo()"
+                                    *ngIf="user && !user.cc_name_on_card">No name on card found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onPaymentInfo()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onPaymentInfo()"
+                                    *ngIf="user && user.cc_number"><strong>CC Number:</strong>
+                                    ************{{user.cc_number | slice:-4}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onPaymentInfo()"
+                                    *ngIf="user && !user.cc_number">No credit card number found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onPaymentInfo()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onPaymentInfo()"
+                                    *ngIf="user && user.cc_exp_date"><strong>CC Expiration:</strong>
+                                    {{user.cc_exp_date}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onPaymentInfo()"
+                                    *ngIf="user && !user.cc_exp_date">No expiration found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onPaymentInfo()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li *ngIf="!production"
+                            class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2">Diagnostic </span>
+                              <div class="form-check form-switch">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           id="flexSwitchCheckDefault"
+                                           [checked]="diagnostic"
+                                           (click)="setDiagnostic()">
+                              </div>
+                        </li>
+                  </ul>
+            </div>
+            <div class="col mb-2">
+                  <app-address *ngIf="isAddressEdit"
+                               [data]="user"
+                               (done)="editReset()"></app-address>
+                  <app-cc-info *ngIf="isPaymentInfoEdit"
+                               [data]="user"
+                               (done)="editReset()"></app-cc-info>
+                  <app-dob *ngIf="isDOBEdit"
+                           [data]="user"
+                           (done)="editReset()"></app-dob>
+                  <app-gender *ngIf="isGenderEdit"
+                              [data]="user"
+                              (done)="editReset()"></app-gender>
+                  <app-user-name *ngIf="isNameEdit"
+                                 [data]="user"
+                                 (done)="editReset()"></app-user-name>
+                  <app-user-phone *ngIf="isPhoneEdit"
+                                  [data]="user"
+                                  (done)="editReset()"></app-user-phone>
+                  <app-user-email *ngIf="isEmailEdit"
+                                  [data]="user"
+                                  (done)="editReset()"></app-user-email>
+                  <app-practice *ngIf="isPracticeEdit"
+                                [data]="user"
+                                (done)="editReset()"></app-practice>
+                  <app-my-company *ngIf="isCompanyNameEdit"
+                  [data]="user"
+                  (done)="editReset()"></app-my-company>              
+                  <pre *ngIf="diagnostic"
+                       class="text-light bg-dark p-4">{{user | json}}</pre>
+            </div>
+      </div>
+</div>

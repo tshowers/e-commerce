@@ -1,0 +1,41 @@
+<form #dataForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="data">
+    <div class="containter-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="text-capitalize">Name</h4>
+            </div>
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input [(ngModel)]="data.first_name" type="text" name="first_name" id="first_name" class="form-control form-control-lg" required autofocus>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input [(ngModel)]="data.last_name" type="text" name="last_name" id="last_name" class="form-control form-control-lg" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="display_name">Display Name</label>
+                            <input [(ngModel)]="data.display_name" type="text" name="display_name" id="display_name" class="form-control form-control-lg" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" [ngStyle]="{'background-color': colorService.secondaryColor, 'border-color': colorService.secondaryColor}" class="btn btn-primary"
+                            [disabled]="!dataForm.form.valid">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

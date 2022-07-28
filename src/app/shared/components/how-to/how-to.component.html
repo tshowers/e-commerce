@@ -1,0 +1,30 @@
+<section id="how-to-use---2" class="section how-to-use-2  pb-5" [ngClass]="{'color-block': (userService.company && userService.company.color_block)}" *ngIf="data && data.how_to">
+  <div class="container">
+    <h2 class="section__title mb-2 wow fadeInUp" [ngStyle]="{'color': colorService.secondaryColor}">{{data?.how_to?.headerText}}</h2>
+    <div class="row">
+      <div class="col" [ngClass]="{'home2': !(userService.company && userService.company.color_block)}">
+        <div class="container">
+          <div class="row ">
+            <div class="block-desc text-muted  wow fadeInUp" innerHTML="{{data?.how_to?.descriptionText}}">
+            </div>
+            <div class="col-md-4 how-to-block-2 wow fadeInUp">
+              <span class="number">1</span>
+              <h3><span *ngIf="!(data && data.how_to && data.how_to.header1)">&nbsp;</span><span *ngIf="(data && data.how_to && data.how_to.header1)">{{data?.how_to?.header1}}</span></h3>
+              <p>{{data?.how_to?.description1}}</p>
+            </div>
+            <div class="col-md-4 how-to-block-2 wow fadeInUp">
+              <span class="number">2</span>
+              <h3><span *ngIf="!(data && data.how_to && data.how_to.header2)">&nbsp;</span><span *ngIf="(data && data.how_to && data.how_to.header2)">{{data?.how_to?.header2}}</span></h3>
+              <p>{{data?.how_to?.description2}}</p>
+            </div>
+            <div class="col-md-4 how-to-block-2 wow fadeInUp">
+              <span class="number">3</span>
+              <h3><span *ngIf="!(data && data.how_to && data.how_to.header3)">&nbsp;</span><span *ngIf="(data && data.how_to && data.how_to.header3)">{{data?.how_to?.header3}}</span> </h3>
+              <p>{{data?.how_to?.description3}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

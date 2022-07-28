@@ -1,0 +1,159 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col wow fadeInDown"><span routerLink="/"
+                  style="cursor: pointer;"><i class="fa fa-chevron-left  fa-2x text-muted"></i></span> </div>
+        <div class="col-md text-center mb-3">
+            <h1 [ngStyle]="{'color': colorService.darkBackground}">Administration</h1>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md wow fadeInDown mb-2">
+            <div class="card">
+                <div class="card-header">
+                    <img *ngIf="userService.authService.firebaseUser && userService.authService.firebaseUser.photoURL"
+                         src="{{userService.authService.firebaseUser.photoURL}}"
+                         alt=""
+                         class="img-thumbnail"
+                         style="max-height: 64px;"> {{userService?.user?.first_name}} {{userService?.user?.last_name}}
+                </div>
+                <div class="card-body">
+                    <div *ngIf="userService.user && (userService.user.user_type == 'practitioner')"
+                         class="alert alert-primary">
+                        <div *ngIf="userService.user && userService.user.practitioner_name">
+                            {{userService?.user?.practitioner_name}}</div>
+                        <div *ngIf="userService.user && userService.user.customer_id">{{userService?.user?.customer_id}}</div>
+                        <div *ngIf="userService.user && userService.user.prac_first_name">{{userService?.user?.prac_first_name}}</div>
+                        <div *ngIf="userService.user && userService.user.prac_last_name">{{userService?.user?.prac_last_name}}</div>
+                        <div *ngIf="userService.user && userService.user.npi">{{userService?.user?.npi}}</div>
+                    </div>
+                    <div class="fw-bold"
+                         *ngIf="userService.user && userService.user.company_name && !(userService.user.user_type == 'practitioner')">
+                        {{userService?.user?.company_name}}</div>
+                    <div *ngIf="userService.user && userService.user.email">{{userService?.user?.email}}</div>
+                    <div *ngIf="userService.user && userService.user.phone_number">{{userService?.user?.phone_number}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md wow fadeInDown mb-2">
+            <div class="card">
+                <div class="card-header"
+                     *ngIf="userService.user && userService.user._id">
+                    <div>{{userService?.user?._id}}</div>
+                </div>
+                <div class="card-body">
+                    <div *ngIf="userService.user && userService.user.address1">{{userService?.user?.address1}} <span
+                              *ngIf="userService.user && userService.user.address2">{{userService?.user?.address2}}</span>
+                    </div>
+                    <div *ngIf="userService.user && userService.user.city">{{userService?.user?.city}}
+                        {{userService?.user?.province}} {{userService?.user?.zip}}</div>
+                    <div *ngIf="userService.user && userService.user.country">{{userService?.user?.country}}</div>
+                    
+                    <div *ngIf="userService.user && userService.user.roles"><hr>Roles: <span class="text-capitalize text-info">{{userService?.user?.roles}}</span> </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row"
+         *ngIf="userService.lastOrderID">
+        <div class="col text-center">
+            <p>Order <strong>{{userService.lastOrderID}}</strong> is being processed.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center wow slideInLeft">
+                    <a class="text-dark p-2"
+                       routerLink="/admin/settings"> <i class="fa fa-cogs"
+                           aria-hidden="true"></i> Settings</a>
+                    <a class="text-secondary text-opacity-25"
+                       style="cursor: pointer;"
+                       routerLink="/admin/settings"><i class="fa fa-chevron-right fa-1x"></i></a>
+                </li>
+            </ul>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center  wow slideInLeft">
+                    <a class="text-dark p-2"
+                       routerLink="/products"><i class="fa fa-gift"
+                           aria-hidden="true"></i> Products</a>
+                    <a class="text-secondary text-opacity-25"
+                       style="cursor: pointer;"
+                       routerLink="/products"><i class="fa fa-chevron-right fa-1x"></i></a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center  wow slideInLeft"  *ngIf="isAdmin">
+                    <a class="text-dark p-2"
+                       routerLink="/customers"><i class="fa fa-users"
+                           aria-hidden="true"></i> Registered Customers</a>
+                    <a class="text-secondary text-opacity-25"
+                       style="cursor: pointer;"
+                       routerLink="/customers"><i class="fa fa-chevron-right fa-1x"></i></a>
+                </li>
+            </ul>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center wow slideInLeft">
+                    <a class="text-dark p-2"
+                       routerLink="/orders"><i class="fa fa-money"
+                           aria-hidden="true"></i> Web Orders</a>
+                    <a class="text-secondary text-opacity-25"
+                       style="cursor: pointer;"
+                       routerLink="/orders"><i class="fa fa-chevron-right fa-1x"></i></a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center wow slideInLeft"  *ngIf="isAdmin">
+                    <a class="text-dark p-2"
+                       routerLink="/carts/pending"><i class="fa fa-money"
+                           aria-hidden="true"></i> Pending Orders</a>
+                    <a class="text-secondary text-opacity-25"
+                       style="cursor: pointer;"
+                       routerLink="/carts/pending"><i class="fa fa-chevron-right fa-1x"></i></a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center wow slideInLeft" *ngIf="isAdmin">
+                    <a class="text-dark p-2"
+                       routerLink="/daily-reports"><i class="fa fa-file-text-o"
+                           aria-hidden="true"></i> Daily Reports</a>
+                    <a class="text-secondary text-opacity-25"
+                       style="cursor: pointer;"
+                       routerLink="/daily-reports"><i class="fa fa-chevron-right fa-1x"></i></a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center wow slideInLeft"  *ngIf="isAdmin">
+                    <a class="text-dark p-2"
+                       routerLink="/orders/requisitions"><i class="fa fa-calendar"
+                           aria-hidden="true"></i> Requisitions</a>
+                    <a class="text-secondary text-opacity-25"
+                       style="cursor: pointer;"
+                       routerLink="/orders/requisitions"><i class="fa fa-chevron-right fa-1x"></i></a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center wow slideInLeft">
+                    <a class="text-dark p-2"
+                       routerLink="/carts"><i class="fa fa-shopping-cart"
+                           aria-hidden="true"></i> Active Shopping Carts</a>
+                    <a class="text-secondary text-opacity-25"
+                       style="cursor: pointer;"
+                       routerLink="/carts"><i class="fa fa-chevron-right fa-1x"></i></a>
+                </li>
+            </ul>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center wow slideInLeft">
+                    <a class="text-dark p-2"
+                       routerLink="/activated-kit-pairing"><i class="fa fa-square"
+                           aria-hidden="true"></i> Activated Kits</a>
+                    <a class="text-secondary text-opacity-25"
+                       style="cursor: pointer;"
+                       routerLink="/admin/activated-kit-pairing"><i class="fa fa-chevron-right fa-1x"></i></a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center wow slideInLeft">
+                    <a class="text-dark p-2"
+                       routerLink="/lab-orders"><i class="fa fa-flask"
+                           aria-hidden="true"></i> Lab Tests</a>
+                    <a class="text-secondary text-opacity-25"
+                       style="cursor: pointer;"
+                       routerLink="/lab-orders"><i class="fa fa-chevron-right fa-1x"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<app-marketing-carousel *ngIf="homeSection && color_block" [data]="data" [background]="background"></app-marketing-carousel>
+<app-home-section *ngIf="homeSection && !color_block" [data]="data" [imageIndex]="imageIndex" [background]="background"></app-home-section>
+<app-marketing-about-product1 *ngIf="aboutProduct1" [data]="data" [background]="color"></app-marketing-about-product1>
+<app-marketing-about-product2 *ngIf="aboutProduct2" [data]="data" [background]="color"></app-marketing-about-product2>
+<app-marketing-about-product3 *ngIf="aboutProduct3" [data]="data" [background]="color"></app-marketing-about-product3>
+<app-marketing-features1 *ngIf="features1" [data]="data" [background]="color"></app-marketing-features1>
+<app-marketing-features2 *ngIf="features2" [data]="data" [background]="color"></app-marketing-features2>
+<app-marketing-features3 *ngIf="features3" [data]="data" [background]="color"></app-marketing-features3>
+<app-how-to [data]="data" *ngIf="howTo" [background]="color"></app-how-to>
+<app-marketing-video1 [data]="data" *ngIf="video1" [background]="color"></app-marketing-video1>
+<app-catalog *ngIf="catalogSection && !text_only_catalog" [data]="data" [background]="background" (itemAdded)="totalUp()"></app-catalog>
+<app-catalog2 *ngIf="catalogSection && text_only_catalog && (userService.isPracFound || isAdmin)" [data]="data" [subCategoryItems]="subCategoryItems" [products]="products" [allProducts]="allProducts" [background]="background" (itemAdded)="totalUpDropShippingCart()" (forPrac)="(checkOutSection && (site_type === 'practitioner'))"></app-catalog2>
+<app-shopping-cart *ngIf="checkOutSection && (userService.isPracFound || isAdmin)" [data]="data" [background]="background" [text_only_catalog]="text_only_catalog" (itemRemoved)="itemRemoved()"></app-shopping-cart>
+<app-check-out *ngIf="checkOutSection && (site_type === 'simple')" [companyData]="data"></app-check-out>
+<app-patient-payment *ngIf="checkOutSection && (site_type === 'patient')" [companyData]="data"></app-patient-payment>
+<app-micro-check-out *ngIf="checkOutSection && (site_type === 'micro')" [companyData]="data" [data]="cartService.cart"></app-micro-check-out>
+<app-about *ngIf="aboutSection" [data]="data"></app-about>
+<app-marketing-video2 [data]="data" *ngIf="video2" [background]="color"></app-marketing-video2>
+<app-marketing-faq1 *ngIf="faq1" [data]="data" [background]="color"></app-marketing-faq1>
+<app-marketing-faq2 *ngIf="faq2" [data]="data" [background]="color"></app-marketing-faq2>
+<app-marketing-faq3 *ngIf="faq3" [data]="data" [background]="color"></app-marketing-faq3>

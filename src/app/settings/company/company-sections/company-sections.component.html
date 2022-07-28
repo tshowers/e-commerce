@@ -1,0 +1,49 @@
+<form #dataForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="data">
+    <div class="containter-fluid wow fadeInLeft">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="text-capitalize">Home Page Sections</h4>
+            </div>
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-check">
+                            <input [(ngModel)]="data.home_section" type="checkbox" name="home_section" id="home_section" class="form-check-input" autofocus>
+                            <label class="form-check-label" for="home_section">Home Section</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-check">
+                            <input [(ngModel)]="data.checkout_section" type="checkbox" name="checkout_section" id="checkout_section" class="form-check-input">
+                            <label class="form-check-label" for="checkout_section">Check Out Section</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-check">
+                            <input [(ngModel)]="data.about_section" type="checkbox" name="about_section" id="about_section" class="form-check-input">
+                            <label class="form-check-label" for="about_section">About Section</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-check">
+                            <input [(ngModel)]="data.footer_section" type="checkbox" name="footer_section" id="footer_section" class="form-check-input">
+                            <label class="form-check-label" for="footer_section">Footer Section</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-primary" [ngStyle]="{'background-color': colorService.secondaryColor, 'border-color': colorService.secondaryColor}"
+                            [disabled]="!dataForm.form.valid">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

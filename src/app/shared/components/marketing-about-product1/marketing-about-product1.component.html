@@ -1,0 +1,35 @@
+<section id="about---1" class="section about-1 pb-5" [ngClass]="{'color-block': (userService.company && userService.company.color_block)}" *ngIf="data && data.about_product1">
+  <div class="container wow fadeInUp">
+    <h2 class="section__title mb-2" [ngStyle]="{'color': colorService.secondaryColor}">{{data?.about_product1?.headerText}}</h2>
+    <div class="row">
+      <div class="col-12" [ngClass]="{'home2': !(userService.company && userService.company.color_block)}">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 col-xs-12 text-dark align-bottom mb-2" innerHTML="{{data?.about_product1?.descriptionText}}">
+          </div>
+          <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="about-features">
+              <div class="feature-box feature-box-primary" [ngStyle]="{'background-color': background}" *ngIf="data.about_product1.featureBlockText1">
+                <i *ngIf="data.about_product1.featureBlockIcon1" class="{{data?.about_product1?.featureBlockIcon1}}"></i> 
+                <p>{{data?.about_product1?.featureBlockText1}}</p>
+              </div>
+              <div class="feature-box feature-box-primary" [ngStyle]="{'background-color': background}" *ngIf="data.about_product1.featureBlockText2">
+                <i *ngIf="data.about_product1.featureBlockIcon2" class="{{data?.about_product1?.featureBlockIcon2}}"></i> 
+                <p>{{data?.about_product1?.featureBlockText2}}</p>
+              </div>
+              <div class="feature-box feature-box-primary" [ngStyle]="{'background-color': background}" *ngIf="data.about_product1.featureBlockText3">
+                <span *ngIf="data.about_product1.featureBlockBadgeText3" class="badge badge-primary">{{data?.about_product1?.featureBlockBadgeText3}}</span>
+                <i *ngIf="data.about_product1.featureBlockIcon3" class="{{data?.about_product1?.featureBlockIcon3}}"></i> 
+                <p>{{data?.about_product1?.featureBlockText3}}</p>
+              </div>
+              <div class="feature-box feature-box-second" [ngStyle]="{'background-color': background}" *ngIf="data.about_product1.featureBlockText4">
+                <span *ngIf="data.about_product1.featureBlockBadgeText4" class="badge badge-second">{{data?.about_product1?.featureBlockBadgeText4}}</span>
+                <i *ngIf="data.about_product1.featureBlockIcon4" class="{{data?.about_product1?.featureBlockIcon4}}"></i> 
+                <p>{{data?.about_product1?.featureBlockText4}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

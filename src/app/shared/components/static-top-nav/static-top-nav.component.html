@@ -1,0 +1,85 @@
+<div [ngClass]="{'home-margin': !isHome}" class="no-print">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top app-header"
+         *ngIf="data">
+        <div class="container-fluid">
+            <a *ngIf="!isSpecialHome" class="navbar-brand  wow slideInLeft"
+               routerLink="/">
+                <img *ngIf="data.logos && data.logos[0]"
+                     style="max-height: 32px;"
+                     src="{{data.logos[0].url}}"
+                     alt="{{data.name}}">
+                <span *ngIf="!(data.logos && data.logos[0])"
+                      [ngStyle]="{'color': color}">{{data?.name}}</span>
+            </a>
+            <a *ngIf="isSpecialHome" class="navbar-brand  wow slideInLeft"
+               >
+                <img *ngIf="data.logos && data.logos[0]"
+                     style="max-height: 32px;"
+                     src="{{data.logos[0].url}}"
+                     alt="{{data.name}}">
+                <span *ngIf="!(data.logos && data.logos[0])"
+                      [ngStyle]="{'color': color}">{{data?.name}}</span>
+            </a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse"
+                 id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a *ngIf="isHome"
+                           class="nav-link" 
+                           href="#catalog">{{data?.catalog_link_text}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a *ngIf="isHome && data?.about_section"
+                           class="nav-link"
+                           href="#about">{{data?.about_link_text}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a *ngIf="isHome && data.activate_link_text && (data.activate_link_text != '')"
+                           class="nav-link"
+                           routerLink="/activate">{{data?.activate_link_text}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a *ngIf="isHome && !isAdmin && authService.firebaseUser && data.view_results_text && (data.view_results_text != '')"
+                           class="nav-link"
+                           routerLink="/my">{{data?.view_results_text}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a *ngIf="authService.firebaseUser && isHome && isAdmin"
+                           class="nav-link"
+                           routerLink="/admin">Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a *ngIf="isHome && authService.firebaseUser"
+                           class="nav-link"
+                           routerLink="/access/sign-out">{{data?.sign_out_text}}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a *ngIf="isHome && !authService.firebaseUser"
+                           class="nav-link"
+                           routerLink="/access">{{data?.sign_in_text}}</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    <a *ngIf="authService.firebaseUser && !isHome && !isSignIn"
+                       class="text-dark wow slideInRight" 
+                       routerLink="/access/sign-out">Sign Out</a>
+                    <span *ngIf="isHome && data && data.phone">{{data.phone}}</span>&nbsp;&nbsp;&nbsp; <a href="#cart"
+                       [ngStyle]="{'color': color}"
+                       *ngIf="isHome">
+                        <i class="fa fa-shopping-cart fa-2x  wow slideInRight"
+                           aria-hidden="true"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </nav>
+</div>

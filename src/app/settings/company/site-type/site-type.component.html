@@ -1,0 +1,37 @@
+<form #dataForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="data">
+    <div class="containter-fluid wow fadeInLeft">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="text-capitalize">Web Site Type</h4>
+            </div>
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-check">
+                            <input [(ngModel)]="data.site_type" class="form-check-input" type="radio" name="site_type" value="simple" id="site_type3">
+                            <label class="form-check-label" for="flexRadioDefault3">Simple</label>
+                        </div>
+                        <div class="form-check">
+                            <input [(ngModel)]="data.site_type" class="form-check-input" type="radio" name="site_type" value="practitioner" id="site_type1">
+                            <label class="form-check-label" for="flexRadioDefault1">Practitioner</label>
+                        </div>
+                        <div class="form-check">
+                            <input [(ngModel)]="data.site_type" class="form-check-input" type="radio" name="site_type" value="patient" id="site_type3">
+                            <label class="form-check-label" for="flexRadioDefault3">Patient</label>
+                        </div>
+                        <div class="form-check">
+                            <input [(ngModel)]="data.site_type" class="form-check-input" type="radio" name="site_type" value="micro" id="site_type2">
+                            <label class="form-check-label" for="flexRadioDefault2">Micro</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" [ngStyle]="{'background-color': colorService.secondaryColor, 'border-color': colorService.secondaryColor}" class="btn btn-primary"
+                            [disabled]="!dataForm.form.valid">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,966 @@
+<form #dataForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="data">
+    <section class="section">
+        <div class="container" *ngIf="transaction_complete">
+            <div class="row">
+                <div class="col-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header text-center text-capitalize">
+                                        <h4>Thank You for your business! </h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row mt-5">
+                                            <div class="col text-center">
+                                                <h4><span *ngIf="order._id">Request Number </span>
+                                                    <strong>{{order._id}}</strong> </h4>
+                                                <div class="hertbit" *ngIf="order._id">
+                                                    <h1> <i class="fa fa-flask" aria-hidden="true"></i></h1>
+                                                </div>
+                                                <p *ngIf="order._id">{{check_out.first_name}} {{check_out.last_name}}
+                                                    your request has been successfully submitted on {{order.created_at |
+                                                    date:'full'}}. </p>
+                                                <div class="text-center" *ngIf="!order._id">
+                                                    <i class="fa fa-cog fa-spin fa-5x fa-fw"></i>
+                                                    <p><i>If the wheel doesn't stop spinning you may need to contact
+                                                            support.</i></p>
+                                                </div>
+                                                <div *ngIf="redirect && order._id">
+                                                    <strong><a href="{{redirect}}">{{redirectText}}</a> </strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" *ngIf="!transaction_complete">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section__title text-capitalize  wow fadeInUp"
+                        [ngStyle]="{'color': colorService.secondaryColor}">{{heading}} </h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="row mt-3 wow fadeInUp">
+                        <div class="col-12 col-md-4">
+                            <label for="first_name">First Name <span *ngIf="showChinese">名字</span></label>
+                            <input [(ngModel)]="data.first_name" type="text" name="first_name" id="first_name"
+                                class="form-control form-control-lg" required pattern="^[ A-Za-z_'-]*$">
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label for="middle_name">Middle Name <span *ngIf="showChinese"></span></label>
+                            <input [(ngModel)]="data.middle_name" type="text" name="middle_name" id="middle_name"
+                                class="form-control form-control-lg" pattern="^[ A-Za-z_'-]*$">
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label for="last_name">Last Name <span *ngIf="showChinese">姓</span></label>
+                            <input [(ngModel)]="data.last_name" type="text" name="last_name" id="last_name"
+                                class="form-control form-control-lg" required pattern="^[ A-Za-z_'-]*$">
+                        </div>
+                    </div>
+                    <div class="row mt-2 wow fadeInUp">
+                        <div class="col-12 col-md-4">
+                            <label for="dob">Date of Birth <span *ngIf="showChinese">出生日期</span></label>
+                            <input [(ngModel)]="data.dob" id="dob" name="dob" autocorrect="off" autocapitalize="off"
+                                spellcheck="off" autocomplete="off" class="form-control form-control-lg" type="date"
+                                required (focusout)="dateFocusOut()">
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label for="gender">Gender at Birth <span *ngIf="showChinese">性别</span></label>
+                            <select [(ngModel)]="data.gender" name="gender" id="gender"
+                                class="form-select form-select-lg" required>
+                                <option value="" selected disabled hidden>Choose Gender at Birth</option>
+                                <option *ngFor="let g of GENDERS" value="{{g.value}}">{{g.name}}</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-4" *ngIf="showSSN">
+                            <label for="ssn">Social Security Number</label>
+                            <input [(ngModel)]="data.ssn" type="text" name="ssn" id="ssn"
+                                class="form-control form-control-lg" pattern="\d{3}[\-]\d{2}[\-]\d{4}" placeholder="xxx-xx-xxxx">
+                        </div>
+                        <div class="col-12  col-md-4" *ngIf="showPassport">
+                            <br>
+                            <div class="form-check">
+                                <input [(ngModel)]="data.vaccinated" name="vaccinated" class="form-check-input"
+                                    type="checkbox" id="vaccinated">
+                                <label class="form-check-label" for="vaccinated"> Vaccinated against COVID-19? <span
+                                        *ngIf="showChinese">接种了 COVID-19 疫苗? 有/没有 </span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  mt-2 wow fadeInUp">
+                        <div class="col-12  col-md-6" *ngIf="showPassport">
+                            <label for="passport_number">Passport Number <span *ngIf="showChinese">护照号码</span></label>
+                            <input [(ngModel)]="data.passport_number" type="text" name="passport_number"
+                                id="passport_number" class="form-control form-control-lg" required>
+                        </div>
+                        <div class="col-12  col-md-6" *ngIf="showPassport">
+                            <label for="nationality">Nationality <span *ngIf="showChinese">国籍</span></label>
+                            <select [(ngModel)]="data.nationality" name="nationality" id="nationality"
+                                class="form-select form-select-lg" required>
+                                <option value="" selected disabled hidden>Nationality</option>
+                                <option value="US">United States of America [US]</option>
+                                <option value="CA">Canada [CA]</option>
+                                <option value="none" disabled>---------------------------------------------</option>
+                                <option value="AF">Afghanistan [AF]</option>
+                                <option value="AL">Albania [AL]</option>
+                                <option value="DZ">Algeria [DZ]</option>
+                                <option value="AS">American Samoa [AS]</option>
+                                <option value="AD">Andorra [AD]</option>
+                                <option value="AO">Angola [AO]</option>
+                                <option value="AI">Anguilla [AI]</option>
+                                <option value="AQ">Antarctica [AQ]</option>
+                                <option value="AG">Antigua and Barbuda [AG]</option>
+                                <option value="AR">Argentina [AR]</option>
+                                <option value="AM">Armenia [AM]</option>
+                                <option value="AW">Aruba [AW]</option>
+                                <option value="AU">Australia [AU]</option>
+                                <option value="AT">Austria [AT]</option>
+                                <option value="AZ">Azerbaijan [AZ]</option>
+                                <option value="BS">Bahama [BS]</option>
+                                <option value="BH">Bahrain [BH]</option>
+                                <option value="BD">Bangladesh [BD]</option>
+                                <option value="BB">Barbados [BB]</option>
+                                <option value="BY">Belarus [BY]</option>
+                                <option value="BE">Belgium [BE]</option>
+                                <option value="BZ">Belize [BZ]</option>
+                                <option value="BJ">Benin [BJ]</option>
+                                <option value="BM">Bermuda [BM]</option>
+                                <option value="BT">Bhutan [BT]</option>
+                                <option value="BO">Bolivia [BO]</option>
+                                <option value="BA">Bosnia and Herzegovina [BA]</option>
+                                <option value="BW">Botswana [BW]</option>
+                                <option value="BV">Bouvet Island [BV]</option>
+                                <option value="BR">Brazil [BR]</option>
+                                <option value="IO">British Indian Ocean Territory [IO]</option>
+                                <option value="VG">British Virgin Islands [VG]</option>
+                                <option value="BN">Brunei Darussalam [BN]</option>
+                                <option value="BG">Bulgaria [BG]</option>
+                                <option value="BF">Burkina Faso [BF]</option>
+                                <option value="BI">Burundi [BI]</option>
+                                <option value="CI">Côte D'ivoire (Ivory Coast [CI]</option>
+                                <option value="KH">Cambodia [KH]</option>
+                                <option value="CM">Cameroon [CM]</option>
+                                <option value="CA">Canada [CA]</option>
+                                <option value="CV">Cape Verde [CV]</option>
+                                <option value="KY">Cayman Islands [KY]</option>
+                                <option value="CF">Central African Republic [CF]</option>
+                                <option value="TD">Chad [TD]</option>
+                                <option value="CL">Chile [CL]</option>
+                                <option value="CN">China [CN]</option>
+                                <option value="CX">Christmas Island [CX]</option>
+                                <option value="CC">Cocos (Keeling) Islands [CC]</option>
+                                <option value="CO">Colombia [CO]</option>
+                                <option value="KM">Comoros [KM]</option>
+                                <option value="CG">Congo [CG]</option>
+                                <option value="CK">Cook Islands [CK]</option>
+                                <option value="CR">Costa Rica [CR]</option>
+                                <option value="HR">Croatia [HR]</option>
+                                <option value="CU">Cuba [CU]</option>
+                                <option value="CY">Cyprus [CY]</option>
+                                <option value="CZ">Czech Republic [CZ]</option>
+                                <option value="DK">Denmark [DK]</option>
+                                <option value="DJ">Djibouti [DJ]</option>
+                                <option value="DM">Dominica [DM]</option>
+                                <option value="DO">Dominican Republic [DO]</option>
+                                <option value="TP">East Timor [TP]</option>
+                                <option value="EC">Ecuador [EC]</option>
+                                <option value="EG">Egypt [EG]</option>
+                                <option value="SV">El Salvador [SV]</option>
+                                <option value="GQ">Equatorial Guinea [GQ]</option>
+                                <option value="ER">Eritrea [ER]</option>
+                                <option value="EE">Estonia [EE]</option>
+                                <option value="ET">Ethiopia [ET]</option>
+                                <option value="FK">Falkland Islands (Malvinas) [FK]</option>
+                                <option value="FO">Faroe Islands [FO]</option>
+                                <option value="FJ">Fiji [FJ]</option>
+                                <option value="FI">Finland [FI]</option>
+                                <option value="FR">France [FR]</option>
+                                <option value="FX">France, Metropolitan [FX]</option>
+                                <option value="GF">French Guiana [GF]</option>
+                                <option value="PF">French Polynesia [PF]</option>
+                                <option value="TF">French Southern Territories [TF]</option>
+                                <option value="GA">Gabon [GA]</option>
+                                <option value="GM">Gambia [GM]</option>
+                                <option value="GE">Georgia [GE]</option>
+                                <option value="DE">Germany [DE]</option>
+                                <option value="GH">Ghana [GH]</option>
+                                <option value="GI">Gibraltar [GI]</option>
+                                <option value="GR">Greece [GR]</option>
+                                <option value="GL">Greenland [GL]</option>
+                                <option value="GD">Grenada [GD]</option>
+                                <option value="GP">Guadeloupe [GP]</option>
+                                <option value="GU">Guam [GU]</option>
+                                <option value="GT">Guatemala [GT]</option>
+                                <option value="GN">Guinea [GN]</option>
+                                <option value="GW">Guinea-Bissau [GW]</option>
+                                <option value="GY">Guyana [GY]</option>
+                                <option value="HT">Haiti [HT]</option>
+                                <option value="HM">Heard and McDonald Islands [HM]</option>
+                                <option value="HN">Honduras [HN]</option>
+                                <option value="HK">Hong Kong [HK]</option>
+                                <option value="HU">Hungary [HU]</option>
+                                <option value="IS">Iceland [IS]</option>
+                                <option value="IN">India [IN]</option>
+                                <option value="ID">Indonesia [ID]</option>
+                                <option value="IQ">Iraq [IQ]</option>
+                                <option value="IE">Ireland [IE]</option>
+                                <option value="IR">Islamic Republic of Iran [IR]</option>
+                                <option value="IL">Israel [IL]</option>
+                                <option value="IT">Italy [IT]</option>
+                                <option value="JM">Jamaica [JM]</option>
+                                <option value="JP">Japan [JP]</option>
+                                <option value="JO">Jordan [JO]</option>
+                                <option value="KZ">Kazakhstan [KZ]</option>
+                                <option value="KE">Kenya [KE]</option>
+                                <option value="KI">Kiribati [KI]</option>
+                                <option value="KP">Korea, Democratic People's Repub [KP]</option>
+                                <option value="KR">Korea, Republic of [KR]</option>
+                                <option value="KW">Kuwait [KW]</option>
+                                <option value="KG">Kyrgyzstan [KG]</option>
+                                <option value="LA">Lao People's Democratic Republic [LA]</option>
+                                <option value="LV">Latvia [LV]</option>
+                                <option value="LB">Lebanon [LB]</option>
+                                <option value="LS">Lesotho [LS]</option>
+                                <option value="LR">Liberia [LR]</option>
+                                <option value="LY">Libyan Arab Jamahiriya [LY]</option>
+                                <option value="LI">Liechtenstein [LI]</option>
+                                <option value="LT">Lithuania [LT]</option>
+                                <option value="LU">Luxembourg [LU]</option>
+                                <option value="MO">Macau [MO]</option>
+                                <option value="MG">Madagascar [MG]</option>
+                                <option value="MW">Malawi [MW]</option>
+                                <option value="MY">Malaysia [MY]</option>
+                                <option value="MV">Maldives [MV]</option>
+                                <option value="ML">Mali [ML]</option>
+                                <option value="MT">Malta [MT]</option>
+                                <option value="MH">Marshall Islands [MH]</option>
+                                <option value="MQ">Martinique [MQ]</option>
+                                <option value="MR">Mauritania [MR]</option>
+                                <option value="MU">Mauritius [MU]</option>
+                                <option value="YT">Mayotte [YT]</option>
+                                <option value="MX">Mexico [MX]</option>
+                                <option value="FM">Micronesia [FM]</option>
+                                <option value="MD">Moldova, Republic of [MD]</option>
+                                <option value="MC">Monaco [MC]</option>
+                                <option value="MN">Mongolia [MN]</option>
+                                <option value="MS">Monserrat [MS]</option>
+                                <option value="MA">Morocco [MA]</option>
+                                <option value="MZ">Mozambique [MZ]</option>
+                                <option value="MM">Myanmar [MM]</option>
+                                <option value="NA">Nambia [NA]</option>
+                                <option value="NR">Nauru [NR]</option>
+                                <option value="NP">Nepal [NP]</option>
+                                <option value="AN">Netherlands Antilles [AN]</option>
+                                <option value="NL">Netherlands [NL]</option>
+                                <option value="NC">New Caledonia [NC]</option>
+                                <option value="NZ">New Zealand [NZ]</option>
+                                <option value="NI">Nicaragua [NI]</option>
+                                <option value="NE">Niger [NE]</option>
+                                <option value="NG">Nigeria [NG]</option>
+                                <option value="NU">Niue [NU]</option>
+                                <option value="NF">Norfolk Island [NF]</option>
+                                <option value="MP">Northern Mariana Islands [MP]</option>
+                                <option value="NO">Norway [NO]</option>
+                                <option value="OM">Oman [OM]</option>
+                                <option value="PK">Pakistan [PK]</option>
+                                <option value="PW">Palau [PW]</option>
+                                <option value="PA">Panama [PA]</option>
+                                <option value="PG">Papua New Guinea [PG]</option>
+                                <option value="PY">Paraguay [PY]</option>
+                                <option value="PE">Peru [PE]</option>
+                                <option value="PH">Philippines [PH]</option>
+                                <option value="PN">Pitcairn [PN]</option>
+                                <option value="PL">Poland [PL]</option>
+                                <option value="PT">Portugal [PT]</option>
+                                <option value="PR">Puerto Rico [PR]</option>
+                                <option value="QA">Qatar [QA]</option>
+                                <option value="RE">Réunion [RE]</option>
+                                <option value="RO">Romania [RO]</option>
+                                <option value="RU">Russian Federation [RU]</option>
+                                <option value="RW">Rwanda [RW]</option>
+                                <option value="LC">Saint Lucia [LC]</option>
+                                <option value="WS">Samoa [WS]</option>
+                                <option value="SM">San Marino [SM]</option>
+                                <option value="ST">Sao Tome and Principe [ST]</option>
+                                <option value="SA">Saudi Arabia [SA]</option>
+                                <option value="SN">Senegal [SN]</option>
+                                <option value="SC">Seychelles [SC]</option>
+                                <option value="SL">Sierra Leone [SL]</option>
+                                <option value="SG">Singapore [SG]</option>
+                                <option value="SK">Slovakia [SK]</option>
+                                <option value="SI">Slovenia [SI]</option>
+                                <option value="SB">Solomon Islands [SB]</option>
+                                <option value="SO">Somalia [SO]</option>
+                                <option value="ZA">South Africa [ZA]</option>
+                                <option value="GS">South Georgia and the South Sand [GS]</option>
+                                <option value="ES">Spain [ES]</option>
+                                <option value="LK">Sri Lanka [LK]</option>
+                                <option value="SH">St. Helena [SH]</option>
+                                <option value="KN">St. Kitts and Nevis [KN]</option>
+                                <option value="PM">St. Pierre and Miquelon [PM]</option>
+                                <option value="VC">St. Vincent and the Grenadines [VC]</option>
+                                <option value="SD">Sudan [SD]</option>
+                                <option value="SR">Suriname [SR]</option>
+                                <option value="SJ">Svalbard and Jan Mayen Islands [SJ]</option>
+                                <option value="SZ">Swaziland [SZ]</option>
+                                <option value="SE">Sweden [SE]</option>
+                                <option value="CH">Switzerland [CH]</option>
+                                <option value="SY">Syrian Arab Republic [SY]</option>
+                                <option value="TW">Taiwan [TW]</option>
+                                <option value="TJ">Tajikistan [TJ]</option>
+                                <option value="TZ">Tanzania, United Republic of [TZ]</option>
+                                <option value="TH">Thailand [TH]</option>
+                                <option value="TG">Togo [TG]</option>
+                                <option value="TK">Tokelau [TK]</option>
+                                <option value="TO">Tonga [TO]</option>
+                                <option value="TT">Trinidad and Tobago [TT]</option>
+                                <option value="TN">Tunisia [TN]</option>
+                                <option value="TR">Turkey [TR]</option>
+                                <option value="TM">Turkmenistan [TM]</option>
+                                <option value="TC">Turks and Caicos Islands [TC]</option>
+                                <option value="TV">Tuvalu [TV]</option>
+                                <option value="UG">Uganda [UG]</option>
+                                <option value="UA">Ukraine [UA]</option>
+                                <option value="AE">United Arab Emirates [AE]</option>
+                                <option value="GB">United Kingdom (Great Britain) [GB]</option>
+                                <option value="UM">United States Minor Outlying Isl [UM]</option>
+                                <option value="US">USA [US]</option>
+                                <option value="VI">United States Virgin Islands [VI]</option>
+                                <option value="ZZ">Unknown or unspecified country [ZZ]</option>
+                                <option value="UY">Uruguay [UY]</option>
+                                <option value="UZ">Uzbekistan [UZ]</option>
+                                <option value="VU">Vanuatu [VU]</option>
+                                <option value="VA">Vatican City State [VA]</option>
+                                <option value="VE">Venezuela [VE]</option>
+                                <option value="VN">Vietnam [VN]</option>
+                                <option value="WF">Wallis and Futuna Islands [WF]</option>
+                                <option value="EH">Western Sahara [EH]</option>
+                                <option value="YE">Yemen [YE]</option>
+                                <option value="YU">Yugoslavia [YU]</option>
+                                <option value="ZR">Zaire [ZR]</option>
+                                <option value="ZM">Zambia [ZM]</option>
+                                <option value="ZW">Zimbabwe [ZW]</option>
+                            </select>
+
+                            <!-- <input [(ngModel)]="data.nationality" type="text" name="nationality" id="nationality" class="form-control form-control-lg" required> -->
+                        </div>
+                    </div>
+                    <div class="row  mt-2 wow fadeInUp">
+                        <div class="col-12  col-md-6">
+                            <label for="email">Email Address <span *ngIf="showChinese">电子邮件地址</span></label>
+                            <input [(ngModel)]="data.email" type="email" name="email" id="email"
+                                placeholder="Test results will be sent to the email provided"
+                                class="form-control form-control-lg" required
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="phone_number">Phone Number <span *ngIf="showChinese">电话号码</span></label>
+                            <input [(ngModel)]="data.phone_number" type="tel" name="phone" id="phone"
+                                class="form-control form-control-lg">
+                        </div>
+                    </div>
+                    <div class="row  mt-2 wow fadeInUp">
+                        <div class="col-12  col-md-6">
+                            <label for="address1">Address 1 <span *ngIf="showChinese">地址</span></label>
+                            <input [(ngModel)]="data.address1" type="text" name="address1" id="address1"
+                                class="form-control form-control-lg" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="address2">Address 2 <span *ngIf="showChinese">地址</span></label>
+                            <input [(ngModel)]="data.address2" type="text" name="address2" id="address2"
+                                class="form-control form-control-lg">
+                        </div>
+                    </div>
+                    <div class="row  mt-2 wow fadeInUp">
+                        <div class="col-12 col-md-6">
+                            <label for="city">City <span *ngIf="showChinese">城市</span></label>
+                            <input [(ngModel)]="data.city" type="text" name="city" id="city"
+                                class="form-control form-control-lg" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="province">State <span *ngIf="showChinese"> 州</span></label>
+                            <select [(ngModel)]="data.province" name="province" id="province"
+                                class="form-select form-select-lg" required>
+                                <option value="" selected disabled hidden>Province or State</option>
+                                <option value="AL">Alabama [AL]</option>
+                                <option value="AK">Alaska [AK]</option>
+                                <option value="AS">American Samoa [AS]</option>
+                                <option value="AZ">Arizona [AZ]</option>
+                                <option value="AR">Arkansas [AR]</option>
+                                <option value="CA">California [CA]</option>
+                                <option value="CO">Colorado [CO]</option>
+                                <option value="CT">Connecticut [CT]</option>
+                                <option value="DE">Delaware [DE]</option>
+                                <option value="DC">District of Columbia [DC]</option>
+                                <option value="FM">Federated States Of Micronesia [FM]</option>
+                                <option value="FL">Florida [FL]</option>
+                                <option value="GA">Georgia [GA]</option>
+                                <option value="GU">Guam [GU]</option>
+                                <option value="HI">Hawaii [HI]</option>
+                                <option value="ID">Idaho [ID]</option>
+                                <option value="IL">Illinois [IL]</option>
+                                <option value="IN">Indiana [IN]</option>
+                                <option value="IA">Iowa [IA]</option>
+                                <option value="KS">Kansas [KS]</option>
+                                <option value="KY">Kentucky [KY]</option>
+                                <option value="LA">Louisiana [LA]</option>
+                                <option value="ME">Maine [ME]</option>
+                                <option value="MH">Marshall Islands [MH]</option>
+                                <option value="MD">Maryland [MD]</option>
+                                <option value="MA">Massachusetts [MA]</option>
+                                <option value="MI">Michigan [MI]</option>
+                                <option value="MN">Minnesota [MN]</option>
+                                <option value="MS">Mississippi [MS]</option>
+                                <option value="MO">Missouri [MO]</option>
+                                <option value="MT">Montana [MT]</option>
+                                <option value="NE">Nebraska [NE]</option>
+                                <option value="NV">Nevada [NV]</option>
+                                <option value="NH">New Hampshire [NH]</option>
+                                <option value="NJ">New Jersey [NJ]</option>
+                                <option value="NM">New Mexico [NM]</option>
+                                <option value="NY">New York [NY]</option>
+                                <option value="NC">North Carolina [NC]</option>
+                                <option value="ND">North Dakota [ND]</option>
+                                <option value="OH">Ohio [OH]</option>
+                                <option value="OK">Oklahoma [OK]</option>
+                                <option value="OR">Oregon [OR]</option>
+                                <option value="PW">Palau [PW]</option>
+                                <option value="PA">Pennsylvania [PA]</option>
+                                <option value="PR">Puerto Rico [PR]</option>
+                                <option value="RI">Rhode Island [RI]</option>
+                                <option value="SC">South Carolina [SC]</option>
+                                <option value="SD">South Dakota [SD]</option>
+                                <option value="TN">Tennessee [TN]</option>
+                                <option value="TX">Texas [TX]</option>
+                                <option value="UT">Utah [UT]</option>
+                                <option value="VT">Vermont [VT]</option>
+                                <option value="VI">Virgin Islands [VI]</option>
+                                <option value="VA">Virginia [VA]</option>
+                                <option value="WA">Washington [WA]</option>
+                                <option value="WV">West Virginia [WV]</option>
+                                <option value="WI">Wisconsin [WI]</option>
+                                <option value="WY">Wyoming [WY]</option>
+                                <option value="none" disabled>---------------------------------------------</option>
+                                <option value="AB">Alberta [AB]</option>
+                                <option value="BC">British Columbia [BC]</option>
+                                <option value="MB">Manitoba [MB]</option>
+                                <option value="NB">New Brunswick [NB]</option>
+                                <option value="NF">Newfoundland and Labrador [NF]</option>
+                                <option value="NT">Northwest Territories [NT]</option>
+                                <option value="NS">Nova Scotia [NS]</option>
+                                <option value="NU">Nunavut [NU]</option>
+                                <option value="ON">Ontario [ON]</option>
+                                <option value="PE">Prince Edward Island [PE]</option>
+                                <option value="QC">Quebec [QC]</option>
+                                <option value="SK">Saskatchewan [SK]</option>
+                                <option value="YT">Yukon Territory [YT]</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row  mt-2 wow fadeInUp">
+                        <div class="col-12 col-md-6">
+                            <label for="zip">Zip Code <span *ngIf="showChinese">邮政编码</span></label>
+                            <input [(ngModel)]="data.zip" type="text" name="zip" id="zip"
+                                class="form-control form-control-lg" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="country">Country <span *ngIf="showChinese"> 国家</span></label>
+                            <select [(ngModel)]="data.country" name="country" id="country"
+                                class="form-select form-select-lg" required>
+                                <option value="" selected disabled hidden>Country</option>
+                                <option value="US">United States of America [US]</option>
+                                <option value="CA">Canada [CA]</option>
+                                <option value="none" disabled>---------------------------------------------</option>
+                                <option value="AF">Afghanistan [AF]</option>
+                                <option value="AL">Albania [AL]</option>
+                                <option value="DZ">Algeria [DZ]</option>
+                                <option value="AS">American Samoa [AS]</option>
+                                <option value="AD">Andorra [AD]</option>
+                                <option value="AO">Angola [AO]</option>
+                                <option value="AI">Anguilla [AI]</option>
+                                <option value="AQ">Antarctica [AQ]</option>
+                                <option value="AG">Antigua and Barbuda [AG]</option>
+                                <option value="AR">Argentina [AR]</option>
+                                <option value="AM">Armenia [AM]</option>
+                                <option value="AW">Aruba [AW]</option>
+                                <option value="AU">Australia [AU]</option>
+                                <option value="AT">Austria [AT]</option>
+                                <option value="AZ">Azerbaijan [AZ]</option>
+                                <option value="BS">Bahama [BS]</option>
+                                <option value="BH">Bahrain [BH]</option>
+                                <option value="BD">Bangladesh [BD]</option>
+                                <option value="BB">Barbados [BB]</option>
+                                <option value="BY">Belarus [BY]</option>
+                                <option value="BE">Belgium [BE]</option>
+                                <option value="BZ">Belize [BZ]</option>
+                                <option value="BJ">Benin [BJ]</option>
+                                <option value="BM">Bermuda [BM]</option>
+                                <option value="BT">Bhutan [BT]</option>
+                                <option value="BO">Bolivia [BO]</option>
+                                <option value="BA">Bosnia and Herzegovina [BA]</option>
+                                <option value="BW">Botswana [BW]</option>
+                                <option value="BV">Bouvet Island [BV]</option>
+                                <option value="BR">Brazil [BR]</option>
+                                <option value="IO">British Indian Ocean Territory [IO]</option>
+                                <option value="VG">British Virgin Islands [VG]</option>
+                                <option value="BN">Brunei Darussalam [BN]</option>
+                                <option value="BG">Bulgaria [BG]</option>
+                                <option value="BF">Burkina Faso [BF]</option>
+                                <option value="BI">Burundi [BI]</option>
+                                <option value="CI">Côte D'ivoire (Ivory Coast [CI]</option>
+                                <option value="KH">Cambodia [KH]</option>
+                                <option value="CM">Cameroon [CM]</option>
+                                <option value="CA">Canada [CA]</option>
+                                <option value="CV">Cape Verde [CV]</option>
+                                <option value="KY">Cayman Islands [KY]</option>
+                                <option value="CF">Central African Republic [CF]</option>
+                                <option value="TD">Chad [TD]</option>
+                                <option value="CL">Chile [CL]</option>
+                                <option value="CN">China [CN]</option>
+                                <option value="CX">Christmas Island [CX]</option>
+                                <option value="CC">Cocos (Keeling) Islands [CC]</option>
+                                <option value="CO">Colombia [CO]</option>
+                                <option value="KM">Comoros [KM]</option>
+                                <option value="CG">Congo [CG]</option>
+                                <option value="CK">Cook Islands [CK]</option>
+                                <option value="CR">Costa Rica [CR]</option>
+                                <option value="HR">Croatia [HR]</option>
+                                <option value="CU">Cuba [CU]</option>
+                                <option value="CY">Cyprus [CY]</option>
+                                <option value="CZ">Czech Republic [CZ]</option>
+                                <option value="DK">Denmark [DK]</option>
+                                <option value="DJ">Djibouti [DJ]</option>
+                                <option value="DM">Dominica [DM]</option>
+                                <option value="DO">Dominican Republic [DO]</option>
+                                <option value="TP">East Timor [TP]</option>
+                                <option value="EC">Ecuador [EC]</option>
+                                <option value="EG">Egypt [EG]</option>
+                                <option value="SV">El Salvador [SV]</option>
+                                <option value="GQ">Equatorial Guinea [GQ]</option>
+                                <option value="ER">Eritrea [ER]</option>
+                                <option value="EE">Estonia [EE]</option>
+                                <option value="ET">Ethiopia [ET]</option>
+                                <option value="FK">Falkland Islands (Malvinas) [FK]</option>
+                                <option value="FO">Faroe Islands [FO]</option>
+                                <option value="FJ">Fiji [FJ]</option>
+                                <option value="FI">Finland [FI]</option>
+                                <option value="FR">France [FR]</option>
+                                <option value="FX">France, Metropolitan [FX]</option>
+                                <option value="GF">French Guiana [GF]</option>
+                                <option value="PF">French Polynesia [PF]</option>
+                                <option value="TF">French Southern Territories [TF]</option>
+                                <option value="GA">Gabon [GA]</option>
+                                <option value="GM">Gambia [GM]</option>
+                                <option value="GE">Georgia [GE]</option>
+                                <option value="DE">Germany [DE]</option>
+                                <option value="GH">Ghana [GH]</option>
+                                <option value="GI">Gibraltar [GI]</option>
+                                <option value="GR">Greece [GR]</option>
+                                <option value="GL">Greenland [GL]</option>
+                                <option value="GD">Grenada [GD]</option>
+                                <option value="GP">Guadeloupe [GP]</option>
+                                <option value="GU">Guam [GU]</option>
+                                <option value="GT">Guatemala [GT]</option>
+                                <option value="GN">Guinea [GN]</option>
+                                <option value="GW">Guinea-Bissau [GW]</option>
+                                <option value="GY">Guyana [GY]</option>
+                                <option value="HT">Haiti [HT]</option>
+                                <option value="HM">Heard and McDonald Islands [HM]</option>
+                                <option value="HN">Honduras [HN]</option>
+                                <option value="HK">Hong Kong [HK]</option>
+                                <option value="HU">Hungary [HU]</option>
+                                <option value="IS">Iceland [IS]</option>
+                                <option value="IN">India [IN]</option>
+                                <option value="ID">Indonesia [ID]</option>
+                                <option value="IQ">Iraq [IQ]</option>
+                                <option value="IE">Ireland [IE]</option>
+                                <option value="IR">Islamic Republic of Iran [IR]</option>
+                                <option value="IL">Israel [IL]</option>
+                                <option value="IT">Italy [IT]</option>
+                                <option value="JM">Jamaica [JM]</option>
+                                <option value="JP">Japan [JP]</option>
+                                <option value="JO">Jordan [JO]</option>
+                                <option value="KZ">Kazakhstan [KZ]</option>
+                                <option value="KE">Kenya [KE]</option>
+                                <option value="KI">Kiribati [KI]</option>
+                                <option value="KP">Korea, Democratic People's Repub [KP]</option>
+                                <option value="KR">Korea, Republic of [KR]</option>
+                                <option value="KW">Kuwait [KW]</option>
+                                <option value="KG">Kyrgyzstan [KG]</option>
+                                <option value="LA">Lao People's Democratic Republic [LA]</option>
+                                <option value="LV">Latvia [LV]</option>
+                                <option value="LB">Lebanon [LB]</option>
+                                <option value="LS">Lesotho [LS]</option>
+                                <option value="LR">Liberia [LR]</option>
+                                <option value="LY">Libyan Arab Jamahiriya [LY]</option>
+                                <option value="LI">Liechtenstein [LI]</option>
+                                <option value="LT">Lithuania [LT]</option>
+                                <option value="LU">Luxembourg [LU]</option>
+                                <option value="MO">Macau [MO]</option>
+                                <option value="MG">Madagascar [MG]</option>
+                                <option value="MW">Malawi [MW]</option>
+                                <option value="MY">Malaysia [MY]</option>
+                                <option value="MV">Maldives [MV]</option>
+                                <option value="ML">Mali [ML]</option>
+                                <option value="MT">Malta [MT]</option>
+                                <option value="MH">Marshall Islands [MH]</option>
+                                <option value="MQ">Martinique [MQ]</option>
+                                <option value="MR">Mauritania [MR]</option>
+                                <option value="MU">Mauritius [MU]</option>
+                                <option value="YT">Mayotte [YT]</option>
+                                <option value="MX">Mexico [MX]</option>
+                                <option value="FM">Micronesia [FM]</option>
+                                <option value="MD">Moldova, Republic of [MD]</option>
+                                <option value="MC">Monaco [MC]</option>
+                                <option value="MN">Mongolia [MN]</option>
+                                <option value="MS">Monserrat [MS]</option>
+                                <option value="MA">Morocco [MA]</option>
+                                <option value="MZ">Mozambique [MZ]</option>
+                                <option value="MM">Myanmar [MM]</option>
+                                <option value="NA">Nambia [NA]</option>
+                                <option value="NR">Nauru [NR]</option>
+                                <option value="NP">Nepal [NP]</option>
+                                <option value="AN">Netherlands Antilles [AN]</option>
+                                <option value="NL">Netherlands [NL]</option>
+                                <option value="NC">New Caledonia [NC]</option>
+                                <option value="NZ">New Zealand [NZ]</option>
+                                <option value="NI">Nicaragua [NI]</option>
+                                <option value="NE">Niger [NE]</option>
+                                <option value="NG">Nigeria [NG]</option>
+                                <option value="NU">Niue [NU]</option>
+                                <option value="NF">Norfolk Island [NF]</option>
+                                <option value="MP">Northern Mariana Islands [MP]</option>
+                                <option value="NO">Norway [NO]</option>
+                                <option value="OM">Oman [OM]</option>
+                                <option value="PK">Pakistan [PK]</option>
+                                <option value="PW">Palau [PW]</option>
+                                <option value="PA">Panama [PA]</option>
+                                <option value="PG">Papua New Guinea [PG]</option>
+                                <option value="PY">Paraguay [PY]</option>
+                                <option value="PE">Peru [PE]</option>
+                                <option value="PH">Philippines [PH]</option>
+                                <option value="PN">Pitcairn [PN]</option>
+                                <option value="PL">Poland [PL]</option>
+                                <option value="PT">Portugal [PT]</option>
+                                <option value="PR">Puerto Rico [PR]</option>
+                                <option value="QA">Qatar [QA]</option>
+                                <option value="RE">Réunion [RE]</option>
+                                <option value="RO">Romania [RO]</option>
+                                <option value="RU">Russian Federation [RU]</option>
+                                <option value="RW">Rwanda [RW]</option>
+                                <option value="LC">Saint Lucia [LC]</option>
+                                <option value="WS">Samoa [WS]</option>
+                                <option value="SM">San Marino [SM]</option>
+                                <option value="ST">Sao Tome and Principe [ST]</option>
+                                <option value="SA">Saudi Arabia [SA]</option>
+                                <option value="SN">Senegal [SN]</option>
+                                <option value="SC">Seychelles [SC]</option>
+                                <option value="SL">Sierra Leone [SL]</option>
+                                <option value="SG">Singapore [SG]</option>
+                                <option value="SK">Slovakia [SK]</option>
+                                <option value="SI">Slovenia [SI]</option>
+                                <option value="SB">Solomon Islands [SB]</option>
+                                <option value="SO">Somalia [SO]</option>
+                                <option value="ZA">South Africa [ZA]</option>
+                                <option value="GS">South Georgia and the South Sand [GS]</option>
+                                <option value="ES">Spain [ES]</option>
+                                <option value="LK">Sri Lanka [LK]</option>
+                                <option value="SH">St. Helena [SH]</option>
+                                <option value="KN">St. Kitts and Nevis [KN]</option>
+                                <option value="PM">St. Pierre and Miquelon [PM]</option>
+                                <option value="VC">St. Vincent and the Grenadines [VC]</option>
+                                <option value="SD">Sudan [SD]</option>
+                                <option value="SR">Suriname [SR]</option>
+                                <option value="SJ">Svalbard and Jan Mayen Islands [SJ]</option>
+                                <option value="SZ">Swaziland [SZ]</option>
+                                <option value="SE">Sweden [SE]</option>
+                                <option value="CH">Switzerland [CH]</option>
+                                <option value="SY">Syrian Arab Republic [SY]</option>
+                                <option value="TW">Taiwan [TW]</option>
+                                <option value="TJ">Tajikistan [TJ]</option>
+                                <option value="TZ">Tanzania, United Republic of [TZ]</option>
+                                <option value="TH">Thailand [TH]</option>
+                                <option value="TG">Togo [TG]</option>
+                                <option value="TK">Tokelau [TK]</option>
+                                <option value="TO">Tonga [TO]</option>
+                                <option value="TT">Trinidad and Tobago [TT]</option>
+                                <option value="TN">Tunisia [TN]</option>
+                                <option value="TR">Turkey [TR]</option>
+                                <option value="TM">Turkmenistan [TM]</option>
+                                <option value="TC">Turks and Caicos Islands [TC]</option>
+                                <option value="TV">Tuvalu [TV]</option>
+                                <option value="UG">Uganda [UG]</option>
+                                <option value="UA">Ukraine [UA]</option>
+                                <option value="AE">United Arab Emirates [AE]</option>
+                                <option value="GB">United Kingdom (Great Britain) [GB]</option>
+                                <option value="UM">United States Minor Outlying Isl [UM]</option>
+                                <option value="US">USA [US]</option>
+                                <option value="VI">United States Virgin Islands [VI]</option>
+                                <option value="ZZ">Unknown or unspecified country [ZZ]</option>
+                                <option value="UY">Uruguay [UY]</option>
+                                <option value="UZ">Uzbekistan [UZ]</option>
+                                <option value="VU">Vanuatu [VU]</option>
+                                <option value="VA">Vatican City State [VA]</option>
+                                <option value="VE">Venezuela [VE]</option>
+                                <option value="VN">Vietnam [VN]</option>
+                                <option value="WF">Wallis and Futuna Islands [WF]</option>
+                                <option value="EH">Western Sahara [EH]</option>
+                                <option value="YE">Yemen [YE]</option>
+                                <option value="YU">Yugoslavia [YU]</option>
+                                <option value="ZR">Zaire [ZR]</option>
+                                <option value="ZM">Zambia [ZM]</option>
+                                <option value="ZW">Zimbabwe [ZW]</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2 wow fadeInUp" *ngIf="showLicenseUpload">
+                <div class="col-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="dropzone" dropzone (hovered)="toggleHover($event)"
+                                    (dropped)="onDrop($event)" [class.hovering]="isHovering">
+                                    <p><i>Drag and Drop Drivers License or Passport</i> <span
+                                            *ngIf="showChinese">请上传您的护照</span> </p>
+                                    <input [(ngModel)]="resultsFile" type="file" name="file" id="file"
+                                        class="form-control form-control-lg" (change)="uploadImage($event)"
+                                        accept=".png,.jpg,.gif,.jpeg">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div *ngFor="let f of dropFiles">
+                                    <app-image1-upload-task [file]="f" [data]="data.license.imageURL">
+                                    </app-image1-upload-task>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="progress" *ngIf="uploadProgress">
+                                    <div class="progress-bar bg-progress" role="progressbar"
+                                        [ngStyle]="{'width': (uploadProgress | async) + '%'}"
+                                        [attr.aria-valuenow]="(uploadProgress | async)" [attr.aria-valuemin]="0"
+                                        [attr.aria-valuemax]="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4"
+                            *ngIf="data && data.license && data.license.imageURL && data.license.imageURL.length">
+                            <div class="col">
+                                <div class="container">
+                                    <div class="row">
+                                        <div *ngFor="let g of data.license.imageURL;let i = index" class="col">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="card" style="width: 18rem; ">
+                                                        <img src="{{g?.url}}" class="card-img-top" alt="{{g?.name}}"
+                                                            style="max-height: 164px;">
+                                                        <div class="card-body">
+                                                            <p class="card-text"> <i class="fa fa-times text-danger"
+                                                                    aria-hidden="true" (click)="onDeleteImageFile(g, i)"
+                                                                    style="cursor: pointer;"></i>
+                                                                &nbsp; {{g?.name}}</p>
+                                                            <a href="{{g?.url}}" target="_blank"
+                                                                class="btn btn-primary">View</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row wow fadeInUp" *ngIf="signatureRequired">
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="signature1">Please sign your initials to indicate that you have read, understand,
+                            and agree to the
+                            terms of the Informed Consent for Laboratory Testing<br>
+                            <span *ngIf="showChinese">请签署您的姓名首字母以表明您已阅读、理解并同意实验室测试知情同意书的条款</span></label>
+                        <input [(ngModel)]="data.signature1" type="text" name="signature1" id="signature1"
+                            class="form-control form-control-lg" required>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="mb-2">
+                        <label for="signature2">Please sign your initials to indicate that you have read, understand,
+                            and agree to the
+                            terms of the Authorization for Disclosure of Protected Health Information<br>
+                            <span *ngIf="showChinese">请签署您的姓名首字母以表明您已阅读、理解并同意披露受保护健康信息授权的条款</span></label>
+                        <input [(ngModel)]="data.signature2" type="text" name="signature2" id="signature2"
+                            class="form-control form-control-lg" required>
+
+
+
+
+                    </div>
+                </div>
+                <div class="col">
+                    <div>
+                        <label for="signature3">Please sign your initials to indicate that you consent to have your test
+                            results shared with the
+                            Chinese consulate<br>
+                            <span *ngIf="showChinese">请签署您的姓名首字母以表明您同意将您的测试结果发送给中国领事馆</span></label>
+                        <input [(ngModel)]="data.signature3" type="text" name="signature3" id="signature3"
+                            class="form-control form-control-lg" required>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+            <hr *ngIf="showInsuranceUpload">
+            <div *ngIf="showInsuranceUpload">
+                <div class="row wow fadeInUp">
+                    <div class="col">
+                        <span class="p-2"><strong>Insurance?</strong> </span>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="has_insurance" name="has_insurance"
+                                [(ngModel)]="data.has_insurance">
+                        </div>
+                    </div>
+                </div>
+                <div class="row wow fadeInUp" *ngIf="data && data.has_insurance">
+                    <div class="col-12 col-md-6">
+                        <label for="insurance_name">Insurance Name</label>
+                        <input [(ngModel)]="data.insurance_name" type="text" name="insurance_name" id="insurance_name"
+                            class="form-control form-control-lg">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="insurance_policy_number">Policy Number</label>
+                        <input [(ngModel)]="data.insurance_policy_number" type="text" name="insurance_policy_number"
+                            id="insurance_policy_number" class="form-control form-control-lg">
+                    </div>
+                </div>
+                <div class="row wow fadeInUp" *ngIf="data && data.has_insurance">
+                    <div class="col-12 col-md-6">
+                        <label for="insurance_group_number">Group Number</label>
+                        <input [(ngModel)]="data.insurance_group_number" type="text" name="insurance_group_number"
+                            id="insurance_group_number" class="form-control form-control-lg">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="insurance_suffix_number">Suffix Number</label>
+                        <input [(ngModel)]="data.insurance_suffix_number" type="text" name="insurance_suffix_number"
+                            id="insurance_suffix_number" class="form-control form-control-lg">
+                    </div>
+                </div>
+                <div class="row wow fadeInUp" *ngIf="data && data.has_insurance">
+                    <div class="col">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="dropzone" dropzone (hovered)="toggleHover2($event)"
+                                        (dropped)="onDrop2($event)" [class.hovering]="isHovering2">
+                                        <p><i>Drag and Drop Insurance Card Front and Back</i> </p>
+                                        <input [(ngModel)]="resultsFile2" type="file" name="file" id="file"
+                                            class="form-control form-control-lg" (change)="uploadImage2($event)"
+                                            accept=".png,.jpg,.gif,.jpeg">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div *ngFor="let h of dropFiles2">
+                                        <app-image1-upload-task [file]="h" [data]="data.insurance_card.imageURL">
+                                        </app-image1-upload-task>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="progress" *ngIf="uploadProgress2">
+                                        <div class="progress-bar bg-progress" role="progressbar"
+                                            [ngStyle]="{'width': (uploadProgress2 | async) + '%'}"
+                                            [attr.aria-valuenow]="(uploadProgress2 | async)" [attr.aria-valuemin]="0"
+                                            [attr.aria-valuemax]="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row"
+                                *ngIf="data && data.insurance_card && data.insurance_card.imageURL && data.insurance_card.imageURL.length">
+                                <div class="col">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div *ngFor="let e of data.insurance_card.imageURL;let i = index"
+                                                class="col">
+                                                <div class="card" style="width: 18rem;">
+                                                    <img src="{{e?.url}}" class="card-img-top" alt="{{e?.name}}"
+                                                        style="max-height: 164px;">
+                                                    <div class="card-body">
+                                                        <p class="card-text"> <i class="fa fa-times text-danger"
+                                                                aria-hidden="true" (click)="onDeleteImage2File(e, i)"
+                                                                style="cursor: pointer;"></i>
+                                                            &nbsp; {{e?.name}}</p>
+                                                        <a href="{{e?.url}}" target="_blank"
+                                                            class="btn btn-primary">View</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row  mt-2 wow fadeInUp">
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input [(ngModel)]="consent_authorization" class="form-check-input" type="checkbox"
+                            id="consent_authorization" name="consent_authorization" required>
+                        <label class="form-check-label" for="consent_authorization"> I have read the <a href="#"
+                                data-bs-toggle="modal" data-bs-target="#consent">Consent Authorization. <span
+                                    *ngIf="showChinese">我已阅读同意授权书</span></a> </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mgt-5 wow fadeInUp">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 text-center mt-3">
+                            <button type="submit" class="btn btn-primary"
+                                [ngStyle]="{'background-color': colorService.secondaryColor, 'border-color': colorService.secondaryColor}"
+                                [disabled]="!dataForm.form.valid">Submit <span *ngIf="showChinese">提交</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+<div class="container mt-5 wow fadeInUp" *ngIf="!production">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" [checked]="diagnostic"
+                    (click)="setDiagnostic()">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Show diagnostic?</label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2" *ngIf="diagnostic">
+        <div class="col-12">
+            <pre class="text-light bg-dark p-4">{{data | json}}</pre>
+        </div>
+    </div>
+</div>
+<app-consent-authorization [companySettings]="companyData"></app-consent-authorization>

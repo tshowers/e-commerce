@@ -1,0 +1,104 @@
+<form #dataForm="ngForm" (ngSubmit)="onSubmit()"  *ngIf="data">
+    <div class="containter-fluid wow fadeInLeft">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="text-capitalize">Order Text</h4>                
+            </div>
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="catalog_link_text">Catalog Link Text</label>
+                            <input [(ngModel)]="data.catalog_link_text" type="text" name="catalog_link_text" id="catalog_link_text" class="form-control form-control-lg" required autofocus>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="about_link_text">About Link Text</label>
+                            <input [(ngModel)]="data.about_link_text" type="text" name="about_link_text" id="about_link_text" class="form-control form-control-lg" required>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="activate_link_text">Activate Kit Text</label>
+                            <input [(ngModel)]="data.activate_link_text" type="text" name="activate_link_text" id="activate_link_text" class="form-control form-control-lg">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="view_results_text">View Results Text</label>
+                            <input [(ngModel)]="data.view_results_text" type="text" name="view_results_text" id="view_results_text" class="form-control form-control-lg">
+                        </div>
+                    </div>
+                </div> -->
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="sign_in_text">Sign In Text</label>
+                            <input [(ngModel)]="data.sign_in_text" type="text" name="sign_in_text" id="sign_in_text" class="form-control form-control-lg" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="sign_out_text">Sign Out Text</label>
+                            <input [(ngModel)]="data.sign_out_text" type="text" name="sign_out_text" id="sign_out_text" class="form-control form-control-lg" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="order_button_text">Button Text</label>
+                            <input [(ngModel)]="data.order_button_text" type="text" name="order_button_text" id="order_button_text" class="form-control form-control-lg" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="catalog_section_title">Catalog Section Title</label>
+                            <input [(ngModel)]="data.catalog_section_title" type="text" name="catalog_section_title" id="catalog_section_title" class="form-control form-control-lg" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="cart_section_title">Cart Section Title</label>
+                            <input [(ngModel)]="data.cart_section_title" type="text" name="cart_section_title" id="cart_section_title" class="form-control form-control-lg" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="check_out_section_title">Check Out Section Title</label>
+                            <input [(ngModel)]="data.check_out_section_title" type="text" name="check_out_section_title" id="check_out_section_title" class="form-control form-control-lg" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="activated_kits_title">Activated Kits Title</label>
+                            <input [(ngModel)]="data.activated_kits_title" type="text" name="activated_kits_title" id="activated_kits_title" class="form-control form-control-lg">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-primary" [ngStyle]="{'background-color': colorService.secondaryColor, 'border-color': colorService.secondaryColor}" [disabled]="!dataForm.form.valid">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

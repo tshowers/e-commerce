@@ -1,0 +1,60 @@
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col"><span (click)="back()"
+                  style="cursor: pointer;"><i class="fa fa-chevron-left fa-2x text-muted"></i></span> </div>
+        <div class="col-md text-center">
+            <h1 [ngStyle]="{'color': colorService.darkBackground}">Orders</h1>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card"
+                 *ngIf="orderService.items else spinner">
+                <div class="card-body" *ngIf="!data">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th *ngIf="userService.user && (userService.user.user_type == 'practitioner')">Name</th>
+                                <th *ngIf="isAdmin || isInsurancePartner">Name</th>
+                                <th>Response</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of orderService.items | async | dateSortDesc; let i = index"
+                                (click)="onView(item)"
+                                style="cursor: pointer;">
+                                <td>{{item?._id}}</td>
+                                <td  *ngIf="userService.user && (userService.user.user_type == 'practitioner')">{{item?.cart?.first_name}} {{item?.cart?.last_name}}</td>
+                                <td *ngIf="isAdmin || isInsurancePartner">
+                                    <span *ngIf="item.user; noUser">
+                                        {{item?.user?.first_name}} {{item?.user?.middle_name}} {{item?.user?.last_name}}
+                                    </span>
+                                    <ng-template #noUser>
+                                        {{item?.cart?.first_name}} {{item?.cart?.last_name}}
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    <span *ngIf="item.charge_response && item.charge_response.outcome && item.charge_response.outcome.seller_message">{{item?.charge_response?.outcome?.seller_message}}</span>
+                                    <span *ngIf="!(item.charge_response && item.charge_response.outcome && item.charge_response.outcome.seller_message)">{{item?.charge_response | slice:0:30}}</span>
+        
+                                </td>
+                                <td class="text-capitalize">{{item?.status  | sentence}}</td>
+                                <td>{{item?.cart.updated_at | date:'medium'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div *ngIf="data" class="mt-2">
+                <app-my-order-view [data]="data" (close)="onClose($event)"></app-my-order-view>
+            </div>
+            <ng-template #spinner>
+                <div class="text-center">Loading . . .</div>
+            </ng-template>
+        </div>
+    </div>
+</div>

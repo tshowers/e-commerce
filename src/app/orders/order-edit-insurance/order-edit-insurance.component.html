@@ -1,0 +1,51 @@
+<form #dataForm="ngForm" (ngSubmit)="onSubmit()">
+    <div class="containter-fluid">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="text-capitalize">Insurance Information</h4>
+            </div>
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="insurance_name">Insurance Company Name</label>
+                            <input [(ngModel)]="data.user.insurance_name" type="text" name="insurance_name" id="insurance_name" class="form-control form-control-lg" required autofocus>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="insurance_group_number">Group Number</label>
+                            <input [(ngModel)]="data.user.insurance_group_number" type="text" name="insurance_group_number" id="insurance_group_number" class="form-control form-control-lg">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="insurance_policy_number">Policy Number</label>
+                            <input [(ngModel)]="data.user.insurance_policy_number" type="text" name="insurance_policy_number" id="insurance_policy_number" class="form-control form-control-lg" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="insurance_suffix_number">Suffix Number</label>
+                            <input [(ngModel)]="data.user.insurance_suffix_number" type="text" name="insurance_suffix_number" id="insurance_suffix_number" class="form-control form-control-lg">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" [ngStyle]="{'background-color': colorService.secondaryColor, 'border-color': colorService.secondaryColor}" class="btn btn-primary"
+                            [disabled]="!dataForm.form.valid">Submit</button>                        <button type="button" value="Cancel" class="btn btn-secondary ms-2" (click)="onCancel()">Cancel</button>    
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

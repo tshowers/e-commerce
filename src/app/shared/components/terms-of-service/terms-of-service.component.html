@@ -1,0 +1,122 @@
+<div class="modal fade"
+     id="tos"
+     data-bs-backdrop="static"
+     data-bs-keyboard="false"
+     tabindex="-1"
+     aria-labelledby="staticBackdropLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"
+                    id="staticBackdropLabel">Terms of Service</h5>
+                <button type="button"
+                [ngStyle]="{'background-color': colorService.secondaryColor, 'border-color': colorService.secondaryColor}"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>I authorize {{companySettings?.name}} to charge the credit card used above for the purchase of COVID-19 tests upon laboratory arrival. I understand that my information will be saved to file for future transactions on my account. </p>
+                <p>{{companySettings?.name}} understands that you care about how we collect, use, and share information
+                    when you interact with our website and services, and we value the trust you place in us. </p> This
+                Policy explains: <ul>
+                    <li> the types of information we collect through our website, forms that are available on our
+                        website, and forms that medical practitioners submit to us by means other than our website when
+                        they request our services; </li>
+                    <li> how we use and protect that information; </li>
+                    <li> the types of information we may share with others and under what circumstances; and </li>
+                    <li> the choices you have regarding our collection, use, and sharing practices. </li>
+                </ul>
+                <p> This policy applies to {{companySettings?.name}} and our website. It does not apply to non-US Taliferro
+                    websites that may link to our website, or websites that are accessible from our website; please
+                    review the privacy policies on those websites directly to understand their privacy practices.</p>
+                <p>We may make changes to this policy from time to time. We will post any changes, and such changes will
+                    become effective when they are posted. Your continued use of our website following the posting of
+                    any changes will mean you accept those changes.</p>
+                <p>For questions about our privacy practices, contact us at:</p>  
+                <blockquote>
+                    {{companySettings?.address}}<br>
+                    {{companySettings?.city}} {{companySettings?.province}} {{companySettings?.zip}}<br>
+                    {{companySettings?.phone}}<br>
+                    {{companySettings?.email}}
+                </blockquote>  
+                <strong>Information we collect</strong>
+                <p>We collect information that you submit to us through the website and on forms, including: information
+                    you submit through our Registration Form, feedback you submit to us through our contact page, and
+                    information you submit using forms we make available on our website and by other means, such as our
+                    Practitioner Certification Form and Requisition Form. Information that we collect on our website and
+                    forms includes name, address, and similar contact information; payment card information, and
+                    information related to the type of testing being requested. When medical practitioners order our
+                    tests, they submit information about themselves and their patients.</p>
+                <p>We collect certain information from you automatically when you visit our website. This information
+                    includes details of your visits to our website and information generated in the course of the use
+                    our website (including the timing, frequency and pattern of service use) including, but not limited
+                    to, traffic data, location data, weblogs and other communication data, the resources that you
+                    access, and how you reached our website. It also includes details regarding the device you use to
+                    access our website or digital services, including where available your IP address, operating system
+                    and browser type.</p>
+                <strong>How we use and share your information</strong>
+                <p>We collect and use the information you give us or that we collect automatically about you for the
+                    following purposes:</p>
+                <ul>
+                    <li> To fulfill our promise to you where you request our products and services; for example, when
+                        medical practitioners submit information to open an account with us. </li>
+                    <li> To send medical practitioners periodic marketing communications. </li>
+                    <li> To provide you with the best service and improve and grow our business, including by analyzing
+                        our website’s traffic so that we can improve the website. </li>
+                    <li> To detect, investigate, and prevent activities that may violate our policies or be fraudulent
+                        or illegal. </li>
+                </ul>
+                <p> We may share the information we collect with:</p>
+                <ul>
+                    <li> Our service providers, such as payment processors and cloud hosting providers, so that we can
+                        provide our services to you. </li>
+                    <li> Law enforcement authorities, if required to do so by law or on the good-faith belief that such
+                        action is necessary to (a) conform to applicable law or comply with legal process served on us
+                        or our website; (b) protect and defend our rights or property, the website or our users, or (c)
+                        act to protect the personal safety of us, users of the website or the public. </li>
+                </ul>
+                <strong>Additional information about our data collection and sharing practices</strong>
+                <strong>Aggregated Data:</strong> We may create analyses using aggregated, de-identified data and share
+                these analyses at our discretion. Third parties will not be able to relate this data to identifiable
+                individuals. <strong>Combination of Information:</strong> We may combine information together and with
+                other information we obtain from our business records or from third party sources. <strong>Change of
+                    Ownership or Corporate Organization:</strong> We may transfer to another entity or its affiliates or
+                service providers some or all information about you in connection with, or during negotiations of, any
+                merger, acquisition, sale of assets or any line of business, change in ownership control, or financing
+                transaction. We cannot promise that an acquiring party or the merged entity will have the same privacy
+                practices or treat your information the same as described in this policy. <strong>International Transfer
+                    of Data:</strong> If you use our website outside of the United States, you understand that we may
+                collect, process, and store your personal information in the United States and other countries. The laws
+                in the U.S. regarding personal information may be different from the laws of your state or country. Any
+                such transfers will comply with safeguards as required by relevant law. By using the website or our
+                services, you consent to the collection, international transfer, storage, and processing of your data.
+                <strong>How we secure the information we collect from or about you</strong>
+                <p>We use a combination of physical, technical, and administrative safeguards to protect the information
+                    we collect. While we use these precautions to safeguard this information, we cannot guarantee the
+                    security of the networks, systems, servers, devices, and databases we operate or that are operated
+                    on our behalf.</p>
+                <strong>Your options and rights</strong>
+                <p>Most web browsers automatically accept cookies but, if you prefer, you can usually modify your
+                    browser setting to disable or reject cookies. If you delete your cookies or if you set your browser
+                    to decline cookies, our website may not operate as intended.</p>
+                <p>Our website uses Google Analytics. Please see Google’s explanation of how it uses the information it
+                    collects, and your ability to opt-out.</p>
+                <p>Your browser or device may include “Do Not Track” functionality. At this time, we do not respond to
+                    browser “Do Not Track” signals.</p>
+                <p>If you wish to unsubscribe from our emails, please contact us using the email address above, or use
+                    the Unsubscribe option available in the email.</p>
+                <strong>Your California Privacy Rights</strong>
+                <p>We do not share your personal information with third parties for those third parties’ direct
+                    marketing purposes.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button"
+                [ngStyle]="{'background-color': colorService.secondaryColor, 'border-color': colorService.secondaryColor}"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

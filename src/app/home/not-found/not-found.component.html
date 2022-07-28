@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col text-center">
+            <div class="server-errors pages-card">
+                <div class="status-text-1"
+                     *ngIf="statusText">{{statusText}}</div>
+                <div class="status-error text-theme hertbit"
+                     *ngIf="errorCode">{{errorCode}}</div>
+                <div class="text-center status-text-2 text-dark"
+                     *ngIf="errorMessage">{{errorMessage}}</div>
+                <div class="text-center">
+                    <a (click)="back()" class="text-primary" style="cursor: pointer;">Go Back</a>
+                </div>     
+            </div>
+        </div>
+    </div>
+</div>
