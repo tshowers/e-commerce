@@ -1,30 +1,27 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Injectable, OnInit } from '@angular/core';
+import { GeneralDataService } from './general-data.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SubCategoryService {
+export class SubCategoryService  extends GeneralDataService  {
+  
+  private _collectionName = environment.SUB_CATEGORIES;
 
-  private _itemDocs?: AngularFirestoreCollection;
-  public items?: Observable<any[]>;
-  private _collectionName: string = environment.SUB_CATEGORIES;
-  public production: boolean;
-
-  constructor(private _firestore: AngularFirestore) { 
-    this.production = environment.production;
+  getData(ID: string) {
+    super.get(ID, this._collectionName);
   }
 
   getAll() {
-    if(!this.production)
-      console.info("getAll", this._collectionName);
-    this._itemDocs = this._firestore.collection(this._collectionName, ref => ref.orderBy('name'));
-    this.items = this._itemDocs.valueChanges({ idField: '_id' });
+    super.getAll(this._collectionName);
   }
 
-  delete(id: string) {
-    this._firestore.collection(this._collectionName).doc(id).delete();
+  createData(data: any) {
+    super.create(data, this._collectionName);
+  }
+
+  delete(id:string) {
+    super.delete(id, this._collectionName);
   }
 }

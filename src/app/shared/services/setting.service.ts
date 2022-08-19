@@ -1,10 +1,12 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { environment } from "../../../environments/environment";
 import { IpService } from './ip.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from './auth.service';
+import { UserService } from './user.service';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { DataService } from './data.service';
 
 
 @Injectable({
@@ -12,56 +14,86 @@ import { AuthService } from './auth.service';
 })
 export class SettingService implements OnDestroy {
 
-  private _itemDocs?: AngularFirestoreCollection;
+  public settings: any;
+  protected _itemDoc?: AngularFirestoreDocument<any>;
+  public item?: Observable<any>;
+
+  protected _itemDocs?: AngularFirestoreCollection;
   public items?: Observable<any[]>;
-  public production: boolean;
-  private _collectionName: string = environment.SETTINGS;
-
+  protected _collectionName;
   private _ipSubscription?: Subscription;
-
   public ipAddress = '';
 
-  public settings: any;
-
-  constructor(private _firestore: AngularFirestore, private _ipService: IpService, private _authService: AuthService) {
-    this.production = environment.production;
+  constructor(protected _firestore: AngularFirestore, private _ipService: IpService, protected _authService: AuthService, protected _userService: UserService) {
+    this._collectionName = environment.SETTINGS;
     this.getIP();
   }
 
-  public ngOnDestroy() : void {
+  ngOnDestroy(): void {
     if (this._ipSubscription)
       this._ipSubscription.unsubscribe();
   }
 
+  getAll() {
+    try {
+      if (!environment.production) 
+        console.log("Getting all ", this._collectionName);
+        
+      this._itemDocs = this._firestore.collection(this._collectionName);
+      this.items = this._itemDocs.valueChanges({ idField: '_id' });
+      } catch (error) {
+        console.error("Error On", this._collectionName);
+    }
 
-  get(ID: string) {
-    return this._firestore.doc(this._collectionName + '/' + ID)
   }
 
-  getAll() {
-    if(!this.production)
+  userStoreSettings(): void {
+    if (!environment.production)
+      console.info("setSettings", this._userService.user?.companyId);
+
+    if (this._userService.user && this._userService.user.companyId)
+      this.setSettings(this._userService.user.companyId);
+  }
+
+  retrieveSettings(id: string): void {
+    this.setSettings(id);
+  }
+
+  private setSettings(id: string): void {
+    this._itemDoc = this._firestore.doc<any>(this._collectionName + '/' + id);
+    this.item = this._itemDoc.valueChanges({ idField: '_id' });
+  }
+
+  private findDefault() {
+    if(!environment.production)
       console.info("getAll", this._collectionName);
+
     this._itemDocs = this._firestore.collection(this._collectionName);
     this.items = this._itemDocs.valueChanges({ idField: '_id' });
+
+    this.items.subscribe((data) => {
+      if (data && data.length && (data.length > 0)) {
+        this.settings = data[0];
+      }
+    })
   }
 
-  update(data: any, id:string) {
-    data.updated_at = new Date().getTime();
-    if (this._authService.firebaseUser)
+  newStoreSetting(data: any): string {
+    data.createdAt = new Date().getTime();
+    data.lastUpdated = new Date().getTime();
+    if (this._authService.firebaseUser) {
       data.uid = this._authService.firebaseUser.uid;
-    // data.updated_by = (this._usersService.user && this._usersService.user.email) ? this._usersService.user.email : '';
-    data.browser_ip = this.ipAddress;
-
-    this._firestore.collection(this._collectionName).doc(id).set(data, { merge: true });
-
+      data.updatedBy = (this._authService.firebaseUser.email) ? this._authService.firebaseUser.email : '';
+    }
+    
+    const id = this._firestore.createId();    
+    this._firestore.collection(this._collectionName).doc(id).set(data);
+    return id;
   }
 
-  create(data: any) {
-    if (this._authService.firebaseUser)
-      data.uid = this._authService.firebaseUser.uid;
-    data.browser_ip = this.ipAddress;
-    data.created_at = new Date().getTime();
-    return this._firestore.collection(this._collectionName).add(data);
+
+  delete(id: string) {
+    this._firestore.collection(this._collectionName).doc(id).delete();
   }
 
   private getIP() {

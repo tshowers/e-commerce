@@ -5,6 +5,9 @@ import { Location } from '@angular/common';
 import { UserService } from 'src/app/shared/services/user.service';
 import { environment } from 'src/environments/environment';
 import { ColorsService } from 'src/app/shared/services/colors.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/shared/services/data.service';
 
 @Component({
   selector: 'app-home',
@@ -64,28 +67,21 @@ export class HomeComponent implements OnInit {
     colors: [],
     description: 'Company Description',
     name: '',
-    site_type: 'micro',
+    siteType: 'micro',
     google_verification: true,
   };
-  public production: boolean;
-  public site_type: any;
+  public siteType: any;
 
 
-  constructor(private _settingService: SettingService, private _location: Location, public userService: UserService, public colorService: ColorsService) {
-    this.production = environment.production;
-    this.site_type = environment.site_type;
-    this.userService.admin$.subscribe((result) => {
-      this.isAdmin = result.valueOf();
-    });
-
+  constructor(private _router:Router, private _settingService: SettingService, private _location: Location, public colorService: ColorsService, public authService: AuthService, private _dataService: DataService) {
+    this.siteType = environment.siteType;
+    this._settingService.userStoreSettings();
   }
 
   ngOnInit(): void {
-    this._settingService.getAll();
-    this._settingSubscription = this._settingService.items?.subscribe((data) => {
-      if (data && data.length && (data.length > 0)) {
-        this.company = data[0];
-      }  
+    this._settingSubscription = this._settingService.item?.subscribe((setting) => {
+      this._settingService.settings = setting;
+      this.company = this._settingService.settings;
     })
   }
 
@@ -93,6 +89,11 @@ export class HomeComponent implements OnInit {
     if (this._settingSubscription)
       this._settingSubscription.unsubscribe();
   }
+
+  onSignOut() : void {
+    this._router.navigate(['identity', 'bye']);
+  }
+
 
   onOrderHistory(): void {
     this.editReset();
@@ -271,10 +272,7 @@ export class HomeComponent implements OnInit {
   }
 
   setCompany(): void {
-    if (this.company._id)
-      this._settingService.update(this.company, this.company._id);
-    else
-      this._settingService.create(this.company);
+    this._dataService.update(environment.SETTINGS, this.company._id, this.company);
   }
 
   onCompanyEmail(): void {

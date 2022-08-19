@@ -24,13 +24,12 @@ export class Catalog2Component implements OnInit {
   @Input() background: any;
   @Output() itemAdded = new EventEmitter();
 
-  product_type = "";
+  productType = "";
   activeBackground = "#ffffff";
   currentFilter = '';
   tab = 1;
   dependencyCodes = '';
   dependencyCodeCount = 0;
-  production: boolean;
 
   tempdependencyCodes = '';
   tempdependencyCodeCount = 0;
@@ -40,7 +39,7 @@ export class Catalog2Component implements OnInit {
 
 
   constructor(private _viewportScroller: ViewportScroller, public authService:AuthService, public userService: UserService, public subCategoryService: SubCategoryService, public colorService: ColorsService, public productTypeService: ProductTypeService, public productService: ProductService, public categoryService: CategoryService, public cartService: CartService) {
-    this.production = environment.production;
+    
   }
 
   ngOnInit(): void {
@@ -50,14 +49,14 @@ export class Catalog2Component implements OnInit {
   }
 
   typeChanged() {
-    this.productService.getAllByType(this.product_type);
+    this.productService.getAllByType(this.productType);
   }
 
   addToCart(item: any): void {
     this._viewportScroller.scrollToAnchor("cart");
 
     if (!this.isInCartAlready(item)) {
-      this.cartService.cart.line_items?.push({ 'product': item, 'quantity': 1 });
+      this.cartService.cart.lineItems?.push({ 'product': item, 'quantity': 1 });
       this.checkForDependency(item);
       this.itemAdded.emit();
     }
@@ -72,21 +71,21 @@ export class Catalog2Component implements OnInit {
     this.dependencyCodeCount = 0;
     this.dependencyCodes = '';
 
-    if (!this.production)
+    if (!environment.production)
       console.log("dependencyCodeCount", this.dependencyCodeCount);
 
-    this.cartService.cart.line_items?.forEach((item) => {
+    this.cartService.cart.lineItems?.forEach((item) => {
       console.log("Loop", item.product);
-      if (item.product && item.product.dependency && item.product.dependency.dependency_code && !item.product.dependency.price_dependent) {
+      if (item.product && item.product.dependency && item.product.dependency.dependencyCode && !item.product.dependency.priceDependent) {
         if (this.dependencyCodeCount > 0)
           this.dependencyCodes += ","
-        this.dependencyCodes += item.product.dependency.dependency_code;
+        this.dependencyCodes += item.product.dependency.dependencyCode;
         this.dependencyCodeCount++;
       }
 
     });
 
-    if (!this.production) {
+    if (!environment.production) {
       let codeSplit = this.dependencyCodes.split(",");
       console.log(this.dependencyCodes, "Temp Codes Split", codeSplit);
     }
@@ -100,10 +99,10 @@ export class Catalog2Component implements OnInit {
   }
 
   private isInCartAlready(item: any): boolean {
-    let lt = (this.cartService.cart.line_items && this.cartService.cart.line_items?.length) ? this.cartService.cart.line_items?.length : 0;
+    let lt = (this.cartService.cart.lineItems && this.cartService.cart.lineItems?.length) ? this.cartService.cart.lineItems?.length : 0;
     let found = false;
     for (let index = 0; index < lt; index++) {
-      const element = this.cartService.cart.line_items?.[index];
+      const element = this.cartService.cart.lineItems?.[index];
       if (element?.product._id === item._id) {
         found = true;
         break;
@@ -151,17 +150,17 @@ export class Catalog2Component implements OnInit {
     item.subCategorySelectedText = item.subCategorySelectedText.trim();
 
 
-    if (!this.production)
+    if (!environment.production)
       console.log("SubCategorySelected", item.subCategorySelected, item.subCategorySelectedText)
   }
 
   private checkIfToRemove(item: any, numberChecked: number): void {
-    let lt = (this.cartService.cart.line_items && this.cartService.cart.line_items?.length) ? this.cartService.cart.line_items?.length : 0;
+    let lt = (this.cartService.cart.lineItems && this.cartService.cart.lineItems?.length) ? this.cartService.cart.lineItems?.length : 0;
     if (numberChecked === 0) {
       for (let index = 0; index < lt; index++) {
-        const element = this.cartService.cart.line_items?.[index];
+        const element = this.cartService.cart.lineItems?.[index];
         if (element?.product._id === item._id) {
-          this.cartService.cart.line_items?.splice(index, 1);
+          this.cartService.cart.lineItems?.splice(index, 1);
         }
       }
       this.checkCartDependency()
@@ -176,7 +175,7 @@ export class Catalog2Component implements OnInit {
         const a = item.subCategory[index];
         let found = this.getPrice(a, itemsChecked);
 
-        if (!this.production)
+        if (!environment.production)
           console.log("Found", found);
 
         if (found) {

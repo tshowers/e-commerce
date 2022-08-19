@@ -24,9 +24,9 @@ export class CcInfoComponent extends DataHandlerComponent implements OnInit {
   }
 
   showContent(): void {
-    let cc_number = document.getElementById("cc_number")
-    let type = cc_number?.getAttribute('type') === 'password' ? 'text' : 'password';
-    cc_number?.setAttribute('type', type);
+    let ccNumber = document.getElementById("ccNumber")
+    let type = ccNumber?.getAttribute('type') === 'password' ? 'text' : 'password';
+    ccNumber?.setAttribute('type', type);
   }
 
 }

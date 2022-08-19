@@ -34,8 +34,8 @@ export class AboutProduct2EditComponent extends DataHandlerComponent implements 
 
   ngOnInit(): void {
     super.ngOnInit();
-    if (!this.data.about_product2) {
-      this.data.about_product2 = {
+    if (!this.data.aboutProduct2) {
+      this.data.aboutProduct2 = {
         imageURL1: [],
         imageURL2: [],
         headerText: '',
@@ -90,14 +90,14 @@ export class AboutProduct2EditComponent extends DataHandlerComponent implements 
   onDeleteImage1File(file: any, at: number): void {
     if (file && file.url) {
       this._storage.refFromURL(file.url).delete();
-      this.data.about_product2.imageURL1.splice(at, 1);
+      this.data.aboutProduct2.imageURL1.splice(at, 1);
     }
   }
 
   onDeleteImage2File(file: any, at: number): void {
     if (file && file.url) {
       this._storage.refFromURL(file.url).delete();
-      this.data.about_product2.imageURL2.splice(at, 1);
+      this.data.aboutProduct2.imageURL2.splice(at, 1);
     }
   }
 
@@ -131,10 +131,10 @@ export class AboutProduct2EditComponent extends DataHandlerComponent implements 
         finalize(async () => {
           const downloadURL = await this._storage.ref(path).getDownloadURL().toPromise();
           this.uploaded = true;
-          this.data.about_product2.imageURL1.push({
+          this.data.aboutProduct2.imageURL1.push({
             'name': event.target.files[0].name,
             'url': downloadURL,
-            'uploaded_at': new Date().getTime()
+            'uploadedAt': new Date().getTime()
           });
         })
       ).subscribe();
@@ -151,10 +151,10 @@ export class AboutProduct2EditComponent extends DataHandlerComponent implements 
         finalize(async () => {
           const downloadURL = await this._storage.ref(path).getDownloadURL().toPromise();
           this.uploaded = true;
-          this.data.about_product2.imageURL2.push({
+          this.data.aboutProduct2.imageURL2.push({
             'name': event.target.files[0].name,
             'url': downloadURL,
-            'uploaded_at': new Date().getTime()
+            'uploadedAt': new Date().getTime()
           });
         })
       ).subscribe();

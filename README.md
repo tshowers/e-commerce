@@ -2,24 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.6.
 
-The application serves as the e-commerce portal and back-end for handling lab test request, activation and fulfillment.
-
-Tha application uses "passwordless" authentication which is setup in Google's Firebase Authentication.
-
-Authentication can also be handled by an Apple ID or Gmail account.
-
-There are 5 web sites that the code serves.
-- dev
-- staging
-- production
-- promo
-- prac
-
-Each environment has a configuration that determines the sites characteristics.
-
-Database meta for each site is retrieved the project settings tab of the Firebase console.
-
-
+[Taliferro Group e-Commerce Product](https://e-commerce.taliferro.com/)
 
 ## Development server
 

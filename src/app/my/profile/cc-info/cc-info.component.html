@@ -8,17 +8,17 @@
                 <div class="row mb-2">
                     <div class="col">
                         <div class="form-group">
-                            <label for="cc_name_on_card">Name on Card</label>
-                            <input [(ngModel)]="data.cc_name_on_card" type="text" name="cc_name_on_card" id="cc_name_on_card" class="form-control form-control-lg" required autofocus>
+                            <label for="ccNameOnCard">Name on Card</label>
+                            <input [(ngModel)]="data.temp.ccNameOnCard" type="text" name="ccNameOnCard" id="ccNameOnCard" class="form-control form-control-lg" required autofocus>
                         </div>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col">
                         <div class="form-group">
-                            <label for="cc_number">Credit Card Number</label>
+                            <label for="ccNumber">Credit Card Number</label>
                             <div class="input-group">
-                                <input [(ngModel)]="data.cc_number" type="password" id="cc_number" name="cc_number" placeholder="Credit Card Number" class="form-control form-control-lg" required>
+                                <input [(ngModel)]="data.temp.ccNumber" type="password" id="ccNumber" name="ccNumber" placeholder="Credit Card Number" class="form-control form-control-lg" required>
                                 <span class="input-group-text" id="basic-addon1" (click)="showContent()" style="cursor: pointer;"><i class="fa fa-eye" aria-hidden="true"></i></span>
                             </div>
                         </div>
@@ -27,8 +27,8 @@
                 <div class="row mb-2">
                     <div class="col">
                         <div class="form-group">
-                            <label for="cc_exp_date">Expiration Date</label>
-                            <input [(ngModel)]="data.cc_exp_date" type="month" name="cc_exp_date" id="cc_exp_date" class="form-control form-control-lg" placeholder="Expiration Date - YYYY-MM" required>
+                            <label for="ccExpDate">Expiration Date</label>
+                            <input [(ngModel)]="data.temp.ccExpDate" type="month" name="ccExpDate" id="ccExpDate" class="form-control form-control-lg" placeholder="Expiration Date - YYYY-MM" required>
                         </div>
                     </div>
                 </div>

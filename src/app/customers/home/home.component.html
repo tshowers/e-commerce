@@ -20,18 +20,13 @@
             <app-customer-view [data]="data" (editItem)="onEdit($event)"></app-customer-view>
         </div>
         <div class="col-md-6">
-            <app-customer-edit-address [data]="data" *ngIf="isCustomerAddress"></app-customer-edit-address>
-            <app-customer-edit-email [data]="data" *ngIf="isCustomerEmail"></app-customer-edit-email>
             <app-customer-edit-name [data]="data" *ngIf="isCustomerName"></app-customer-edit-name>
-            <app-customer-edit-phone [data]="data" *ngIf="isCustomerPhone"></app-customer-edit-phone>
             <app-customer-edit-title [data]="data" *ngIf="isCustomerTitle"></app-customer-edit-title>
-            <app-customer-edit-type [data]="data" *ngIf="isCustomerType"></app-customer-edit-type>
             <app-customer-edit-credit [data]="data" *ngIf="isCustomerCredit"></app-customer-edit-credit>
             <app-customer-edit-personal [data]="data" *ngIf="isCustomerPersonal"></app-customer-edit-personal>
-            <app-customer-edit-status [data]="data" *ngIf="isCustomerStatus"></app-customer-edit-status>
             <app-customer-edit-dob [data]="data" *ngIf="isCustomerDob"></app-customer-edit-dob>
             <app-customer-edit-gender [data]="data" *ngIf="isCustomerGender"></app-customer-edit-gender>
-            <pre *ngIf="isDiagnostic" class="text-light bg-dark p-4">{{data | json}}</pre>
+            <pre *ngIf="isDiagnostic">{{data | json}}</pre>
 
         </div>
     </div>

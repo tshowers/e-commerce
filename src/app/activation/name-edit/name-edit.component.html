@@ -3,15 +3,15 @@
         <div class="row">
             <div class="col-12">
                 <div *ngIf="data" class="form-group m-2">
-                    <input [(ngModel)]="data.company_name" id="company_name" name="company_name" autocorrect="off" autocapitalize="off" spellcheck="off" autocomplete="off"
+                    <input [(ngModel)]="data.companyName" id="companyName" name="companyName" autocorrect="off" autocapitalize="off" spellcheck="off" autocomplete="off"
                         placeholder="Employer or Organization" class="form-control form-control-lg" type="text" minlength="2">
                 </div>
                 <div *ngIf="data" class="form-group m-2">
-                    <input [(ngModel)]="data.first_name" id="first_name" name="first_name" placeholder="First Name" autocorrect="off" autocapitalize="off" spellcheck="off" autocomplete="off"
+                    <input [(ngModel)]="data.firstName" id="firstName" name="firstName" placeholder="First Name" autocorrect="off" autocapitalize="off" spellcheck="off" autocomplete="off"
                         class="form-control form-control-lg" type="text" minlength="1" required>
                 </div>
                 <div *ngIf="data" class="form-group m-2">
-                    <input [(ngModel)]="data.last_name" id="last_name" name="last_name" autocorrect="off" autocapitalize="off" spellcheck="off" autocomplete="off" placeholder="Last Name"
+                    <input [(ngModel)]="data.lastName" id="lastName" name="lastName" autocorrect="off" autocapitalize="off" spellcheck="off" autocomplete="off" placeholder="Last Name"
                         class="form-control form-control-lg" type="text" minlength="2" required>
                 </div>
             </div>

@@ -8,16 +8,16 @@
                 <div class="row mb-2">
                     <div class="col">
                         <div class="form-group">
-                            <label for="address1">Street Address 1</label>
-                            <input [(ngModel)]="data.address1" type="text" name="address1" id="address1" class="form-control form-control-lg" required autofocus>
+                            <label for="streetAddress1">Street Address 1</label>
+                            <input [(ngModel)]="data.temp.streetAddress1" type="text" name="streetAddress1" id="streetAddress1" class="form-control form-control-lg" required autofocus>
                         </div>
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col">
                         <div class="form-group">
-                            <label for="address2">Street Address 2</label>
-                            <input [(ngModel)]="data.address2" type="text" name="address2" id="address2" class="form-control form-control-lg">
+                            <label for="streetAddress2">Street Address 2</label>
+                            <input [(ngModel)]="data.temp.streetAddress2" type="text" name="streetAddress2" id="streetAddress2" class="form-control form-control-lg">
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="city">City</label>
-                            <input [(ngModel)]="data.city" type="text" name="city" id="city" class="form-control form-control-lg" required>
+                            <input [(ngModel)]="data.temp.city" type="text" name="city" id="city" class="form-control form-control-lg" required>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="province">Province</label>
-                            <select [(ngModel)]="data.province" name="province" id="province" class="form-select form-select-lg" required>
+                            <select [(ngModel)]="data.temp.province" name="province" id="province" class="form-select form-select-lg" required>
                                 <option value="" selected disabled hidden>Choose State or Province</option>
                                 <option value="AL">Alabama [AL]</option>
                                 <option value="AK">Alaska [AK]</option>
@@ -115,7 +115,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="zip">Zip Code</label>
-                            <input [(ngModel)]="data.zip" type="text" name="zip" id="zip" class="form-control form-control-lg" required>
+                            <input [(ngModel)]="data.temp.zip" type="text" name="zip" id="zip" class="form-control form-control-lg" required>
                         </div>
                     </div>
                 </div>
@@ -123,7 +123,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="country">Country</label>
-                            <select [(ngModel)]="data.country" name="country" id="country" class="form-select form-select-lg">
+                            <select [(ngModel)]="data.temp.country" name="country" id="country" class="form-select form-select-lg">
                                 <option value="US">United States of America [US]</option>
                                 <option value="CA">Canada [CA]</option>
                                 <option value="">---------------------------------------------</option>

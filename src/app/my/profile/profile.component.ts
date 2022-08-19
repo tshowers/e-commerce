@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private _userService: UserService, private _location: Location, public settingService: SettingService, public colorService: ColorsService) { 
     this.user = this._userService.user;
-    this.production = environment.production;
+    
   }
 
   ngOnInit(): void {

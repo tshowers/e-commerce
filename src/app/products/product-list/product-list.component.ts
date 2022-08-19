@@ -10,8 +10,6 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class ProductListComponent implements OnInit, OnDestroy {
 
   @Output() id = new EventEmitter();
-  loading: any;
-  private _dataSubscription?: Subscription;
   data: any;
   filteredData = '';
 
@@ -20,15 +18,9 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._dataSubscription = this.productService.items?.subscribe((data) => {
-      this.data = data;
-      this.loading = 'complete';
-    })
   }
 
   ngOnDestroy(): void {
-    if (this._dataSubscription)
-      this._dataSubscription.unsubscribe();
   }
 
   public onView(value: any): void {

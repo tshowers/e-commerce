@@ -16,11 +16,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   public practiceAlert: boolean = true;
   public settings: any;
   private _settingSubscription?: Subscription; 
-  public production: boolean;
+  
 
   constructor(private _location: Location, public userService: UserService, public settingService: SettingService, public colorService: ColorsService) { 
-    this.production = environment.production;
-    this.userService.setRoles();
+    
   }
 
   ngOnInit(): void {

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ColorsService } from '../../services/colors.service';
+import { SettingService } from '../../services/setting.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class MarketingVideo2Component implements OnInit {
   videoURL: any;
 
 
-  constructor(public domSanitizer: DomSanitizer, public userService: UserService, public colorService: ColorsService) { }
+  constructor(public domSanitizer: DomSanitizer, public userService: UserService, public colorService: ColorsService, public settingsService: SettingService) { }
 
   ngOnInit(): void {
     if (this.data && this.data.video2 && this.data.video2.videoURL)

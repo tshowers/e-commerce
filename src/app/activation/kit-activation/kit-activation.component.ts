@@ -62,9 +62,9 @@ export class KitActivationComponent extends DataHandlerComponent implements OnIn
     const order = await this.getOrder();
     if (order != null) {
       this.data.order = order;
-      this.data.order_id = this.orderId;
+      this.data.orderId = this.orderId;
 
-      if (!this.production)
+      if (!environment.production)
         console.log("Order", order);
 
       this.onKitNumber();
@@ -80,24 +80,24 @@ export class KitActivationComponent extends DataHandlerComponent implements OnIn
   public onLabOrderFound(dataFound: any) {
     this.data = dataFound;
 
-    if (!this.production)
+    if (!environment.production)
       console.log("New Data should be", this.data);
   }
 
   private fillLabOrderInfofromUser(): void {
     if (this.userService.authService.firebaseUser && this.userService.user) {
-      this.data.email = (this.userService.user.email) ? this.userService.user.email : '';
-      this.data.phone = (this.userService.user.phone_number) ? this.userService.user.phone_number : '';
-      this.data.address1 = (this.userService.user.address1) ? this.userService.user.address1 : '';
-      this.data.address2 = (this.userService.user.address2) ? this.userService.user.address2 : '';
-      this.data.city = (this.userService.user.city) ? this.userService.user.city : '';
-      this.data.province = (this.userService.user.province) ? this.userService.user.province : '';
-      this.data.zip = (this.userService.user.zip) ? this.userService.user.zip : '';
-      this.data.country = (this.userService.user.country) ? this.userService.user.country : '';
-      this.data.first_name = (this.userService.user.first_name) ? this.userService.user.first_name : '';
-      this.data.last_name = (this.userService.user.last_name) ? this.userService.user.last_name : '';
-      this.data.gender = (this.userService.user.gender) ? this.userService.user.gender : '';
-      this.data.dob = (this.userService.user.dob) ? this.userService.user.dob : '';
+      this.data.email = (this.userService.user.temp.email) ? this.userService.user.temp.email : '';
+      this.data.phone = (this.userService.user.temp.phoneNumber) ? this.userService.user.temp.phoneNumber : '';
+      this.data.streetAddress1 = (this.userService.user.temp.streetAddress1) ? this.userService.user.temp.streetAddress1 : '';
+      this.data.streetAddress2 = (this.userService.user.temp.streetAddress2) ? this.userService.user.temp.streetAddress2 : '';
+      this.data.city = (this.userService.user.temp.city) ? this.userService.user.temp.city : '';
+      this.data.province = (this.userService.user.temp.province) ? this.userService.user.temp.province : '';
+      this.data.zip = (this.userService.user.temp.zip) ? this.userService.user.temp.zip : '';
+      this.data.country = (this.userService.user.temp.country) ? this.userService.user.temp.country : '';
+      this.data.firstName = (this.userService.user.temp.firstName) ? this.userService.user.temp.firstName : '';
+      this.data.lastName = (this.userService.user.temp.lastName) ? this.userService.user.temp.lastName : '';
+      this.data.gender = (this.userService.user.temp.gender) ? this.userService.user.temp.gender : '';
+      this.data.dob = (this.userService.user.temp.dob) ? this.userService.user.temp.dob : '';
     }
   }
 
@@ -134,7 +134,7 @@ export class KitActivationComponent extends DataHandlerComponent implements OnIn
 
     this.allDataEntered = this.isComplete();
 
-    if (!this.production)
+    if (!environment.production)
       console.log("All Data entered", this.allDataEntered, this.data);
   }
 
@@ -235,9 +235,9 @@ export class KitActivationComponent extends DataHandlerComponent implements OnIn
 
   public isComplete(): boolean {
 
-    if (this.data.first_name
-      && this.data.last_name
-      && this.data.address1
+    if (this.data.firstName
+      && this.data.lastName
+      && this.data.streetAddress1
       && this.data.city
       && this.data.province
       && this.data.zip
@@ -245,8 +245,8 @@ export class KitActivationComponent extends DataHandlerComponent implements OnIn
       && this.data.dob
       && this.data.email
       && this.data.phone
-      && this.data.time_collected
-      && this.data.date_collected
+      && this.data.timeCollected
+      && this.data.dateCollected
     )
       return true;
     else

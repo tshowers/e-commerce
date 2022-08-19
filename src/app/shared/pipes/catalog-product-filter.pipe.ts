@@ -14,7 +14,7 @@ export class CatalogProductFilterPipe implements PipeTransform {
     for (const item of value) {
       let a = (item && item.title) ? String(item.title) : '';
       let b = (item && item.keywords) ? String(item.keywords) : '';
-      let c = (item && item.product_type) ? String(item.product_type) : '';
+      let c = (item && item.productType) ? String(item.productType) : '';
       let d = (item && item.manufacturer) ? String(item.manufacturer) : '';
       let e = (item && item.author) ? String(item.author) : '';
       let f = (item && item.category) ? String(item.category) : '';

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ColorsService } from '../../services/colors.service';
+import { SettingService } from '../../services/setting.service';
 
 @Component({
   selector: 'app-about',
@@ -10,7 +11,7 @@ export class AboutComponent implements OnInit {
 
   @Input() data: any;
 
-  constructor(public colorService: ColorsService) { }
+  constructor(public colorService: ColorsService, public settingService: SettingService) { }
 
   ngOnInit(): void {
   }

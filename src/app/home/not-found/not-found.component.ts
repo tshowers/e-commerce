@@ -10,7 +10,7 @@ export class NotFoundComponent implements OnInit {
 
   public statusText = "Oops!";
   public errorCode = "4 0 4";
-  public errorMessage = "PAGE NOT FOUND";
+  public errorMessage = "An Error Occurred";
   public subErrorMessage = "APOLOGIES!";
   public redirectLink = "/";
   public linkText = "Go to Home Page";

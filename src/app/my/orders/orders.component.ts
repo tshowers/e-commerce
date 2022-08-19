@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { ColorsService } from 'src/app/shared/services/colors.service';
 import { environment } from 'src/environments/environment';
+import { SettingService } from 'src/app/shared/services/setting.service';
 
 @Component({
   selector: 'app-orders',
@@ -23,7 +24,7 @@ export class OrdersComponent implements OnInit {
   public isInsurancePartner: boolean = false;
   public isAdmin: boolean = false;
 
-  constructor(private _location: Location, public orderService: OrderService, public userService: UserService, public colorService: ColorsService) {
+  constructor(private _location: Location, public orderService: OrderService, public userService: UserService, public colorService: ColorsService, public settingService: SettingService) {
     this.userService.insurancePartner$.subscribe((result) => {
       this.isInsurancePartner = result.valueOf();
     });
@@ -34,15 +35,15 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.production)
-    console.log("User is a ", this.userService.user?.user_type, this.userService.user, "Admin", this.isAdmin, "Partner", this.isInsurancePartner);
+    if (!environment.production)
+    console.log("User is a ", this.userService.user?.temp.userType, this.userService.user, "Admin", this.isAdmin, "Partner", this.isInsurancePartner);
 
     if (this.isInsurancePartner && !this.isAdmin)
       this.orderService.getInsuranceRelated();
-    else if (this.userService.user && this.userService.user.user_type && (this.userService.user.user_type == 'practitioner'))
-      this.orderService.getAllByPrac(this.userService.user?.customer_id);
+    else if (this.userService.user && this.userService.user.temp.userType && (this.userService.user.temp.userType == 'practitioner'))
+      this.orderService.getAllByPrac(this.userService.user?.temp.customerId);
     else
-      this.orderService.getAllByUser(this.userService.user?.uid);
+      this.orderService.getAllByUser(this.userService.user?._id);
   }
 
   back(): void {

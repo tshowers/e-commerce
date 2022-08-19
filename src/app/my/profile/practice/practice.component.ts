@@ -20,16 +20,16 @@ export class PracticeComponent extends DataHandlerComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.data.user_type == 'patient') {
-      this.data.practitioner_name = '';
+    if (this.data.userType == 'patient') {
+      this.data.practitionerName = '';
       this.data.npi = '';
-      this.data.customer_id = '';
-      this.data.prac_first_name = '';
-      this.data.prac_last_name = '';
+      this.data.customerId = '';
+      this.data.pracFirstName = '';
+      this.data.pracLastName = '';
       super.onSetByUID(environment.USERS);
     } else {
-      if ((this.data.practitioner_name && this.data.practitioner_name != '')
-        && (this.data.customer_id && this.data.customer_id != ''))
+      if ((this.data.practitionerName && this.data.practitionerName != '')
+        && (this.data.customerId && this.data.customerId != ''))
         super.onSetByUID(environment.USERS);
     }
   }

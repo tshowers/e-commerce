@@ -29,70 +29,30 @@
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span class="p-2"
-                          *ngIf="data && data.status"><strong>Status: </strong> {{data.status}}</span>
+                          *ngIf="data && data.displayName"><strong>Display Name: </strong> {{data.displayName}}</span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.status">No status</span>
-                    <a class="text-secondary text-opacity-25"
-                       style="cursor: pointer;"
-                       (click)="onStatus()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2"
-                          *ngIf="data && data.email"><strong>Email Address: </strong> {{data.email}}</span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.email">No email</span>
-                    <a class="text-secondary text-opacity-25"
-                       style="cursor: pointer;"
-                       (click)="onEmail()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2"
-                          *ngIf="data && data.display_name"><strong>Display Name: </strong> {{data.display_name}}</span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.display_name">No display name</span>
+                          *ngIf="data && !data.displayName">No display name</span>
                     <a class="text-secondary text-opacity-25"
                        style="cursor: pointer;"
                        (click)="onName()"><i class="fa fa-chevron-right fa-1x"></i></a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span class="p-2"
-                          *ngIf="data && data.first_name"><strong>First Name: </strong> {{data.first_name}}</span>
+                          *ngIf="data && data.firstName"><strong>First Name: </strong> {{data.firstName}}</span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.first_name">No first name</span>
+                          *ngIf="data && !data.firstName">No first name</span>
                     <a class="text-secondary text-opacity-25"
                        style="cursor: pointer;"
                        (click)="onName()"><i class="fa fa-chevron-right fa-1x"></i></a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span class="p-2"
-                          *ngIf="data && data.last_name"><strong>Last Name: </strong> {{data.last_name}}</span>
+                          *ngIf="data && data.lastName"><strong>Last Name: </strong> {{data.lastName}}</span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.last_name">No last name</span>
+                          *ngIf="data && !data.lastName">No last name</span>
                     <a class="text-secondary text-opacity-25"
                        style="cursor: pointer;"
                        (click)="onName()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                </li>
-            </ul>
-            <ul class="list-group mb-3">    
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2"
-                          *ngIf="data && data.phone_number"><strong>Phone Number: </strong> {{data.phone_number}}</span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.phone_number">No author</span>
-                    <a class="text-secondary text-opacity-25"
-                       style="cursor: pointer;"
-                       (click)="onPhone()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                </li>
-            </ul>
-            <ul class="list-group mb-3">    
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2"
-                          *ngIf="data && data.address1"><strong>Address: </strong>  {{data.address1}} {{data?.address2}}<br>{{data?.city}} {{data?.province}} {{data?.zip}}<br>{{data?.country}}</span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.address1">No address 1</span>
-                    <a class="text-secondary text-opacity-25"
-                       style="cursor: pointer;"
-                       (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
                 </li>
             </ul>
             <ul class="list-group mb-3">    
@@ -118,36 +78,36 @@
             <ul class="list-group mb-3">    
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span class="p-2"
-                          *ngIf="data && data.cc_company">{{data.cc_company}}</span>
+                          *ngIf="data && data.ccCompany">{{data.ccCompany}}</span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.cc_company">No Credit Card Company</span>
+                          *ngIf="data && !data.ccCompany">No Credit Card Company</span>
                     <a class="text-secondary text-opacity-25"
                        style="cursor: pointer;"
                        (click)="onCreditCard()"><i class="fa fa-chevron-right fa-1x"></i></a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span class="p-2"
-                          *ngIf="data && data.cc_name_on_card">{{data.cc_name_on_card}}</span>
+                          *ngIf="data && data.ccNameOnCard">{{data.ccNameOnCard}}</span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.cc_name_on_card">No name on card</span>
+                          *ngIf="data && !data.ccNameOnCard">No name on card</span>
                     <a class="text-secondary text-opacity-25"
                        style="cursor: pointer;"
                        (click)="onCreditCard()"><i class="fa fa-chevron-right fa-1x"></i></a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span class="p-2"
-                          *ngIf="data && data.cc_number">{{data.cc_number}}</span>
+                          *ngIf="data && data.ccNumber">{{data.ccNumber}}</span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.cc_number">No credit card number</span>
+                          *ngIf="data && !data.ccNumber">No credit card number</span>
                     <a class="text-secondary text-opacity-25"
                        style="cursor: pointer;"
                        (click)="onCreditCard()"><i class="fa fa-chevron-right fa-1x"></i></a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span class="p-2"
-                          *ngIf="data && data.cc_exp_date">{{data.cc_exp_date}}</span>
+                          *ngIf="data && data.ccExpDate">{{data.ccExpDate}}</span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.cc_exp_date">No credit card expiration</span>
+                          *ngIf="data && !data.ccExpDate">No credit card expiration</span>
                     <a class="text-secondary text-opacity-25"
                        style="cursor: pointer;"
                        (click)="onCreditCard()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -162,34 +122,6 @@
                     <a class="text-secondary text-opacity-25"
                        style="cursor: pointer;"
                        (click)="onTitle()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                </li>
-            </ul>
-            <ul class="list-group mb-3">    
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2"
-                          *ngIf="data && data.updated_at"><strong>Updated: </strong>{{data.updated_at | date:'medium'}}</span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.updated_at">No update date</span>
-                    
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2"
-                          *ngIf="data && data.updated_by"><strong>Updated By: </strong>{{data.updated_by}}</span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.updated_by">No updated by</span>
-                    
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2"
-                          *ngIf="data && data.created_by"><strong>Created By: </strong>{{data.created_by}}</span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.created_by">No created by</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2"
-                          *ngIf="data && data.created_at"><strong>Created: </strong>{{data.created_at}}</span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                          *ngIf="data && !data.created_at">No created at</span>
                 </li>
             </ul>
             <ul class="list-group mb-3">

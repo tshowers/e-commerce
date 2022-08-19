@@ -1,17 +1,17 @@
-<section class="section" id="catalog">
+<section class="section  pb-5" id="catalog" *ngIf="((productService.items | async)?.length != 0)">
     <div class="container">
         <div class="row  wow fadeInUp">
             <div class="col-12">
-                <h2 [ngStyle]="{'color': colorService.secondaryColor}" class="section__title">{{data?.catalog_section_title}}</h2>
-                <div class="section__sort" *ngIf="data && data.category_section">
+                <h2 [ngStyle]="{'color': colorService.secondaryColor}" class="section__title">{{data?.catalogSectionTitle}}</h2>
+                <div class="section__sort" *ngIf="data && data.categorySection">
                     <button [ngClass]="{ 'active' : (currentFilter === '') }" (click)="resetFilter()" type="button">All</button>
                     <button *ngFor="let cat of categoryService.items | async" [ngClass]="{ 'active': (currentFilter === cat.name) }" (click)="setFilter(cat.name)" type="button">{{cat.name}}</button>
                 </div>
             </div>
         </div>
-        <div class="row mt-3  wow fadeInUp" *ngIf="data && data.category_section">
+        <div class="row mt-3  wow fadeInUp" *ngIf="data && data.categorySection">
             <div class="col-md-6">
-                <select class="form-select mb-2" aria-label="Type select" [(ngModel)]="product_type" (change)="typeChanged()">
+                <select class="form-select mb-2" aria-label="Type select" [(ngModel)]="productType" (change)="typeChanged()">
                     <option value="" selected disabled hidden>Choose Type</option>
                     <option value="{{s.name}}" *ngFor="let s of productTypeService.items | async | nameSort; let x = index">{{s.name}} </option>
                 </select>
@@ -33,8 +33,8 @@
                     <div class="container-fluid flush">
                         <div class="row">
                             <div class="col-md">
-                                <span *ngIf="item.active && !item.on_sale" class="product__price">{{ item?.price | currency }}</span>
-                                <span *ngIf="item.active && item.on_sale" class="product__price">{{ item?.sale_price | currency }}</span>
+                                <span *ngIf="item.active && !item.onSale" class="product__price">{{ item?.price | currency }}</span>
+                                <span *ngIf="item.active && item.onSale" class="product__price">{{ item?.salePrice | currency }}</span>
                             </div>
                         </div>
                         <span *ngIf="!item.active || !item.price" class="text-danger"> Not Available</span>

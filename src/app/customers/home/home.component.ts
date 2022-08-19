@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
 
   public newUser: User = {
-
+    
   }
 
   constructor(private _location: Location, public colorService: ColorsService) { }

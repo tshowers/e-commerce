@@ -6,7 +6,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { OrdersComponent } from './orders/orders.component';
 import { LabOrdersComponent } from './lab-orders/lab-orders.component';
 import { PaymentsComponent } from './payments/payments.component';
-
 import { HomeComponent } from './home/home.component';
 
 import { AddressComponent } from './profile/address/address.component';
@@ -44,7 +43,7 @@ import { LabOrderResultsComponent } from './lab-orders/lab-order-results/lab-ord
     OrderViewComponent,
     PracticeComponent,
     LabOrderViewComponent,
-    LabOrderResultsComponent
+    LabOrderResultsComponent,
   ],
   imports: [
     CommonModule,

@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   public production: boolean = false;
 
   constructor(private _location: Location, public colorService: ColorsService) { 
-    this.production = environment.production;
+    
   }
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 
-    if (!this.production)
+    if (!environment.production)
       console.log("Active Cart", this.data);
   }
 

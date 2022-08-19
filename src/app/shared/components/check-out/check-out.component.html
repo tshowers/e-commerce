@@ -1,54 +1,54 @@
-<form #dataForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="companyData">
+<form #dataForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="companyData && ((productService.items | async)?.length != 0)">
     <section class="section">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <h2 class="section__title text-capitalize  wow fadeInUp"
-                        [ngStyle]="{'color': colorService.secondaryColor}">{{companyData?.check_out_section_title}}</h2>
+                        [ngStyle]="{'color': colorService.secondaryColor}">Simple {{companyData?.checkOutSectionTitle}}</h2>
                 </div>
             </div>
             <div class="row mt-2  wow fadeInUp">
                 <div class="col-12">
                     <div class="row mt-2">
                         <div class="col-12 col-md-6">
-                            <input [(ngModel)]="check_out.first_name" type="text" name="first_name" id="first_name"
+                            <input [(ngModel)]="contact.firstName" type="text" name="firstName" id="firstName"
                                 placeholder="First Name" class="form-control form-control-lg" required
-                                #first_name="ngModel" pattern="^[ A-Za-z_'-]*$">
+                                #firstName="ngModel" pattern="^[ A-Za-z_'-]*$" style="">
                         </div>
                         <div class="col-12 col-md-6">
-                            <input [(ngModel)]="check_out.last_name" type="text" name="last_name" id="last_name"
+                            <input [(ngModel)]="contact.lastName" type="text" name="lastName" id="lastName"
                                 placeholder="Last Name" class="form-control form-control-lg" required
-                                #last_name="ngModel" pattern="^[ A-Za-z_'-]*$">
+                                #lastName="ngModel" pattern="^[ A-Za-z_'-]*$" style="color:black">
                         </div>
                     </div>
                     <div class="row  mt-2">
                         <div class="col-12  col-md-6">
-                            <input [(ngModel)]="check_out.email" type="email" name="email" id="email"
+                            <input [(ngModel)]="emailAddress.emailAddress" type="email" name="email" id="email"
                                 class="form-control form-control-lg" placeholder="Email Address" required
                                 #email="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
                         </div>
                         <div class="col-12 col-md-6">
-                            <input [(ngModel)]="check_out.phone" type="tel" name="phone" id="phone"
+                            <input [(ngModel)]="phone.phoneNumber" type="tel" name="phone" id="phone"
                                 class="form-control form-control-lg" placeholder="Phone Number" required>
                         </div>
                     </div>
                     <div class="row  mt-5">
                         <div class="col-12  col-md-6">
-                            <input [(ngModel)]="check_out.billing_address1" type="text" name="address1" id="address1"
+                            <input [(ngModel)]="address.streetAddress1" type="text" name="streetAddress1" id="streetAddress1"
                                 class="form-control form-control-lg" placeholder="Billing Address 1" required>
                         </div>
                         <div class="col-12 col-md-6">
-                            <input [(ngModel)]="check_out.billing_address2" type="text" name="address2" id="address2"
+                            <input [(ngModel)]="address.streetAddress2" type="text" name="streetAddress2" id="streetAddress2"
                                 class="form-control form-control-lg" placeholder="Billing Address 2">
                         </div>
                     </div>
                     <div class="row  mt-2">
-                        <div class="col-12 col-md-6"> <input [(ngModel)]="check_out.billing_city" type="text"
+                        <div class="col-12 col-md-6"> <input [(ngModel)]="address.city" type="text"
                                 name="city" id="city" class="form-control form-control-lg" placeholder="City" required>
                         </div>
-                        <div class="col-12 col-md-6"><select [(ngModel)]="check_out.billing_province" name="province"
+                        <div class="col-12 col-md-6"><select [(ngModel)]="address.province" name="province"
                                 id="province" class="form-select form-select-lg" required>
-                                <option value="" selected disabled hidden>Shipping Province</option>
+                                <option value="" selected disabled hidden>Province</option>
                                 <option value="AL">Alabama [AL]</option>
                                 <option value="AK">Alaska [AK]</option>
                                 <option value="AS">American Samoa [AS]</option>
@@ -124,10 +124,10 @@
                             </select></div>
                     </div>
                     <div class="row  mt-2">
-                        <div class="col-12 col-md-6"><input [(ngModel)]="check_out.billing_zip" type="text" name="zip"
+                        <div class="col-12 col-md-6"><input [(ngModel)]="address.zipCode" type="text" name="zip"
                                 id="zip" class="form-control form-control-lg" placeholder="Billing Zip Code" required>
                         </div>
-                        <div class="col-12 col-md-6"><select [(ngModel)]="check_out.billing_country" name="country"
+                        <div class="col-12 col-md-6"><select [(ngModel)]="address.country" name="country"
                                 id="country" class="form-select form-select-lg" required>
                                 <option value="" selected disabled hidden>Country</option>
                                 <option value="US">United States of America [US]</option>
@@ -377,45 +377,45 @@
                     <div class="row  mt-2">
                         <div class="col-12 col-md-6">
                             <div class="form-check">
-                                <input [(ngModel)]="check_out.billing_shipping" class="form-check-input" type="checkbox"
-                                    id="billing_shipping" name="billing_shipping" checked>
-                                <label class="form-check-label" for="billing_shipping"> Billing and Shipping are the
+                                <input [(ngModel)]="cartService.cart.billingShipping" class="form-check-input" type="checkbox"
+                                    id="billingShipping" name="billingShipping" checked>
+                                <label class="form-check-label" for="billingShipping"> Billing and Shipping are the
                                     same </label>
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="!check_out.billing_shipping">
+                    <div *ngIf="!cartService.cart.billingShipping">
                         <div class="row  mt-2">
                             <div class="col-12 col-md-6">
-                                <input [(ngModel)]="check_out.shipping_first_name" type="text"
-                                    name="shipping_first_name" id="shipping_first_name"
+                                <input [(ngModel)]="shippingAddress.firstName" type="text"
+                                    name="shipping_firstName" id="shipping_firstName"
                                     class="form-control form-control-lg" placeholder="Shipping First Name"
-                                    #shipping_first_name="ngModel" pattern="^[ A-Za-z_'-]*$">
+                                    #shipping_firstName="ngModel" pattern="^[ A-Za-z_'-]*$">
                             </div>
                             <div class="col-12 col-md-6">
-                                <input [(ngModel)]="check_out.shipping_last_name" type="text" name="shipping_last_name"
-                                    id="shipping_last_name" class="form-control form-control-lg"
-                                    placeholder="Shipping Last Name" #shipping_last_name="ngModel"
+                                <input [(ngModel)]="shippingAddress.lastName" type="text" name="shipping_lastName"
+                                    id="shipping_lastName" class="form-control form-control-lg"
+                                    placeholder="Shipping Last Name" #shipping_lastName="ngModel"
                                     pattern="^[ A-Za-z_'-]*$">
                             </div>
                         </div>
                         <div class="row  mt-2">
                             <div class="col-12 col-md-6">
-                                <input [(ngModel)]="check_out.shipping_address1" type="text" name="shipping_address1"
-                                    id="shipping_address1" class="form-control form-control-lg"
+                                <input [(ngModel)]="shippingAddress.streetAddress1" type="text" name="shippingstreetAddress1"
+                                    id="shippingstreetAddress1" class="form-control form-control-lg"
                                     placeholder="Shipping Address 1">
                             </div>
                             <div class="col-12 col-md-6">
-                                <input [(ngModel)]="check_out.shipping_address2" type="text" name="shipping_address2"
-                                    id="shipping_address2" class="form-control form-control-lg"
+                                <input [(ngModel)]="shippingAddress.streetAddress2" type="text" name="shippingstreetAddress2"
+                                    id="shippingstreetAddress2" class="form-control form-control-lg"
                                     placeholder="Shipping Address 2">
                             </div>
                         </div>
                         <div class="row  mt-2">
-                            <div class="col-12 col-md-6"> <input [(ngModel)]="check_out.shipping_city" type="text"
+                            <div class="col-12 col-md-6"> <input [(ngModel)]="shippingAddress.city" type="text"
                                     name="shipping_city" id="shipping_city" class="form-control form-control-lg"
                                     placeholder="Shipping City"></div>
-                            <div class="col-12 col-md-6"><select [(ngModel)]="check_out.shipping_province"
+                            <div class="col-12 col-md-6"><select [(ngModel)]="shippingAddress.province"
                                     name="shipping_province" id="shipping_province" class="form-select form-select-lg">
                                     <option value="" selected disabled hidden>Shipping Province</option>
                                     <option value="AL">Alabama [AL]</option>
@@ -493,10 +493,10 @@
                                 </select></div>
                         </div>
                         <div class="row  mt-2">
-                            <div class="col-12 col-md-6"><input [(ngModel)]="check_out.shipping_zip" type="text"
+                            <div class="col-12 col-md-6"><input [(ngModel)]="shippingAddress.zipCode" type="text"
                                     name="shipping_zip" id="shipping_zip" class="form-control form-control-lg"
                                     placeholder="Shipping Zip Code"></div>
-                            <div class="col-12 col-md-6"><select [(ngModel)]="check_out.shipping_country"
+                            <div class="col-12 col-md-6"><select [(ngModel)]="shippingAddress.country"
                                     name="shipping_country" id="shipping_country" class="form-select form-select-lg">
                                     <option value="" selected disabled hidden>Country</option>
                                     <option value="US">United States of America [US]</option>
@@ -752,16 +752,16 @@
                     <div class="row mt-2">
                         <div class="col-12 col-md-6">
                             <div class="form__group">
-                                <input [(ngModel)]="check_out.cc_name_on_card" type="text" name="cc_name_on_card"
-                                    id="cc_name_on_card" placeholder="Name on Card" class="form-control form-control-lg"
-                                    required minlength="3" #cc_name_on_card="ngModel" pattern="^[ A-Za-z_'-]*$">
+                                <input [(ngModel)]="paymentDetails.ccNameOnCard" type="text" name="ccNameOnCard"
+                                    id="ccNameOnCard" placeholder="Name on Card" class="form-control form-control-lg"
+                                    required minlength="3" #ccNameOnCard="ngModel" pattern="^[ A-Za-z_'-]*$">
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="input-group">
-                                <input [(ngModel)]="check_out.cc_number" type="password" id="cc_number" name="cc_number"
+                                <input [(ngModel)]="paymentDetails.ccNumber" type="password" id="ccNumber" name="ccNumber"
                                     placeholder="Credit Card Number" class="form-control form-control-lg" required
-                                    #cc_number="ngModel" pattern="[0-9]{13,16}">
+                                    #ccNumber="ngModel" pattern="[0-9]{13,16}">
                                 <span class="input-group-text" id="basic-addon1" (click)="showContent()"
                                     style="cursor: pointer;"><i class="fa fa-eye" aria-hidden="true"></i></span>
                             </div>
@@ -770,17 +770,17 @@
                     <div class="row mt-2">
                         <div class="col-6 col-md-6">
                             <div class="form__group">
-                                <input [(ngModel)]="check_out.cc_exp_date" type="month" name="cc_exp_date"
-                                    id="cc_exp_date" placeholder="Expiration Date - YYYY-MM"
-                                    class="form-control form-control-lg" required #cc_exp_date="ngModel"
+                                <input [(ngModel)]="paymentDetails.ccExpDate" type="month" name="ccExpDate"
+                                    id="ccExpDate" placeholder="Expiration Date - YYYY-MM"
+                                    class="form-control form-control-lg" required #ccExpDate="ngModel"
                                     pattern="^[\d]{4}-[\d]{2}$">
                             </div>
                         </div>
                         <div class="col-6 col-md-6">
                             <div class="form__group">
-                                <input [(ngModel)]="check_out.cc_security_code" type="text" name="cc_security_code"
-                                    id="cc_security_code" placeholder="Security Code"
-                                    class="form-control form-control-lg" required #cc_security_code="ngModel"
+                                <input [(ngModel)]="paymentDetails.ccSecurityCode" type="text" name="ccSecurityCode"
+                                    id="ccSecurityCode" placeholder="Security Code"
+                                    class="form-control form-control-lg" required #ccSecurityCode="ngModel"
                                     pattern="[0-9]{3,4}">
                             </div>
                         </div>
@@ -788,8 +788,8 @@
                     <div class="row  mt-2">
                         <div class="col-12 col-md-6">
                             <div class="form__group form__group--select">
-                                <select class="form-select form-select-lg" [(ngModel)]="check_out.delivery_time"
-                                    name="delivery_time" id="delivery_time">
+                                <select class="form-select form-select-lg" [(ngModel)]="cartService.cart.deliveryTime"
+                                    name="deliveryTime" id="deliveryTime">
                                     <option value="" selected disabled hidden>Rush Delivery?</option>
                                     <option value="No">No Rush Delivery</option>
                                     <option value="Yes">Yes Rush Delivery</option>
@@ -800,16 +800,16 @@
                     <div class="row  mt-2">
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input [(ngModel)]="check_out.terms_of_service" class="form-check-input" type="checkbox"
-                                    id="terms_of_service" name="terms_of_service" required>
-                                <label class="form-check-label" for="terms_of_service"> I have read the <a href="#"
+                                <input [(ngModel)]="cartService.cart.termsOfService" class="form-check-input" type="checkbox"
+                                    id="termsOfService" name="termsOfService" required>
+                                <label class="form-check-label" for="termsOfService"> I have read the <a href="#"
                                         data-bs-toggle="modal" data-bs-target="#tos">terms of service</a>. </label>
                             </div>
                         </div>
                         <div class="col-md-6" *ngIf="companyData && companyData.apple_verification">
                             <div class="form-check"
                                 *ngIf="!(userService.authService.firebaseUser && userService.authService.firebaseUser.email)">
-                                <input [(ngModel)]="check_out.apple_auth" class="form-check-input" type="checkbox"
+                                <input [(ngModel)]="cartService.cart.apple_auth" class="form-check-input" type="checkbox"
                                     id="apple_auth" name="apple_auth">
                                 <label class="form-check-label" for="apple_auth"> Use <i class="fa fa-apple"
                                         aria-hidden="true"></i> Apple to authenticate the purchase. </label>
@@ -818,7 +818,7 @@
                     </div>
                     <div class="row mt-2">
                         <div class="col-12 text-center mt-3"
-                            *ngIf="(cartService.cart.line_items && (cartService.cart.line_items.length > 0))">
+                            *ngIf="(cartService.cart.lineItems && (cartService.cart.lineItems.length > 0))">
                             <button type="submit"
                                 [ngStyle]="{'background-color': colorService.secondaryColor, 'border-color': colorService.secondaryColor}"
                                 class="btn btn-primary" [disabled]="!dataForm.form.valid">Place Order</button>
@@ -841,10 +841,16 @@
     </div>
     <div class="row mt-2" *ngIf="diagnostic">
         <div class="col-12">
-            <pre class="text-light bg-dark p-4">{{check_out | json}}</pre>
+            <pre>{{authService.firebaseUser}}</pre>
         </div>
         <div class="col-12">
-            <pre class="text-light bg-dark p-4">{{cartService.cart | json}}</pre>
+            <pre >{{contact | json}}</pre>
+        </div>
+        <div class="col-12">
+            <pre >{{cartService.cart | json}}</pre>
+        </div>
+        <div class="col-12">
+            <pre >{{companyData | json}}</pre>
         </div>
     </div>
 </div>

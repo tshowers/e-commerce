@@ -44,8 +44,6 @@ import { UnderConstructionComponent } from './components/under-construction/unde
 import { HomeSectionComponent } from './components/home-section/home-section.component';
 import { ImageUploadTaskComponent } from './components/image-upload-task/image-upload-task.component';
 import { ResultUploadTaskComponent } from './components/result-upload-task/result-upload-task.component';
-import { PatientPaymentComponent } from './components/patient-payment/patient-payment.component';
-import { MicroCheckOutComponent } from './components/micro-check-out/micro-check-out.component';
 import { ActivatedKitsComponent } from './components/activated-kits/activated-kits.component';
 import { TermsOfServiceComponent } from './components/terms-of-service/terms-of-service.component';
 import { MarketingFaq1Component } from './components/marketing-faq1/marketing-faq1.component';
@@ -67,7 +65,6 @@ import { Image1UploadTaskComponent } from './components/image1-upload-task/image
 import { Image2UploadTaskComponent } from './components/image2-upload-task/image2-upload-task.component';
 import { MarketingCarouselComponent } from './components/marketing-carousel/marketing-carousel.component';
 import { Catalog2Component } from './components/catalog2/catalog2.component';
-import { MedicalCheckOutComponent } from './components/medical-check-out/medical-check-out.component';
 import { ConsentAuthorizationComponent } from './components/consent-authorization/consent-authorization.component';
 
 @NgModule({
@@ -111,8 +108,6 @@ import { ConsentAuthorizationComponent } from './components/consent-authorizatio
     HomeSectionComponent,
     ImageUploadTaskComponent,
     ResultUploadTaskComponent,
-    PatientPaymentComponent,
-    MicroCheckOutComponent,
     ActivatedKitsComponent,
     TermsOfServiceComponent,
     MarketingFaq1Component,
@@ -134,7 +129,6 @@ import { ConsentAuthorizationComponent } from './components/consent-authorizatio
     Image2UploadTaskComponent,
     MarketingCarouselComponent,
     Catalog2Component,
-    MedicalCheckOutComponent,
     ConsentAuthorizationComponent,
   ],
   imports: [
@@ -161,8 +155,6 @@ import { ConsentAuthorizationComponent } from './components/consent-authorizatio
     HomeSectionComponent,
     ImageUploadTaskComponent,
     ResultUploadTaskComponent,
-    PatientPaymentComponent,
-    MicroCheckOutComponent,
     ActivatedKitsComponent,
     MarketingFaq1Component,
     MarketingFaq2Component,
@@ -182,7 +174,6 @@ import { ConsentAuthorizationComponent } from './components/consent-authorizatio
     Image1UploadTaskComponent,
     MarketingCarouselComponent,
     Catalog2Component,
-    MedicalCheckOutComponent,
     ConsentAuthorizationComponent,
 
     AppointmentFilterPipe,

@@ -11,14 +11,14 @@ export class OrderViewComponent implements OnInit {
 
   @Input() data?: any;
   @Output() close = new EventEmitter();
-  public production: boolean;
+  
 
   constructor() {
-    this.production = environment.production;
+    
   }
 
   ngOnInit(): void {
-    if (!this.production)
+    if (!environment.production)
       console.log("OrderViewComponent", this.data);
   }
 

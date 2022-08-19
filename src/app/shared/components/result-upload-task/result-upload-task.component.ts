@@ -20,10 +20,10 @@ export class ResultUploadTaskComponent implements OnInit, OnDestroy {
   private _task?: AngularFireUploadTask;
   public downloadURL?: any;
   private _taskSubscription?: Subscription
-  public production: boolean;
+  
 
   constructor(private _storage: AngularFireStorage, private _db: AngularFirestore) {
-    this.production = environment.production;
+    
 
   }
 
@@ -57,7 +57,7 @@ export class ResultUploadTaskComponent implements OnInit, OnDestroy {
           this.data.files.push({
             'name': this.file?.name,
             'url': this.downloadURL,
-            'uploaded_at': new Date().getTime()
+            'uploadedAt': new Date().getTime()
           });
         })
       ).subscribe();

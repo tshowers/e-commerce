@@ -25,7 +25,7 @@ export class LabOrderSummaryComponent  extends DataHandlerComponent implements O
 
   ngOnInit(): void {
     super.ngOnInit();
-    if (this.production)
+    if (environment.production)
       console.log("USER", this._userService.user);
   }
 
@@ -40,17 +40,17 @@ export class LabOrderSummaryComponent  extends DataHandlerComponent implements O
 
   fillInProfile(): void {
     if (this._userService.user && this.isMe) {
-      this._userService.user.first_name = this.data.first_name;
-      this._userService.user.last_name = this.data.last_name;
-      this._userService.user.address1 =  this.data.address1;
-      this._userService.user.address2 =  this.data.address2;
-      this._userService.user.city =  this.data.city;
-      this._userService.user.province =  this.data.province;
-      this._userService.user.zip =  this.data.zip;
-      this._userService.user.gender =  this.data.gender;
-      this._userService.user.dob =  this.data.dob;
-      this._userService.user.email =  this.data.email;
-      this._userService.user.phone_number =  this.data.phone;
+      this._userService.user.temp.firstName = this.data.firstName;
+      this._userService.user.temp.lastName = this.data.lastName;
+      this._userService.user.temp.streetAddress1 =  this.data.streetAddress1;
+      this._userService.user.temp.streetAddress2 =  this.data.streetAddress2;
+      this._userService.user.temp.city =  this.data.city;
+      this._userService.user.temp.province =  this.data.province;
+      this._userService.user.temp.zip =  this.data.zip;
+      this._userService.user.temp.gender =  this.data.gender;
+      this._userService.user.temp.dob =  this.data.dob;
+      this._userService.user.temp.email =  this.data.email;
+      this._userService.user.temp.phoneNumber =  this.data.phone;
     }
   }
 

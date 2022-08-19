@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 
 export const MONTHS = ["January", "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-export const ORDER_DATE_TYPE = ["By Appointment Date", "By Order Date"];
+export const orderDate_TYPE = ["By Appointment Date", "By Order Date"];
 
 @Component({
   selector: 'app-order-list',
@@ -25,7 +25,7 @@ export class OrderListComponent implements OnInit, OnDestroy {
   public queryDateDisplay = "none"
   public queryDate: any;
   public ordersHolding: any;
-  public production: boolean;
+  
   public data3: any;
   public prodEnv: boolean = false;
   public today = new Date();
@@ -37,7 +37,7 @@ export class OrderListComponent implements OnInit, OnDestroy {
   public MONTH = MONTHS;
 
   constructor(public orderService: OrderService) {
-    this.production = environment.production;
+    
     this.prodEnv = (environment.firebaseConfig.projectId == 'white-form-303916');
     this.past30Days();
   }
@@ -48,7 +48,7 @@ export class OrderListComponent implements OnInit, OnDestroy {
       this.loading = 'complete'
     })
 
-    if (!this.production)
+    if (!environment.production)
       console.log("Today is", this.today.toLocaleDateString(), this.MONTH[(this.today.getMonth())], this.today.getDate(), this.today.getFullYear());
 
   }
@@ -117,8 +117,8 @@ export class OrderListComponent implements OnInit, OnDestroy {
     qD.setDate(qD.getDate() + 1);
 
     this.data3 = this.data.filter((e: any) => {
-      var date = new Date(e.updated_at).toLocaleDateString();
-      // if (!this.production)
+      var date = new Date(e.lastUpdated).toLocaleDateString();
+      // if (!environment.production)
       //   console.log("Compare Dates", date, qD.toLocaleDateString())
       return (date == qD.toLocaleDateString());
     });

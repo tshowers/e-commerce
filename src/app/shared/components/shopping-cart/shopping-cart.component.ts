@@ -21,7 +21,7 @@ export class ShoppingCartComponent implements OnInit {
   @Output() itemRemoved = new EventEmitter();
   @Input() forPrac = false;
 
-  constructor(public cartService: CartService, public colorService: ColorsService) { 
+  constructor(public cartService: CartService, public colorService: ColorsService, public settingService: SettingService) { 
 
   }
 
@@ -66,34 +66,34 @@ export class ShoppingCartComponent implements OnInit {
     if (this.forPrac)
       this.removePracItem(at)
     else {
-      this.cartService.cart.line_items?.splice(at, 1);
+      this.cartService.cart.lineItems?.splice(at, 1);
       this.totalUp();
       this.itemRemoved.emit();
       }  
   }
 
   removePracItem(at: number): void {
-    this.cartService.cart.line_items?.splice(at, 1);
+    this.cartService.cart.lineItems?.splice(at, 1);
     this.totalUpDropShippingCart();
     this.itemRemoved.emit();
   }
 
   totalUpDropShippingCart(): void {
     this.total = 0;
-    this.cartService.cart.line_items?.forEach(item => {
+    this.cartService.cart.lineItems?.forEach(item => {
       if (item.product.calculatedPrice) {
         this.total += item.product.calculatedPrice;
       }
       else if (item.product.subTypeSelected) {
-        if (item.product.subType[item.product.subTypeSelected - 1].on_sale) {
-          this.total += (item.product.subType[item.product.subTypeSelected - 1].sale_price * item.quantity)
+        if (item.product.subType[item.product.subTypeSelected - 1].onSale) {
+          this.total += (item.product.subType[item.product.subTypeSelected - 1].salePrice * item.quantity)
         }
         else {
           this.total += (item.product.subType[item.product.subTypeSelected - 1].price * item.quantity)
         }
       } else {
-        if (item.product.on_sale)
-          this.total += (item.product.sale_price * item.quantity)
+        if (item.product.onSale)
+          this.total += (item.product.salePrice * item.quantity)
         else
           this.total += (item.product.price * item.quantity)
       }
@@ -104,9 +104,9 @@ export class ShoppingCartComponent implements OnInit {
 
   totalUp(): void {
     this.total = 0;
-    this.cartService.cart.line_items?.forEach(item => {
-      if (item.product.on_sale)
-        this.total += (item.product.sale_price * item.quantity)
+    this.cartService.cart.lineItems?.forEach(item => {
+      if (item.product.onSale)
+        this.total += (item.product.salePrice * item.quantity)
       else
         this.total += (item.product.price * item.quantity)
     });
@@ -115,18 +115,18 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   isProductDependency(): void {
-    this.cartService.cart.line_items?.forEach(item => {
-      if (item.product.dependency && item.product.dependency.price_dependent) {
+    this.cartService.cart.lineItems?.forEach(item => {
+      if (item.product.dependency && item.product.dependency.priceDependent) {
         this.isCheckCartForDependentProducts(item.product)
       }
     })
   }
 
   isCheckCartForDependentProducts(product: any): void {
-    let code = product.dependency?.dependency_code;
-    this.cartService.cart.line_items?.forEach(item => {
+    let code = product.dependency?.dependencyCode;
+    this.cartService.cart.lineItems?.forEach(item => {
       if (item.product._id != product._id) {
-        if (item.product.dependency.dependency_code === code) {
+        if (item.product.dependency.dependencyCode === code) {
           this.isCheckWhichOptionsAreChecked(product, item.product);
         }
       }

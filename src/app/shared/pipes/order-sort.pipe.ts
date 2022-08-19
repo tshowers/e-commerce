@@ -8,8 +8,8 @@ export class OrderSortPipe implements PipeTransform {
   transform(data: any): any {
     if (!data) return;
     return data.sort((a: any, b: any) => {
-      let aDate = (a.updated_at) ? new Date(a.updated_at) : new Date();
-      let bDate = (b.updated_at) ? new Date(b.updated_at) : new Date();
+      let aDate = (a.lastUpdated) ? new Date(a.lastUpdated) : new Date();
+      let bDate = (b.lastUpdated) ? new Date(b.lastUpdated) : new Date();
 
       if (aDate > bDate) return -1;
       if (aDate < bDate) return 1;

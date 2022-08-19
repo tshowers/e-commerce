@@ -9,10 +9,9 @@ import { AuthService } from './auth.service';
 })
 export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
-  production: boolean;
 
   constructor(private _authService: AuthService, private _router: Router) {
-    this.production = environment.production;
+    
   }
 
   canActivate(
@@ -21,7 +20,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     const ok: boolean = isUser(this._authService.getFirestoreUser());
 
     if (!ok) {
-      this._router.navigate(['access'])
+      this._router.navigate(['/'])
       return false
     }
 
@@ -37,13 +36,13 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let url = `/${route.path}`;
-    url = (url) ? url : 'access';
+    url = (url) ? url : '/';
 
     // return this.checkLogin(url);
     const ok: boolean = isUser(this._authService.getFirestoreUser());
 
     if (!ok) {
-      this._router.navigate(['access'])
+      this._router.navigate(['/'])
       return false;
     }
 

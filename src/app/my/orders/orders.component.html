@@ -1,3 +1,34 @@
+<app-inline-box-nav *ngIf="(settingService.settings && !settingService.settings.colorBlock)" [data]="settingService.settings" [isHome]="false"></app-inline-box-nav>
+<app-static-top-nav *ngIf="settingService.settings && settingService.settings.colorBlock" [data]="settingService.settings" [isHome]="false"></app-static-top-nav>
+<div *ngIf="!settingService.settings">
+    <nav class="navbar navbar-expand-lg" style="background-color: white;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="https://www.taliferro.com" style="color: #191919;">
+            <img src="https://www.taliferro.com/assets/images/taliferro-group-logo.png" alt="" width="48" height="48" class="d-inline-block align-text-top"> Taliferro Group </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" style="color:#737373" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#737373" href="https://www.taliferro.com/#products">Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#737373" href="https://www.taliferro.com/#services">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#737373" href="https://www.taliferro.com/#about">About</a>
+              </li>
+            </ul>
+            <span class="navbar-text" style="color: #191919;"> 425.305.3748 </span>
+          </div>
+        </div>
+      </nav>
+      
+</div>
 <div class="container-fluid mt-3">
     <div class="row">
         <div class="col"><span (click)="back()"
@@ -16,7 +47,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th *ngIf="userService.user && (userService.user.user_type == 'practitioner')">Name</th>
+                                <th *ngIf="userService.user && (userService.user.temp.userType == 'practitioner')">Name</th>
                                 <th *ngIf="isAdmin || isInsurancePartner">Name</th>
                                 <th>Response</th>
                                 <th>Status</th>
@@ -28,22 +59,22 @@
                                 (click)="onView(item)"
                                 style="cursor: pointer;">
                                 <td>{{item?._id}}</td>
-                                <td  *ngIf="userService.user && (userService.user.user_type == 'practitioner')">{{item?.cart?.first_name}} {{item?.cart?.last_name}}</td>
+                                <td  *ngIf="userService.user && (userService.user.temp.userType == 'practitioner')">{{item?.cart?.firstName}} {{item?.cart?.lastName}}</td>
                                 <td *ngIf="isAdmin || isInsurancePartner">
                                     <span *ngIf="item.user; noUser">
-                                        {{item?.user?.first_name}} {{item?.user?.middle_name}} {{item?.user?.last_name}}
+                                        {{item?.user?.firstName}} {{item?.user?.middle_name}} {{item?.user?.lastName}}
                                     </span>
                                     <ng-template #noUser>
-                                        {{item?.cart?.first_name}} {{item?.cart?.last_name}}
+                                        {{item?.cart?.firstName}} {{item?.cart?.lastName}}
                                     </ng-template>
                                 </td>
                                 <td>
-                                    <span *ngIf="item.charge_response && item.charge_response.outcome && item.charge_response.outcome.seller_message">{{item?.charge_response?.outcome?.seller_message}}</span>
-                                    <span *ngIf="!(item.charge_response && item.charge_response.outcome && item.charge_response.outcome.seller_message)">{{item?.charge_response | slice:0:30}}</span>
+                                    <span *ngIf="item.chargeResponse && item.chargeResponse.outcome && item.chargeResponse.outcome.seller_message">{{item?.chargeResponse?.outcome?.seller_message}}</span>
+                                    <span *ngIf="!(item.chargeResponse && item.chargeResponse.outcome && item.chargeResponse.outcome.seller_message)">{{item?.chargeResponse | slice:0:30}}</span>
         
                                 </td>
                                 <td class="text-capitalize">{{item?.status  | sentence}}</td>
-                                <td>{{item?.cart.updated_at | date:'medium'}}</td>
+                                <td>{{item?.cart.lastUpdated | date:'medium'}}</td>
                             </tr>
                         </tbody>
                     </table>

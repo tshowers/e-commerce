@@ -21,13 +21,13 @@ export class CatalogComponent implements OnInit {
   @Input() catalogSection: boolean = false;
   @Input() text_only_catalog: boolean = false;
   @Output() itemAdded = new EventEmitter();
-  product_type = "";
+  productType = "";
   activeBackground = "#ffffff";
   currentFilter = '';
-  public production: boolean;
+  
 
   constructor(public subCategoryService: SubCategoryService, public productTypeService: ProductTypeService, public productService: ProductService, public categoryService: CategoryService, private _cartService: CartService, public colorService: ColorsService) {
-    this.production = environment.production;
+    
   }
 
   ngOnInit(): void {
@@ -35,21 +35,21 @@ export class CatalogComponent implements OnInit {
   }
 
   typeChanged() {
-    this.productService.getAllByType(this.product_type);
+    this.productService.getAllByType(this.productType);
   }
 
   addToCart(item: any): void {
     if (!this.isInCartAlready(item)) {
-      this._cartService.cart.line_items?.push({ 'product': item, 'quantity': 1 });
+      this._cartService.cart.lineItems?.push({ 'product': item, 'quantity': 1 });
       this.itemAdded.emit();
     }
   }
 
   private isInCartAlready(item: any): boolean {
-    let lt = (this._cartService.cart.line_items && this._cartService.cart.line_items?.length) ? this._cartService.cart.line_items?.length : 0;
+    let lt = (this._cartService.cart.lineItems && this._cartService.cart.lineItems?.length) ? this._cartService.cart.lineItems?.length : 0;
     let found = false;
     for (let index = 0; index < lt; index++) {
-      const element = this._cartService.cart.line_items?.[index];
+      const element = this._cartService.cart.lineItems?.[index];
       if (element?.product._id === item._id) {
         found = true;
         break;
@@ -67,7 +67,7 @@ export class CatalogComponent implements OnInit {
     item.subCategorySelected[x] = { name: name, checked: element.checked };
     item.subCategorySelectedText = name;
     
-    if (!this.production)
+    if (!environment.production)
       console.log("onSubCategory", item);
   }
 

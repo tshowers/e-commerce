@@ -4,14 +4,14 @@
             <div class="card red">
                 <div class="card-header">Practitioner</div>
                 <div class="card-body">
-                    <div *ngIf="data && data.user && data.user.practitioner_name">
-                        <div>{{data?.user?.practitioner_name}}</div>
-                        <div>{{data?.user?.practitioner_address1}} {{data.user?.practitioner_address2}}</div>
+                    <div *ngIf="data && data.user && data.user.practitionerName">
+                        <div>{{data?.user?.practitionerName}}</div>
+                        <div>{{data?.user?.practitioner_streetAddress1}} {{data.user?.practitioner_streetAddress2}}</div>
                         <div>{{data?.user?.practitioner_city}} {{data?.user?.practitioner_province}}
                             {{data?.user?.practitioner_zip}}</div>
-                        <div>{{data?.user?.customer_id}}</div>
+                        <div>{{data?.user?.customerId}}</div>
                     </div>
-                    <div *ngIf="!(data && data.user && data.user.practitioner_name)">
+                    <div *ngIf="!(data && data.user && data.user.practitionerName)">
                         <div>{{settingService?.settings?.name}}</div>
                         <div>{{settingService?.settings?.address}}</div>
                         <div>{{settingService?.settings?.city}} {{settingService?.settings?.province}}
@@ -100,21 +100,21 @@
                 <div class="card-header">Patient (all fields required except Passport # for Covid-19 tests)</div>
                 <div class="card-body">
                     <div *ngIf="data && data.user">
-                        <div *ngIf="data.user && data.user.first_name"><strong>First Name 名字:</strong>
-                            {{data?.user?.first_name}} </div>
+                        <div *ngIf="data.user && data.user.firstName"><strong>First Name 名字:</strong>
+                            {{data?.user?.firstName}} </div>
                         <div *ngIf="data.user && data.user.middle_name"><strong>Middle Name: </strong>
                             {{data.user.middle_name}}</div>
-                        <div *ngIf="data.user && data.user.last_name"><strong>Last Name 姓:
-                            </strong>{{data?.user?.last_name}}</div>
+                        <div *ngIf="data.user && data.user.lastName"><strong>Last Name 姓:
+                            </strong>{{data?.user?.lastName}}</div>
                         <div *ngIf="data.user && data.user.gender"><strong>Gender 性别: </strong> {{data.user.gender}}
                         </div>
                         <div *ngIf="data.user && data.user.dob"><strong>Date of Birth 出生日期: </strong> {{data.user.dob}}
                         </div>
-                        <div *ngIf="data.user && data.user.address1"><strong>Address 地址: </strong>
-                            {{data.user.address1}} {{data?.user?.address2}} {{data?.user?.city}}
+                        <div *ngIf="data.user && data.user.streetAddress1"><strong>Address 地址: </strong>
+                            {{data.user.streetAddress1}} {{data?.user?.streetAddress2}} {{data?.user?.city}}
                             {{data?.user?.province}} {{data?.user?.zip}}</div>
-                        <div *ngIf="data.user && data.user.phone_number"><strong>Phone:
-                            </strong>{{data.user.phone_number}}</div>
+                        <div *ngIf="data.user && data.user.phoneNumber"><strong>Phone:
+                            </strong>{{data.user.phoneNumber}}</div>
                         <div *ngIf="data.user && data.user.email"><strong>Email: </strong>{{data.user.email}}</div>
                     </div>
                     <div *ngIf="data && data.appointment">
@@ -134,7 +134,7 @@
                         <div *ngIf="data.appointment.category"><strong>Category:</strong>{{data.appointment.category}}
                         </div>
                     </div>
-                    <div><strong>Updated:</strong> {{data?.updated_at | date}}</div>
+                    <div><strong>Updated:</strong> {{data?.lastUpdated | date}}</div>
                     <div><strong>Order ID:</strong> {{data?._id}} </div>
                 </div>
             </div>
@@ -156,25 +156,25 @@
                         </div>
                         <div><strong>Check Number: </strong>
                             <span
-                                *ngIf="data && data.cart && data.cart.payment_details && data.cart.payment_details.cc_number && (data.cart.payment_details.cc_number.length)">
-                                ***********{{data?.cart?.payment_details?.cc_number | slice:-4}}<br>
+                                *ngIf="data && data.cart && data.cart.paymentDetails && data.cart.paymentDetails.ccNumber && (data.cart.paymentDetails.ccNumber.length)">
+                                ***********{{data?.cart?.paymentDetails?.ccNumber | slice:-4}}<br>
                             </span>
                             <span
-                                *ngIf="!(data && data.cart && data.cart.payment_details && data.cart.payment_details.cc_number && (data.cart.payment_details.cc_number.length))">
+                                *ngIf="!(data && data.cart && data.cart.paymentDetails && data.cart.paymentDetails.ccNumber && (data.cart.paymentDetails.ccNumber.length))">
                                 __________<br>
                             </span>
                         </div>
                         <div><strong>Card Holder Name: </strong>
                             <span
-                                *ngIf="data && data.cart && data.cart.payment_details && data.cart.payment_details.cc_name_on_card">{{data?.cart?.payment_details?.cc_name_on_card}}</span>
+                                *ngIf="data && data.cart && data.cart.paymentDetails && data.cart.paymentDetails.ccNameOnCard">{{data?.cart?.paymentDetails?.ccNameOnCard}}</span>
                             <span
-                                *ngIf="!(data && data.cart && data.cart.payment_details && data.cart.payment_details.cc_name_on_card)">__________</span>
+                                *ngIf="!(data && data.cart && data.cart.paymentDetails && data.cart.paymentDetails.ccNameOnCard)">__________</span>
                         </div>
                         <div><strong>Expiration Date: </strong>
                             <span
-                                *ngIf="data && data.cart && data.cart.payment_details && data.cart.payment_details.cc_exp_date">{{data?.cart?.payment_details?.cc_exp_date}}</span>
+                                *ngIf="data && data.cart && data.cart.paymentDetails && data.cart.paymentDetails.ccExpDate">{{data?.cart?.paymentDetails?.ccExpDate}}</span>
                             <span
-                                *ngIf="!(data && data.cart && data.cart.payment_details && data.cart.payment_details.cc_exp_date)">__________</span>
+                                *ngIf="!(data && data.cart && data.cart.paymentDetails && data.cart.paymentDetails.ccExpDate)">__________</span>
                         </div>
                     </div>
                     <div><strong>Amount: </strong>
@@ -241,7 +241,7 @@
                 <div class="card-header">Identification</div>
                 <div class="card-body">
                     <div><strong>Nationality | 国籍:</strong> {{data?.user?.nationality}}</div>
-                    <div><strong>Passport Number for Traveler | 护照号:</strong> {{data?.user?.passport_number}}</div>
+                    <div><strong>Passport Number for Traveler | 护照号:</strong> {{data?.user?.passportNumber}}</div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="photo">
                         <label class="form-check-label" for="photo"> Photo ID/ Passport Checked </label>
@@ -329,8 +329,8 @@
             <div class="card grey">
                 <div class="card-body">
                     <div *ngIf="data && data.user">
-                        <span *ngIf="data.user && data.user.first_name">{{data?.user?.first_name}} </span>
-                        <span *ngIf="data.user && data.user.last_name">{{data?.user?.last_name}}</span>
+                        <span *ngIf="data.user && data.user.firstName">{{data?.user?.firstName}} </span>
+                        <span *ngIf="data.user && data.user.lastName">{{data?.user?.lastName}}</span>
                         <span class="ms-2" *ngIf="data.user && data.user.dob"> {{data.user.dob}}</span>
                     </div>
                     <div *ngIf="data && data.appointment">
@@ -348,8 +348,8 @@
             <div class="card grey">
                 <div class="card-body">
                     <div *ngIf="data && data.user">
-                        <span *ngIf="data.user && data.user.first_name">{{data?.user?.first_name}} </span>
-                        <span *ngIf="data.user && data.user.last_name">{{data?.user?.last_name}}</span>
+                        <span *ngIf="data.user && data.user.firstName">{{data?.user?.firstName}} </span>
+                        <span *ngIf="data.user && data.user.lastName">{{data?.user?.lastName}}</span>
                         <span class="ms-2" *ngIf="data.user && data.user.dob"> {{data.user.dob}}</span>
                     </div>
                     <div *ngIf="data && data.appointment">

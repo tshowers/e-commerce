@@ -38,6 +38,10 @@ import { UserService } from './shared/services/user.service';
 import { HeaderComponent } from './home/header/header.component';
 import { FooterComponent } from './home/footer/footer.component';
 import { ThankYouComponent } from './home/thank-you/thank-you.component';
+import { UnderConstructionComponent } from './home/under-construction/under-construction.component';
+import { StoreComponent } from './home/store/store.component';
+import { YourStoreUnderConstructionComponent } from './home/your-store-under-construction/your-store-under-construction.component';
+import { SetupRequiredComponent } from './home/setup-required/setup-required.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +52,10 @@ import { ThankYouComponent } from './home/thank-you/thank-you.component';
     HeaderComponent,
     FooterComponent,
     ThankYouComponent,
+    UnderConstructionComponent,
+    StoreComponent,
+    YourStoreUnderConstructionComponent,
+    SetupRequiredComponent,
   ],
   imports: [
     BrowserModule,

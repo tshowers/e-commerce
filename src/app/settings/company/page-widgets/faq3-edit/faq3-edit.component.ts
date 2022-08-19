@@ -100,7 +100,7 @@ export class Faq3EditComponent extends DataHandlerComponent implements OnInit {
           this.data.faq3.imageURL.push({
             'name': event.target.files[0].name,
             'url': downloadURL,
-            'uploaded_at': new Date().getTime()
+            'uploadedAt': new Date().getTime()
           });
         })
       ).subscribe();

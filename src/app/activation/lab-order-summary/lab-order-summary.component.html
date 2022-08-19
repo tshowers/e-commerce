@@ -12,30 +12,30 @@
                                           </div>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">
-                                          <span class="p-2" style="cursor: pointer;" (click)="onOrderID()" *ngIf="data.order_id"><strong>Order:</strong> {{data.order_id}}</span>
-                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onOrderID()" *ngIf="!data.order_id">No order number</span>
+                                          <span class="p-2" style="cursor: pointer;" (click)="onOrderID()" *ngIf="data.orderId"><strong>Order:</strong> {{data.orderId}}</span>
+                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onOrderID()" *ngIf="!data.orderId">No order number</span>
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onOrderID()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">
-                                          <span class="p-2" style="cursor: pointer;" (click)="onKitNumber()" *ngIf="data.kit_number"><strong>Kit Number:</strong> {{data.kit_number}}</span>
-                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onKitNumber()" *ngIf="!data.kit_number">No kit number</span>
+                                          <span class="p-2" style="cursor: pointer;" (click)="onKitNumber()" *ngIf="data.kitNumber"><strong>Kit Number:</strong> {{data.kitNumber}}</span>
+                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onKitNumber()" *ngIf="!data.kitNumber">No kit number</span>
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onKitNumber()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                               </ul>
                               <ul class="list-group mb-3">
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">
-                                          <span class="p-2" style="cursor: pointer;" (click)="onName()" *ngIf="data && data.first_name"><strong>First Name:</strong> {{data.first_name}}</span>
-                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onName()" *ngIf="data && !data.first_name">No first name</span>
+                                          <span class="p-2" style="cursor: pointer;" (click)="onName()" *ngIf="data && data.firstName"><strong>First Name:</strong> {{data.firstName}}</span>
+                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onName()" *ngIf="data && !data.firstName">No first name</span>
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onName()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">
-                                          <span class="p-2" style="cursor: pointer;" (click)="onName()" *ngIf="data && data.last_name"><strong>Last Name:</strong> {{data.last_name}} </span>
-                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onName()" *ngIf="data && !data.last_name">No last name</span>
+                                          <span class="p-2" style="cursor: pointer;" (click)="onName()" *ngIf="data && data.lastName"><strong>Last Name:</strong> {{data.lastName}} </span>
+                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onName()" *ngIf="data && !data.lastName">No last name</span>
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onName()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">
-                                          <span class="p-2" style="cursor: pointer;" (click)="onName()" *ngIf="data && data.company_name"><strong>Last Name:</strong> {{data.company_name}} </span>
-                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onName()" *ngIf="data && !data.company_name">No company name</span>
+                                          <span class="p-2" style="cursor: pointer;" (click)="onName()" *ngIf="data && data.companyName"><strong>Last Name:</strong> {{data.companyName}} </span>
+                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onName()" *ngIf="data && !data.companyName">No company name</span>
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onName()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                               </ul>
@@ -51,16 +51,16 @@
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onGender()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">
-                                          <span class="p-2" style="cursor: pointer;" (click)="onTimeCollected()" *ngIf="data && data.date_collected"><strong>Date Collected:</strong>
-                                                {{data.date_collected}}</span>
-                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onTimeCollected()" *ngIf="data && !data.date_collected">No date
+                                          <span class="p-2" style="cursor: pointer;" (click)="onTimeCollected()" *ngIf="data && data.dateCollected"><strong>Date Collected:</strong>
+                                                {{data.dateCollected}}</span>
+                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onTimeCollected()" *ngIf="data && !data.dateCollected">No date
                                                 collected</span>
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onTimeCollected()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">
-                                          <span class="p-2" style="cursor: pointer;" (click)="onTimeCollected()" *ngIf="data && data.time_collected"><strong>Time Colleted:</strong>
-                                                {{data.time_collected}}</span>
-                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onTimeCollected()" *ngIf="data && !data.time_collected">No time
+                                          <span class="p-2" style="cursor: pointer;" (click)="onTimeCollected()" *ngIf="data && data.timeCollected"><strong>Time Colleted:</strong>
+                                                {{data.timeCollected}}</span>
+                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onTimeCollected()" *ngIf="data && !data.timeCollected">No time
                                                 collected</span>
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onTimeCollected()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
@@ -72,7 +72,7 @@
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onPhone()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">
-                                          <span class="p-2" style="cursor: pointer;" (click)="onPhone()"><strong>Text Notification:</strong> {{data.text_notification}}</span>
+                                          <span class="p-2" style="cursor: pointer;" (click)="onPhone()"><strong>Text Notification:</strong> {{data.textNotification}}</span>
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onPhone()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">
@@ -81,17 +81,17 @@
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onEmail()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">
-                                          <span class="p-2" style="cursor: pointer;" (click)="onEmail()"><strong>Email Notification:</strong> {{data.email_notification}}</span>
+                                          <span class="p-2" style="cursor: pointer;" (click)="onEmail()"><strong>Email Notification:</strong> {{data.emailNotification}}</span>
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onEmail()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">
-                                          <span class="p-2" style="cursor: pointer;" (click)="onAddress()" *ngIf="data && data.address1"><strong>Address 1:</strong> {{data.address1}}</span>
-                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onAddress()" *ngIf="data && !data.address1">No address 1</span>
+                                          <span class="p-2" style="cursor: pointer;" (click)="onAddress()" *ngIf="data && data.streetAddress1"><strong>Address 1:</strong> {{data.streetAddress1}}</span>
+                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onAddress()" *ngIf="data && !data.streetAddress1">No address 1</span>
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">
-                                          <span class="p-2" style="cursor: pointer;" (click)="onAddress()" *ngIf="data && data.address2"><strong>Address 2:</strong> {{data.address2}}</span>
-                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onAddress()" *ngIf="data && !data.address2">No address 2</span>
+                                          <span class="p-2" style="cursor: pointer;" (click)="onAddress()" *ngIf="data && data.streetAddress2"><strong>Address 2:</strong> {{data.streetAddress2}}</span>
+                                          <span class="p-2 text-danger text-opacity-50 fst-italic" style="cursor: pointer;" (click)="onAddress()" *ngIf="data && !data.streetAddress2">No address 2</span>
                                           <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center wow fadeUp">

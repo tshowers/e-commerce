@@ -34,8 +34,8 @@ export class ProductSubTypeListComponent implements OnInit, OnDestroy {
     let subType = {
       name: '',
       price: 0.00,
-      sale_price: 0.00,
-      on_sale: false,
+      salePrice: 0.00,
+      onSale: false,
     };
     let x = {'item': subType, 'editMode': false};
     this.id.emit(x);

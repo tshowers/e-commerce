@@ -2,12 +2,12 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div *ngIf="data" class="form-group m-2"> <label for="date_collected">Collection Date</label>
-                    <input [(ngModel)]="data.date_collected" id="date_collected" name="date_collected" autocorrect="off" autocapitalize="off" spellcheck="off" autocomplete="off"
+                <div *ngIf="data" class="form-group m-2"> <label for="dateCollected">Collection Date</label>
+                    <input [(ngModel)]="data.dateCollected" id="dateCollected" name="dateCollected" autocorrect="off" autocapitalize="off" spellcheck="off" autocomplete="off"
                         class="form-control form-control-lg" type="date" required>
                 </div>
-                <div *ngIf="data" class="form-group m-2"> <label for="time_collected">Collection Time</label>
-                    <input [(ngModel)]="data.time_collected" id="time_collected" name="time_collected" autocorrect="off" autocapitalize="off" spellcheck="off" autocomplete="off"
+                <div *ngIf="data" class="form-group m-2"> <label for="timeCollected">Collection Time</label>
+                    <input [(ngModel)]="data.timeCollected" id="timeCollected" name="timeCollected" autocorrect="off" autocapitalize="off" spellcheck="off" autocomplete="off"
                         class="form-control form-control-lg" type="time" required>
                 </div>
             </div>

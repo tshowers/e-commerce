@@ -9,7 +9,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="category">Select Type</label>
-                            <select [(ngModel)]="data.product_type" name="category" id="category" class="form-select form-select-lg" required>
+                            <select [(ngModel)]="data.productType" name="category" id="category" class="form-select form-select-lg" required>
                                 <option value="" selected disabled hidden>Choose Type</option>
                                 <option *ngFor="let t of productTypeService.items | async | nameSort" value="{{t.name}}">{{t.name}}</option>
                             </select>

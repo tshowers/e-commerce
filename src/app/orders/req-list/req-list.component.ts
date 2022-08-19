@@ -22,7 +22,7 @@ export class ReqListComponent implements OnInit, OnDestroy {
   public queryDateDisplay = "none"
   public queryDate: any;
   public ordersHolding: any;
-  public production: boolean;
+  
   public data3: any;
   public active1: boolean = false;
   public active2: boolean = false;
@@ -32,7 +32,7 @@ export class ReqListComponent implements OnInit, OnDestroy {
   public chinaOnly: boolean = false;
 
   constructor(public orderService: OrderService, private _location: Location, public colorService: ColorsService) {
-    this.production = environment.production;
+    
     this.orderService.getAll();
   }
 
@@ -73,7 +73,7 @@ export class ReqListComponent implements OnInit, OnDestroy {
     const today = new Date();
     const yesterday = new Date();
     this.queryDate = yesterday.setDate(today.getDate() - 1);
-    if (!this.production)
+    if (!environment.production)
       console.log("QueryDate", yesterday.toLocaleDateString());
     this.ordersByDate();
   }
@@ -85,20 +85,20 @@ export class ReqListComponent implements OnInit, OnDestroy {
     const today = new Date();
     const yesterday = new Date();
     this.queryDate = yesterday.setDate(today.getDate() - 2);
-    if (!this.production)
+    if (!environment.production)
       console.log("QueryDate", this.queryDate.toLocaleDateString());
     this.ordersByDate();
   }
 
   sortItems(): void {
-    if (!this.production)
+    if (!environment.production)
       console.log("Sorting");
     this.data3 = this.data3.sort((a: any, b: any) => {
       if ((a && a.appointment && a.appointment.time) && (b && b.appointment && b.appointment.time)) {
 
         let aTime = this.parseTime(a.appointment.time, a.appointment.date);
         let bTime = this.parseTime(b.appointment.time, b.appointment.date);
-        if (!this.production)
+        if (!environment.production)
           console.log("aTime", aTime, "bTime", bTime);
         if (aTime > bTime) return 1;
         if (aTime < bTime) return -1;
@@ -124,7 +124,7 @@ export class ReqListComponent implements OnInit, OnDestroy {
     this.active3 = true;
     const tomorrow = new Date();
     this.queryDate = tomorrow;
-    if (!this.production)
+    if (!environment.production)
       console.log("QueryDate", this.queryDate.toLocaleDateString());
     this.ordersByDate();
   }
@@ -145,9 +145,9 @@ export class ReqListComponent implements OnInit, OnDestroy {
     qD.setDate(qD.getDate() + 1);
 
     this.data3 = this.data.filter((e: any) => {
-      var date = (e.appointment && e.appointment.date) ? new Date(e.appointment.date).toLocaleDateString() : new Date(e.updated_at).toLocaleDateString();
+      var date = (e.appointment && e.appointment.date) ? new Date(e.appointment.date).toLocaleDateString() : new Date(e.lastUpdated).toLocaleDateString();
 
-      if (!this.production)
+      if (!environment.production)
         console.log(this.chinaOnly, "Compare Dates", qD.toLocaleDateString())
 
       return (!this.chinaOnly) ? (date == qD.toLocaleDateString()) : ((date == qD.toLocaleDateString()) && (!e.appointment.canceled) && (e.appointment && e.appointment.category && e.appointment.category.indexOf(this.FILTER_TYPE) >= 0));

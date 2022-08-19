@@ -8,9 +8,9 @@ export class DateSortDescPipe implements PipeTransform {
   transform(data:any): any {
     if (!data) return;
     return data.sort((a: any, b: any) => {
-      if (a && a.updated_at && b && b.updated_at) {
-        if (a.updated_at > b.updated_at) return 1;
-        if (a.updated_at < b.updated_at) return -1;
+      if (a && a.lastUpdated && b && b.lastUpdated) {
+        if (a.lastUpdated > b.lastUpdated) return 1;
+        if (a.lastUpdated < b.lastUpdated) return -1;
         }
       return 0;
     });

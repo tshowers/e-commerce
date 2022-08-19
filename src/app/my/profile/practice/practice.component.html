@@ -8,54 +8,54 @@
                 <div class="row mb-3">
                     <div class="col-6">
                         <div class="form-check">
-                            <input [(ngModel)]="data.user_type" class="form-check-input" type="radio" name="user_type" id="user_type1" value="practitioner">
-                            <label class="form-check-label" for="user_type1"> Practitioner </label>
+                            <input [(ngModel)]="data.temp.userType" class="form-check-input" type="radio" name="userType" id="userType1" value="practitioner">
+                            <label class="form-check-label" for="userType1"> Practitioner </label>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-check">
-                            <input [(ngModel)]="data.user_type" class="form-check-input" type="radio" name="user_type" id="user_type2" value="patient">
-                            <label class="form-check-label" for="user_type2"> Patient </label>
+                            <input [(ngModel)]="data.temp.userType" class="form-check-input" type="radio" name="userType" id="userType2" value="patient">
+                            <label class="form-check-label" for="userType2"> Patient </label>
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2" *ngIf="data.user_type === 'practitioner'">
+                <div class="row mb-2" *ngIf="data.temp.userType === 'practitioner'">
                     <div class="col">
                         <div class="form-group">
-                            <label for="practitioner_name">Practice Name</label>
-                            <input [(ngModel)]="data.practitioner_name" type="text" name="practitioner_name" id="practitioner_name" class="form-control form-control-lg" required>
+                            <label for="practitionerName">Practice Name</label>
+                            <input [(ngModel)]="data.temp.practitionerName" type="text" name="practitionerName" id="practitionerName" class="form-control form-control-lg" required>
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2" *ngIf="data.user_type === 'practitioner'">
+                <div class="row mb-2" *ngIf="data.temp.userType === 'practitioner'">
                     <div class="col">
                         <div class="form-group">
-                            <label for="practitioner_address1">Practice Address1</label>
-                            <input [(ngModel)]="data.practitioner_address1" type="text" name="practitioner_address1" id="practitioner_address1" class="form-control form-control-lg" required>
+                            <label for="practitioner_streetAddress1">Practice streetAddress1</label>
+                            <input [(ngModel)]="data.temp.practitioner_streetAddress1" type="text" name="practitioner_streetAddress1" id="practitioner_streetAddress1" class="form-control form-control-lg" required>
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2" *ngIf="data.user_type === 'practitioner'">
+                <div class="row mb-2" *ngIf="data.temp.userType === 'practitioner'">
                     <div class="col">
                         <div class="form-group">
-                            <label for="practitioner_address2">Practice Address2</label>
-                            <input [(ngModel)]="data.practitioner_address2" type="text" name="practitioner_address2" id="practitioner_address2" class="form-control form-control-lg">
+                            <label for="practitioner_streetAddress2">Practice streetAddress2</label>
+                            <input [(ngModel)]="data.temp.practitioner_streetAddress2" type="text" name="practitioner_streetAddress2" id="practitioner_streetAddress2" class="form-control form-control-lg">
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2" *ngIf="data.user_type === 'practitioner'">
+                <div class="row mb-2" *ngIf="data.temp.userType === 'practitioner'">
                     <div class="col">
                         <div class="form-group">
                             <label for="practitioner_city">Practice City</label>
-                            <input [(ngModel)]="data.practitioner_city" type="text" name="practitioner_city" id="practitioner_city" class="form-control form-control-lg" required>
+                            <input [(ngModel)]="data.temp.practitioner_city" type="text" name="practitioner_city" id="practitioner_city" class="form-control form-control-lg" required>
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2" *ngIf="data.user_type === 'practitioner'">
+                <div class="row mb-2" *ngIf="data.temp.userType === 'practitioner'">
                     <div class="col">
                         <div class="form-group">
                             <label for="practitioner_province">Practice Province</label>
-                            <select [(ngModel)]="data.practitioner_province" name="practitioner_province" id="practitioner_province" class="form-select form-select-lg" required>
+                            <select [(ngModel)]="data.temp.practitioner_province" name="practitioner_province" id="practitioner_province" class="form-select form-select-lg" required>
                                 <option value="" selected disabled hidden>Choose State or Province</option>
                                 <option value="AL">Alabama [AL]</option>
                                 <option value="AK">Alaska [AK]</option>
@@ -133,43 +133,43 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2" *ngIf="data.user_type === 'practitioner'">
+                <div class="row mb-2" *ngIf="data.temp.userType === 'practitioner'">
                     <div class="col">
                         <div class="form-group">
                             <label for="practitioner_zip">Practice Zip</label>
-                            <input [(ngModel)]="data.practitioner_zip" type="text" name="practitioner_zip" id="practitioner_zip" class="form-control form-control-lg" required>
+                            <input [(ngModel)]="data.temp.practitioner_zip" type="text" name="practitioner_zip" id="practitioner_zip" class="form-control form-control-lg" required>
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2" *ngIf="data.user_type === 'practitioner'">
+                <div class="row mb-2" *ngIf="data.temp.userType === 'practitioner'">
                     <div class="col">
                         <div class="form-group">
                             <label for="npi">NPI</label>
-                            <input [(ngModel)]="data.npi" type="text" name="npi" id="npi" class="form-control form-control-lg">
+                            <input [(ngModel)]="data.temp.npi" type="text" name="npi" id="npi" class="form-control form-control-lg">
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2" *ngIf="data.user_type === 'practitioner'">
+                <div class="row mb-2" *ngIf="data.temp.userType === 'practitioner'">
                     <div class="col">
                         <div class="form-group">
-                            <label for="customer_id">Practitioner Number</label>
-                            <input [(ngModel)]="data.customer_id" type="text" name="customer_id" id="customer_id" class="form-control form-control-lg" required>
+                            <label for="customerId">Practitioner Number</label>
+                            <input [(ngModel)]="data.temp.customerId" type="text" name="customerId" id="customerId" class="form-control form-control-lg" required>
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2" *ngIf="data.user_type === 'practitioner'">
+                <div class="row mb-2" *ngIf="data.temp.userType === 'practitioner'">
                     <div class="col">
                         <div class="form-group">
-                            <label for="prac_first_name">Practitioner First Name</label>
-                            <input [(ngModel)]="data.prac_first_name" type="text" name="prac_first_name" id="prac_first_name" class="form-control form-control-lg">
+                            <label for="pracFirstName">Practitioner First Name</label>
+                            <input [(ngModel)]="data.temp.pracFirstName" type="text" name="pracFirstName" id="pracFirstName" class="form-control form-control-lg">
                         </div>
                     </div>
                 </div>
-                <div class="row mb-2" *ngIf="data.user_type === 'practitioner'">
+                <div class="row mb-2" *ngIf="data.temp.userType === 'practitioner'">
                     <div class="col">
                         <div class="form-group">
-                            <label for="prac_last_name">Practitioner Last Name</label>
-                            <input [(ngModel)]="data.prac_last_name" type="text" name="prac_last_name" id="prac_last_name" class="form-control form-control-lg" required>
+                            <label for="pracLastName">Practitioner Last Name</label>
+                            <input [(ngModel)]="data.temp.pracLastName" type="text" name="pracLastName" id="pracLastName" class="form-control form-control-lg" required>
                         </div>
                     </div>
                 </div>

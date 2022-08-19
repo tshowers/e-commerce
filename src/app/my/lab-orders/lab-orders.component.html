@@ -37,11 +37,11 @@
                                 (click)="onView(data)"
                                 style="cursor: pointer;">
                                 <th scope="row"
-                                    title="{{data?._id}}">{{data?.first_name}} {{data?.last_name}}</th>
-                                <td>{{data?.kit_number}}</td>
+                                    title="{{data?._id}}">{{data?.firstName}} {{data?.lastName}}</th>
+                                <td>{{data?.kitNumber}}</td>
                                 <td>{{data?.status | status}}
                                 </td>
-                                <td>{{data?.updated_at | date:'medium'}}</td>
+                                <td>{{data?.lastUpdated | date:'medium'}}</td>
                             </tr>
                         </tbody>
                     </table>

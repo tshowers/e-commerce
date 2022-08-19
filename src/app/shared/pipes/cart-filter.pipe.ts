@@ -13,18 +13,18 @@ export class CartFilterPipe implements PipeTransform {
     const resultArray = [];
 
     for (const item of value) {
-      let a = (item && item.first_name) ? item.first_name : '';
-      let b = (item && item.last_name) ? item.last_name : '';
+      let a = (item && item.firstName) ? item.firstName : '';
+      let b = (item && item.lastName) ? item.lastName : '';
       let c = (item && item.email) ? item.email : '';
       let d = (item && item.phone) ? item.phone : '';
-      let e = (item && item.customer_id) ? String(item.customer_id) : '';
-      let f = (item && item.user_type) ? String(item.user_type) : '';
-      let g = (item && item.line_items && item.line_items[0] && item.line_items[0].product && item.line_items[0].product.title) ? item.line_items[0].product.title : '';
-      let h = (item && item.line_items && item.line_items[1] && item.line_items[1].product && item.line_items[1].product.title) ? item.line_items[1].product.title : '';
-      let i = (item && item.line_items && item.line_items[2] && item.line_items[2].product && item.line_items[2].product.title) ? item.line_items[2].product.title : '';
-      let j = (item && item.line_items && item.line_items[0] && item.line_items[0].product && item.line_items[0].product.category) ? item.line_items[0].product.category : '';
-      let k = (item && item.line_items && item.line_items[1] && item.line_items[1].product && item.line_items[1].product.category) ? item.line_items[1].product.category : '';
-      let l = (item && item.line_items && item.line_items[2] && item.line_items[2].product && item.line_items[2].product.category) ? item.line_items[2].product.category : '';
+      let e = (item && item.customerId) ? String(item.customerId) : '';
+      let f = (item && item.userType) ? String(item.userType) : '';
+      let g = (item && item.lineItems && item.lineItems[0] && item.lineItems[0].product && item.lineItems[0].product.title) ? item.lineItems[0].product.title : '';
+      let h = (item && item.lineItems && item.lineItems[1] && item.lineItems[1].product && item.lineItems[1].product.title) ? item.lineItems[1].product.title : '';
+      let i = (item && item.lineItems && item.lineItems[2] && item.lineItems[2].product && item.lineItems[2].product.title) ? item.lineItems[2].product.title : '';
+      let j = (item && item.lineItems && item.lineItems[0] && item.lineItems[0].product && item.lineItems[0].product.category) ? item.lineItems[0].product.category : '';
+      let k = (item && item.lineItems && item.lineItems[1] && item.lineItems[1].product && item.lineItems[1].product.category) ? item.lineItems[1].product.category : '';
+      let l = (item && item.lineItems && item.lineItems[2] && item.lineItems[2].product && item.lineItems[2].product.category) ? item.lineItems[2].product.category : '';
 
 
       if ((a.toLowerCase().indexOf(filterName.toLowerCase()) > -1)

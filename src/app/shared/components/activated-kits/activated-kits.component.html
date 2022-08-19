@@ -31,13 +31,13 @@
                                 (click)="onView(data)"
                                 style="cursor: pointer;">
                                 <th scope="row"
-                                    title="{{data?._id}}">{{data?.first_name}} {{data?.last_name}}</th>
-                                <td>{{data?.kit_number}}</td>
+                                    title="{{data?._id}}">{{data?.firstName}} {{data?.lastName}}</th>
+                                <td>{{data?.kitNumber}}</td>
                                 <td>
                                     <ul class="list-group list-group-flush"
-                                        *ngIf="data.order && data.order.cart && data.order.cart.line_items">
+                                        *ngIf="data.order && data.order.cart && data.order.cart.lineItems">
                                         <li class="list-group-item d-flex justify-content-between align-items-center"
-                                            *ngFor="let item of data.order.cart.line_items; let i = index">
+                                            *ngFor="let item of data.order.cart.lineItems; let i = index">
                                             {{item?.product.title}} <span
                                                   class="badge bg-primary rounded-pill">{{item?.quantity}}</span>
                                         </li>

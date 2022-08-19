@@ -20,10 +20,10 @@ export class CompanySectionsComponent extends DataHandlerComponent implements On
   }
 
   onSubmit() : void {
-    this.data.home_section = (this.data.home_section) ? this.data.home_section : false;
-    this.data.about_section = (this.data.about_section) ? this.data.about_section : false;
-    this.data.checkout_section = (this.data.checkout_section) ? this.data.checkout_section : false;
-    this.data.footer_section = (this.data.footer_section) ? this.data.footer_section : false;
+    this.data.homeSection = (this.data.homeSection) ? this.data.homeSection : false;
+    this.data.aboutSection = (this.data.aboutSection) ? this.data.aboutSection : false;
+    this.data.checkoutSection = (this.data.checkoutSection) ? this.data.checkoutSection : false;
+    this.data.footerSection = (this.data.footerSection) ? this.data.footerSection : false;
 
     super.onSubmit(environment.SETTINGS);
   }

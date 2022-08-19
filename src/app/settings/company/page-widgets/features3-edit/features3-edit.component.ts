@@ -116,7 +116,7 @@ export class Features3EditComponent extends DataHandlerComponent implements OnIn
           this.data.features3.imageURL.push({
             'name': event.target.files[0].name,
             'url': downloadURL,
-            'uploaded_at': new Date().getTime()
+            'uploadedAt': new Date().getTime()
           });
         })
       ).subscribe();

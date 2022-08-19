@@ -29,10 +29,10 @@
                   <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                               <span class="p-2"
-                                    *ngIf="data && data.product_type"><strong>Type:</strong>
-                                    {{data.product_type}}</span>
+                                    *ngIf="data && data.productType"><strong>Type:</strong>
+                                    {{data.productType}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    *ngIf="data && !data.product_type">No product type</span>
+                                    *ngIf="data && !data.productType">No product type</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onProductType()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -134,28 +134,28 @@
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                               <span class="p-2"
-                                    *ngIf="data && data.sale_price"><strong>Sale Price:</strong> {{data.sale_price |
+                                    *ngIf="data && data.salePrice"><strong>Sale Price:</strong> {{data.salePrice |
                                     currency}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    *ngIf="data && !data.sale_price">No sale price</span>
+                                    *ngIf="data && !data.salePrice">No sale price</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onPrice()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                               <span class="p-2"
-                                    *ngIf="data && data.on_sale"><strong>On Sale:</strong> {{data.on_sale}}</span>
+                                    *ngIf="data && data.onSale"><strong>On Sale:</strong> {{data.onSale}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    *ngIf="data && !data.on_sale">No on sale information</span>
+                                    *ngIf="data && !data.onSale">No on sale information</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onPrice()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                               <span class="p-2"
-                                    *ngIf="data && data.dependency && data.dependency.price_dependent"><strong>Price Dependency:</strong> {{data?.dependency?.price  | currency}} {{data?.dependency?.dependency_code}}</span>
+                                    *ngIf="data && data.dependency && data.dependency.priceDependent"><strong>Price Dependency:</strong> {{data?.dependency?.price  | currency}} {{data?.dependency?.dependencyCode}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    *ngIf="!(data && data.dependency && data.dependency.price_dependent)">No dependency</span>
+                                    *ngIf="!(data && data.dependency && data.dependency.priceDependent)">No dependency</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onProductPriceDependency()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -218,20 +218,20 @@
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                               <span class="p-2"
-                                    *ngIf="data && data.units_on_order"><strong>On Order:</strong>
-                                    {{data.units_on_order}}</span>
+                                    *ngIf="data && data.unitsOnOrder"><strong>On Order:</strong>
+                                    {{data.unitsOnOrder}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    *ngIf="data && !data.units_on_order">No units on order</span>
+                                    *ngIf="data && !data.unitsOnOrder">No units on order</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onStock()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                               <span class="p-2"
-                                    *ngIf="data && data.units_in_stock"><strong>In Stock:</strong>
-                                    {{data.units_in_stock}}</span>
+                                    *ngIf="data && data.unitsInStock"><strong>In Stock:</strong>
+                                    {{data.unitsInStock}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    *ngIf="data && !data.units_in_stock">No units on stock info</span>
+                                    *ngIf="data && !data.unitsInStock">No units on stock info</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onStock()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -240,31 +240,31 @@
                   <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                               <span class="p-2"
-                                    *ngIf="data && data.updated_at"><strong>Last Updated:</strong> {{data.updated_at |
+                                    *ngIf="data && data.lastUpdated"><strong>Last Updated:</strong> {{data.lastUpdated |
                                     date:'medium'}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    *ngIf="data && !data.updated_at">No update date</span>
+                                    *ngIf="data && !data.lastUpdated">No update date</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                               <span class="p-2"
-                                    *ngIf="data && data.updated_by"><strong>Updated By:</strong>
-                                    {{data.updated_by}}</span>
+                                    *ngIf="data && data.updatedBy"><strong>Updated By:</strong>
+                                    {{data.updatedBy}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    *ngIf="data && !data.updated_by">No updated by</span>
+                                    *ngIf="data && !data.updatedBy">No updated by</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                               <span class="p-2"
-                                    *ngIf="data && data.created_by"><strong>Created By:</strong>
-                                    {{data.created_by}}</span>
+                                    *ngIf="data && data.createdBy"><strong>Created By:</strong>
+                                    {{data.createdBy}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    *ngIf="data && !data.created_by">No created by</span>
+                                    *ngIf="data && !data.createdBy">No created by</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                               <span class="p-2"
-                                    *ngIf="data && data.created_at"><strong>Created:</strong> {{data.created_at |
+                                    *ngIf="data && data.createdAt"><strong>Created:</strong> {{data.createdAt |
                                     date:'medium'}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    *ngIf="data && !data.created_at">No created at</span>
+                                    *ngIf="data && !data.createdAt">No created at</span>
                         </li>
                   </ul>
                   <ul class="list-group mb-3">

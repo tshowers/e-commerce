@@ -61,10 +61,10 @@ export class ProductEditSubCategoryOptionComponent extends DataHandlerComponent 
       this.data.subCategory = [];
 
     if (this.editMode) {
-      if (!this.production)
+      if (!environment.production)
         console.log("Editing", this.editMode)
     } else {
-      if (!this.production)
+      if (!environment.production)
         console.log("Adding", this.editMode)
 
       this.data.subCategory.push(this.options);

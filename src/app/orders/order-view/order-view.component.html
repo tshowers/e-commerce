@@ -19,10 +19,10 @@
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2" *ngIf="data.browser_ip">
-                        <strong>IP: </strong> {{data.browser_ip}}
+                    <span class="p-2" *ngIf="data.browserIp">
+                        <strong>IP: </strong> {{data.browserIp}}
                     </span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="!(data.browser_ip)">
+                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="!(data.browserIp)">
                         No IP address captured
                     </span>
                 </li>
@@ -49,18 +49,18 @@
 
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2" *ngIf="data.updated_at">
-                        <strong>Updated: </strong> {{data?.updated_at | date:'medium'}}
+                    <span class="p-2" *ngIf="data.lastUpdated">
+                        <strong>Updated: </strong> {{data?.lastUpdated | date:'medium'}}
                     </span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="!(data.updated_at)">
+                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="!(data.lastUpdated)">
                         No updated date captured
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2" *ngIf="data.created_at">
-                        <strong>Created: </strong> {{data?.created_at | date:'medium'}}
+                    <span class="p-2" *ngIf="data.createdAt">
+                        <strong>Created: </strong> {{data?.createdAt | date:'medium'}}
                     </span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="!(data.created_at)">
+                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="!(data.createdAt)">
                         No created date captured
                     </span>
                 </li>
@@ -101,33 +101,33 @@
             </ul>
             <ul class="list-group mb-3" *ngIf="data.cart">
                 <li class="list-group-item d-flex justify-content-between align-items-center"
-                    *ngIf="data && data.cart && data.cart.prac_pay">
+                    *ngIf="data && data.cart && data.cart.pracPay">
                     <span class="p-2 text-capitalize">
-                        <strong>Order Type: </strong> {{data.cart.prac_pay}}
+                        <strong>Order Type: </strong> {{data.cart.pracPay}}
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center"
-                    *ngIf="data && data.cart && data.cart.practitioner_name">
+                    *ngIf="data && data.cart && data.cart.practitionerName">
                     <span class="p-2">
-                        <strong>Practitioner: </strong> {{data.cart.practitioner_name}}
+                        <strong>Practitioner: </strong> {{data.cart.practitionerName}}
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center"
-                    *ngIf="data && data.cart && data.cart.customer_id">
+                    *ngIf="data && data.cart && data.cart.customerId">
                     <span class="p-2">
-                        <strong>Practitioner Number: </strong> {{data.cart.customer_id}}
+                        <strong>Practitioner Number: </strong> {{data.cart.customerId}}
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center"
-                    *ngIf="data && data.cart && data.cart.prac_first_name">
+                    *ngIf="data && data.cart && data.cart.pracFirstName">
                     <span class="p-2">
-                        <strong>Practitioner First Name: </strong> {{data.cart.prac_first_name}}
+                        <strong>Practitioner First Name: </strong> {{data.cart.pracFirstName}}
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center"
-                    *ngIf="data && data.cart && data.cart.prac_last_name">
+                    *ngIf="data && data.cart && data.cart.pracLastName">
                     <span class="p-2">
-                        <strong>Practitioner Last Name: </strong> {{data.cart.prac_last_name}}
+                        <strong>Practitioner Last Name: </strong> {{data.cart.pracLastName}}
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center"
@@ -137,24 +137,24 @@
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center"
-                    *ngIf="data && data.cart && data.cart.prac_phone">
+                    *ngIf="data && data.cart && data.cart.pracPhone">
                     <span class="p-2">
-                        <strong>Practitioner Phone: </strong> {{data.cart.prac_phone}}
+                        <strong>Practitioner Phone: </strong> {{data.cart.pracPhone}}
                     </span>
                 </li>
             </ul>
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2" *ngIf="data.cart && data.cart.first_name && data.cart.last_name">
-                        <strong>Cart Name: </strong>{{data?.cart?.first_name}}
-                        {{data?.cart?.last_name}}
+                    <span class="p-2" *ngIf="data.cart && data.cart.firstName && data.cart.lastName">
+                        <strong>Cart Name: </strong>{{data?.cart?.firstName}}
+                        {{data?.cart?.lastName}}
                     </span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="data.user && data.user.first_name && data.user.last_name">
-                        <strong>User Name: </strong>{{data?.user?.first_name}}
-                        {{data?.user?.last_name}}
+                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="data.user && data.user.firstName && data.user.lastName">
+                        <strong>User Name: </strong>{{data?.user?.firstName}}
+                        {{data?.user?.lastName}}
                     </span>
                     <span class="p-2"
-                        *ngIf="!(data.cart && data.cart.first_name && data.cart.last_name) && !(data.user && data.user.first_name && data.user.last_name)">
+                        *ngIf="!(data.cart && data.cart.firstName && data.cart.lastName) && !(data.user && data.user.firstName && data.user.lastName)">
                         No name
                     </span>
                     <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onName()"><i
@@ -171,26 +171,26 @@
                             class="fa fa-chevron-right fa-1x"></i></a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2" *ngIf="(data.cart && data.cart.address1)">
-                        <strong>Cart Address1: </strong> {{data.cart.address1}}
+                    <span class="p-2" *ngIf="(data.cart && data.cart.streetAddress1)">
+                        <strong>Cart streetAddress1: </strong> {{data.cart.streetAddress1}}
                     </span>
-                    <span class="p-2" *ngIf="(data.user && data.user.address1)">
-                        <strong>User Address1: </strong> {{data.user.address1}}
+                    <span class="p-2" *ngIf="(data.user && data.user.streetAddress1)">
+                        <strong>User streetAddress1: </strong> {{data.user.streetAddress1}}
                     </span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="!(data.cart && data.cart.address1) && !(data.user && data.user.address1)">
+                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="!(data.cart && data.cart.streetAddress1) && !(data.user && data.user.streetAddress1)">
                         No address 1
                     </span>
                     <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onAddress()"><i
                             class="fa fa-chevron-right fa-1x"></i></a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2" *ngIf="(data.cart && data.cart.address2)">
-                        <strong>Cart Address2: </strong> {{data.cart.address2}}
+                    <span class="p-2" *ngIf="(data.cart && data.cart.streetAddress2)">
+                        <strong>Cart streetAddress2: </strong> {{data.cart.streetAddress2}}
                     </span>
-                    <span class="p-2" *ngIf="(data.user && data.user.address2)">
-                        <strong>User Address2: </strong> {{data.user.address2}}
+                    <span class="p-2" *ngIf="(data.user && data.user.streetAddress2)">
+                        <strong>User streetAddress2: </strong> {{data.user.streetAddress2}}
                     </span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="!(data.cart && data.cart.address2) && !(data.user && data.user.address2)">
+                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="!(data.cart && data.cart.streetAddress2) && !(data.user && data.user.streetAddress2)">
                         No address 2
                     </span>
                     <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onAddress()"><i
@@ -294,11 +294,11 @@
                             class="fa fa-chevron-right fa-1x"></i></a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2" *ngIf="data.user && data.user.passport_number">
+                    <span class="p-2" *ngIf="data.user && data.user.passportNumber">
                         <strong>
-                            Passport Number: </strong> {{data.user.passport_number}}
+                            Passport Number: </strong> {{data.user.passportNumber}}
                     </span>
-                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="!(data.user && data.user.passport_number)">
+                    <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="!(data.user && data.user.passportNumber)">
                         No passport number
                     </span>
                     <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onPassportNumber()"><i
@@ -325,14 +325,14 @@
                             class="fa fa-chevron-right fa-1x"></i></a>
                 </li>
             </ul>
-            <ul class="list-group mb-3" *ngIf="data.cart && data.cart.line_items && data.cart.line_items.length">
+            <ul class="list-group mb-3" *ngIf="data.cart && data.cart.lineItems && data.cart.lineItems.length">
                 <li class="list-group-item">
                     <div class="card">
                         <div class="card-header">Items Purchased</div>
                         <div class="card-body">
-                            <ul class="list-group list-group-flush" *ngIf="data.cart && data.cart.line_items">
+                            <ul class="list-group list-group-flush" *ngIf="data.cart && data.cart.lineItems">
                                 <li class="list-group-item d-flex justify-content-between align-items-center"
-                                    *ngFor="let item of data.cart.line_items; let i = index">
+                                    *ngFor="let item of data.cart.lineItems; let i = index">
                                     <img *ngIf="item && item.product && item.product.files && item.product.files[0] && item.product.files[0].url"
                                         class="img-fluid" style="max-height: 64px;"
                                         src="{{item?.product?.files[0]?.url}}" alt="">
@@ -352,60 +352,60 @@
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span class="p-2"
-                        *ngIf="data.cart && data.cart.shipping_address && data.cart.shipping_address.address1">
-                        <strong>Address1: </strong> {{data?.cart?.shipping_address?.address1}}
+                        *ngIf="data.cart && data.cart.shippingAddress && data.cart.shippingAddress.streetAddress1">
+                        <strong>streetAddress1: </strong> {{data?.cart?.shippingAddress?.streetAddress1}}
                     </span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                        *ngIf="!(data.cart && data.cart.shipping_address && data.cart.shipping_address.address1)">
+                        *ngIf="!(data.cart && data.cart.shippingAddress && data.cart.shippingAddress.streetAddress1)">
                         No Shipping Address 1
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span class="p-2"
-                        *ngIf="data.cart && data.cart.shipping_address && data.cart.shipping_address.address2">
-                        <strong>Address2: </strong> {{data?.cart?.shipping_address?.address2}}
+                        *ngIf="data.cart && data.cart.shippingAddress && data.cart.shippingAddress.streetAddress2">
+                        <strong>streetAddress2: </strong> {{data?.cart?.shippingAddress?.streetAddress2}}
                     </span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                        *ngIf="!(data.cart && data.cart.shipping_address && data.cart.shipping_address.address2)">
+                        *ngIf="!(data.cart && data.cart.shippingAddress && data.cart.shippingAddress.streetAddress2)">
                         No Shipping Address 2
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span class="p-2"
-                        *ngIf="data.cart && data.cart.shipping_address && data.cart.shipping_address.city">
-                        <strong>City: </strong> {{data?.cart?.shipping_address?.city}}
+                        *ngIf="data.cart && data.cart.shippingAddress && data.cart.shippingAddress.city">
+                        <strong>City: </strong> {{data?.cart?.shippingAddress?.city}}
                     </span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                        *ngIf="!(data.cart && data.cart.shipping_address && data.cart.shipping_address.city)">
+                        *ngIf="!(data.cart && data.cart.shippingAddress && data.cart.shippingAddress.city)">
                         No Shipping City
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span class="p-2"
-                        *ngIf="data.cart && data.cart.shipping_address && data.cart.shipping_address.province">
-                        <strong>State: </strong> {{data?.cart?.shipping_address?.province}}
+                        *ngIf="data.cart && data.cart.shippingAddress && data.cart.shippingAddress.province">
+                        <strong>State: </strong> {{data?.cart?.shippingAddress?.province}}
                     </span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                        *ngIf="!(data.cart && data.cart.shipping_address && data.cart.shipping_address.province)">
+                        *ngIf="!(data.cart && data.cart.shippingAddress && data.cart.shippingAddress.province)">
                         No Shipping State
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span class="p-2" *ngIf="data.cart && data.cart.shipping_address && data.cart.shipping_address.zip">
-                        <strong>Zip Code: </strong> {{data?.cart?.shipping_address?.zip}}
+                    <span class="p-2" *ngIf="data.cart && data.cart.shippingAddress && data.cart.shippingAddress.zip">
+                        <strong>Zip Code: </strong> {{data?.cart?.shippingAddress?.zip}}
                     </span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                        *ngIf="!(data.cart && data.cart.shipping_address && data.cart.shipping_address.zip)">
+                        *ngIf="!(data.cart && data.cart.shippingAddress && data.cart.shippingAddress.zip)">
                         No Shipping Zip Code
                     </span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span class="p-2"
-                        *ngIf="data.cart && data.cart.shipping_address && data.cart.shipping_address.country">
-                        <strong>Country: </strong> {{data?.cart?.shipping_address?.country}}
+                        *ngIf="data.cart && data.cart.shippingAddress && data.cart.shippingAddress.country">
+                        <strong>Country: </strong> {{data?.cart?.shippingAddress?.country}}
                     </span>
                     <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                        *ngIf="!(data.cart && data.cart.shipping_address && data.cart.shipping_address.country)">
+                        *ngIf="!(data.cart && data.cart.shippingAddress && data.cart.shippingAddress.country)">
                         No Shipping Country
                     </span>
                 </li>
@@ -442,13 +442,13 @@
                     <div *ngIf="data.cart && data.cart.amount">
                         <strong>Amount:</strong> {{data?.cart?.amount | currency}}
                     </div>
-                    <div *ngIf="data.user && data.user.browser_ip">
+                    <div *ngIf="data.user && data.user.browserIp">
                         <strong>IP:</strong> <span
-                            *ngIf="data && data.user && data.user.browser_ip">{{data?.user?.browser_ip}}</span> <span
-                            *ngIf="!(data && data.user && data.user.browser_ip)">{{data?.cart?.browser_ip}}</span> <br>
+                            *ngIf="data && data.user && data.user.browserIp">{{data?.user?.browserIp}}</span> <span
+                            *ngIf="!(data && data.user && data.user.browserIp)">{{data?.cart?.browserIp}}</span> <br>
                     </div>
-                    <div *ngIf="data.cart && data.cart.created_at">
-                        <strong>Created:</strong> {{data?.cart?.created_at | date:'medium'}}
+                    <div *ngIf="data.cart && data.cart.createdAt">
+                        <strong>Created:</strong> {{data?.cart?.createdAt | date:'medium'}}
                     </div>
                 </div>
             </div>
@@ -458,16 +458,16 @@
                 <div class="card-header"> Customer Info </div>
                 <div class="card-body">
                     <strong><i class="fa fa-pencil-square-o" style="cursor: pointer;" aria-hidden="true"
-                            (click)="onName()"></i> Name:</strong> {{data?.cart?.first_name}}
-                    {{data?.cart?.last_name}}<br>
+                            (click)="onName()"></i> Name:</strong> {{data?.cart?.firstName}}
+                    {{data?.cart?.lastName}}<br>
                     <div *ngIf="data.user && data.user.middle_name"><strong><i class="fa fa-pencil-square-o"
                                 style="cursor: pointer;" aria-hidden="true" (click)="onName()"></i>Middle Name:
                         </strong> <span>{{data.user.middle_name}}</span></div>
                     <strong><i class="fa fa-pencil-square-o" style="cursor: pointer;" aria-hidden="true"
-                            (click)="onName()"></i> Company or Organization:</strong> {{data?.cart?.company_name}}<br>
+                            (click)="onName()"></i> Company or Organization:</strong> {{data?.cart?.companyName}}<br>
                     <strong><i class="fa fa-pencil-square-o" style="cursor: pointer;" aria-hidden="true"
-                            (click)="onAddress()"></i> Address:</strong> {{data?.cart?.address1}}
-                    {{data?.cart?.address2}} {{data?.cart?.city}} {{data?.cart?.province}} {{data?.cart?.zip}}<br>
+                            (click)="onAddress()"></i> Address:</strong> {{data?.cart?.streetAddress1}}
+                    {{data?.cart?.streetAddress2}} {{data?.cart?.city}} {{data?.cart?.province}} {{data?.cart?.zip}}<br>
                     <strong><i class="fa fa-pencil-square-o" style="cursor: pointer;" aria-hidden="true"
                             (click)="onPhone()"></i> Phone:</strong> {{data?.cart?.phone}}<br>
                     <strong><i class="fa fa-pencil-square-o" style="cursor: pointer;" aria-hidden="true"
@@ -480,7 +480,7 @@
                                 (click)="onSsn()"></i> SSN: </strong> <span>{{data?.user?.ssn}}</span></div>
                     <div><strong><i class="fa fa-pencil-square-o" style="cursor: pointer;" aria-hidden="true"
                                 (click)="onPassportNumber()"></i> Passport Number: </strong>
-                        <span>{{data?.user?.passport_number}}</span>
+                        <span>{{data?.user?.passportNumber}}</span>
                     </div>
                     <div><strong><i class="fa fa-pencil-square-o" style="cursor: pointer;" aria-hidden="true"
                                 (click)="onNationality()"></i> Nationality: </strong>
@@ -497,28 +497,28 @@
             <div class="card">
                 <div class="card-header">Insurance Related</div>
                 <div class="card-body">
-                    <div><strong>Has Insurance: </strong> <span>{{data.user.has_insurance}}</span></div>
-                    <div *ngIf="data && data.user && data.user.insurance_name"><strong><i class="fa fa-pencil-square-o"
+                    <div><strong>Has Insurance: </strong> <span>{{data.user.hasInsurance}}</span></div>
+                    <div *ngIf="data && data.user && data.user.insuranceName"><strong><i class="fa fa-pencil-square-o"
                                 style="cursor: pointer;" aria-hidden="true" (click)="onInsurance()"></i> Insurance Name:
-                        </strong> <span>{{data?.user?.insurance_name}}</span></div>
-                    <div *ngIf="data && data.user && data.user.insurance_group_number"><strong><i
+                        </strong> <span>{{data?.user?.insuranceName}}</span></div>
+                    <div *ngIf="data && data.user && data.user.insuranceGroupNumber"><strong><i
                                 class="fa fa-pencil-square-o" style="cursor: pointer;" aria-hidden="true"
                                 (click)="onInsurance()"></i> Insurance Group Number: </strong>
-                        <span>{{data?.user?.insurance_group_number}}</span>
+                        <span>{{data?.user?.insuranceGroupNumber}}</span>
                     </div>
-                    <div *ngIf="data && data.user && data.user.insurance_policy_number"><strong><i
+                    <div *ngIf="data && data.user && data.user.insurancePolicyNumber"><strong><i
                                 class="fa fa-pencil-square-o" style="cursor: pointer;" aria-hidden="true"
                                 (click)="onInsurance()"></i> Insurance Policy Number: </strong>
-                        <span>{{data?.user?.insurance_policy_number}}</span>
+                        <span>{{data?.user?.insurancePolicyNumber}}</span>
                     </div>
-                    <div *ngIf="data && data.user && data.user.insurance_suffix_number"><strong><i
+                    <div *ngIf="data && data.user && data.user.insuranceSuffixNumber"><strong><i
                                 class="fa fa-pencil-square-o" style="cursor: pointer;" aria-hidden="true"
                                 (click)="onInsurance()"></i> Insurance Suffix Number: </strong>
-                        <span>{{data?.user?.insurance_suffix_number}}</span>
+                        <span>{{data?.user?.insuranceSuffixNumber}}</span>
                     </div>
                     <div
-                        *ngIf="data.user.insurance_card && data.user.insurance_card.imageURL && data.user.insurance_card.imageURL.length && (data.user.insurance_card.imageURL.length > 0)">
-                        <div *ngFor="let j of data.user.insurance_card.imageURL">
+                        *ngIf="data.user.insuranceCard && data.user.insuranceCard.imageURL && data.user.insuranceCard.imageURL.length && (data.user.insuranceCard.imageURL.length > 0)">
+                        <div *ngFor="let j of data.user.insuranceCard.imageURL">
 
                             <img src="{{j.url}}" alt="" class="img-thumbnail" style="max-height: 250px;">
                         </div>
@@ -532,22 +532,22 @@
                 </div>
             </div>
         </div>
-        <div class="col-md mt-2" *ngIf="data.user_type === 'practitioner'">
+        <div class="col-md mt-2" *ngIf="data.userType === 'practitioner'">
             <div class="card">
                 <div class="card-header">Practitioner Info</div>
                 <div class="card-body">
-                    <div *ngIf="data && data.cart && data.cart.practitioner_name"><strong>Practice Name:</strong>
-                        {{data?.cart?.practitioner_name}}</div>
-                    <div *ngIf="data && data.cart && data.cart.customer_id"><strong>Practice Number:</strong>
-                        {{data?.cart?.customer_id}}</div>
-                    <div *ngIf="data && data.cart && data.cart.prac_first_name"><strong>Practitioner First
-                            Name:</strong> {{data?.cart?.prac_first_name}}</div>
-                    <div *ngIf="data && data.cart && data.cart.prac_last_name"><strong>Practitioner Last Name:</strong>
-                        {{data?.cart?.prac_last_name}}</div>
+                    <div *ngIf="data && data.cart && data.cart.practitionerName"><strong>Practice Name:</strong>
+                        {{data?.cart?.practitionerName}}</div>
+                    <div *ngIf="data && data.cart && data.cart.customerId"><strong>Practice Number:</strong>
+                        {{data?.cart?.customerId}}</div>
+                    <div *ngIf="data && data.cart && data.cart.pracFirstName"><strong>Practitioner First
+                            Name:</strong> {{data?.cart?.pracFirstName}}</div>
+                    <div *ngIf="data && data.cart && data.cart.pracLastName"><strong>Practitioner Last Name:</strong>
+                        {{data?.cart?.pracLastName}}</div>
                     <div *ngIf="data && data.cart && data.cart.npi"><strong>NPI:</strong> {{data?.cart?.npi}}</div>
-                    <strong>Orderer Name:</strong> {{data?.cart?.prac_first_name}} {{data?.cart?.prac_last_name}}<br>
-                    <strong>Payer:</strong> {{data?.cart?.prac_pay}}<br>
-                    <strong>Phone:</strong> {{data?.cart?.prac_phone}}<br>
+                    <strong>Orderer Name:</strong> {{data?.cart?.pracFirstName}} {{data?.cart?.pracLastName}}<br>
+                    <strong>Payer:</strong> {{data?.cart?.pracPay}}<br>
+                    <strong>Phone:</strong> {{data?.cart?.pracPhone}}<br>
                 </div>
             </div>
         </div>
@@ -576,27 +576,27 @@
                 </div>
             </div>
         </div>
-        <div class="col-md mt-2" *ngIf="data.cart && data.cart.payment_details && data.cart.payment_details.cc_number">
+        <div class="col-md mt-2" *ngIf="data.cart && data.cart.paymentDetails && data.cart.paymentDetails.ccNumber">
             <div class="card">
                 <div class="card-header"> Credit Card Info </div>
-                <div class="card-body"> {{data?.cart?.payment_details?.cc_name_on_card}}<br>
+                <div class="card-body"> {{data?.cart?.paymentDetails?.ccNameOnCard}}<br>
                     <span
-                        *ngIf="data && data.cart && data.cart.payment_details && data.cart.payment_details.cc_number && (data.cart.payment_details.cc_number.length)">
-                        ***********{{data?.cart?.payment_details?.cc_number | slice:-4}}<br>
+                        *ngIf="data && data.cart && data.cart.paymentDetails && data.cart.paymentDetails.ccNumber && (data.cart.paymentDetails.ccNumber.length)">
+                        ***********{{data?.cart?.paymentDetails?.ccNumber | slice:-4}}<br>
                     </span>
-                    {{data?.cart?.payment_details?.cc_exp_date}}
+                    {{data?.cart?.paymentDetails?.ccExpDate}}
                 </div>
             </div>
         </div>
     </div>
     <div class="row mb-3">
-        <div class="col-md mt-2" *ngIf="data.cart && data.cart.line_items && data.cart.line_items.length">
+        <div class="col-md mt-2" *ngIf="data.cart && data.cart.lineItems && data.cart.lineItems.length">
             <div class="card">
                 <div class="card-header">Items Purchased</div>
                 <div class="card-body">
-                    <ul class="list-group list-group-flush" *ngIf="data.cart && data.cart.line_items">
+                    <ul class="list-group list-group-flush" *ngIf="data.cart && data.cart.lineItems">
                         <li class="list-group-item d-flex justify-content-between align-items-center"
-                            *ngFor="let item of data.cart.line_items; let i = index">
+                            *ngFor="let item of data.cart.lineItems; let i = index">
                             <img *ngIf="item && item.product && item.product.files && item.product.files[0] && item.product.files[0].url"
                                 class="img-fluid" style="max-height: 64px;" src="{{item?.product?.files[0]?.url}}"
                                 alt="">
@@ -609,16 +609,16 @@
                 </div>
             </div>
         </div>
-        <div class="col-md mt-2" *ngIf="data.cart && data.cart.shipping_address && data.cart.shipping_address.address1">
+        <div class="col-md mt-2" *ngIf="data.cart && data.cart.shippingAddress && data.cart.shippingAddress.streetAddress1">
             <div class="card">
                 <div class="card-header">Shipping Information</div>
                 <div class="card-body">
-                    <strong>Address1:</strong> {{data?.cart?.shipping_address?.address1}}
-                    {{data?.cart?.shipping_address?.address2}} <br><strong>City:</strong>
-                    {{data?.cart?.shipping_address?.city}}<br>
-                    <strong>Province:</strong> {{data?.cart?.shipping_address?.province}}<br>
-                    <strong>Zip:</strong> {{data?.cart?.shipping_address?.zip}}<br>
-                    <strong>Country:</strong> {{data?.cart?.shipping_address?.country}}<br>
+                    <strong>streetAddress1:</strong> {{data?.cart?.shippingAddress?.streetAddress1}}
+                    {{data?.cart?.shippingAddress?.streetAddress2}} <br><strong>City:</strong>
+                    {{data?.cart?.shippingAddress?.city}}<br>
+                    <strong>Province:</strong> {{data?.cart?.shippingAddress?.province}}<br>
+                    <strong>Zip:</strong> {{data?.cart?.shippingAddress?.zip}}<br>
+                    <strong>Country:</strong> {{data?.cart?.shippingAddress?.country}}<br>
                 </div>
             </div>
         </div>

@@ -15,8 +15,8 @@ export class ProductSubTypeEditComponent extends DataHandlerComponent implements
   subType: any = {
     name: '',
     price: 0.00,
-    sale_price: 0.00,
-    on_sale: false,
+    salePrice: 0.00,
+    onSale: false,
   };
 
   public editMode = false;
@@ -24,7 +24,7 @@ export class ProductSubTypeEditComponent extends DataHandlerComponent implements
 
   constructor(protected _dataService: DataService, public colorService: ColorsService) {
     super(_dataService);
-    this.production = environment.production;
+    
   }
 
   ngOnInit(): void {
@@ -39,8 +39,8 @@ export class ProductSubTypeEditComponent extends DataHandlerComponent implements
       this.subType = {
         name: '',
         price: 0.00,
-        sale_price: 0.00,
-        on_sale: false,
+        salePrice: 0.00,
+        onSale: false,
       };
     }, 1500);
   }
@@ -50,10 +50,10 @@ export class ProductSubTypeEditComponent extends DataHandlerComponent implements
       this.data.subType = [];
 
     if (this.editMode) {
-      if (!this.production)
+      if (!environment.production)
         console.log("Editing", this.editMode)
     } else {
-      if (!this.production)
+      if (!environment.production)
         console.log("Adding", this.editMode)
 
       this.data.subType.push(this.subType);

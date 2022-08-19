@@ -1,11 +1,14 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
+import firebase from 'firebase/app';
+
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { environment } from "../../../environments/environment";
 import { IpService } from './ip.service';
 import { Subscription } from 'rxjs';
 import { User } from '../data/user.model';
 import { AuthService } from './auth.service';
+import { SettingService } from './setting.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +21,11 @@ export class UserService implements OnDestroy {
   private _refDocs?: AngularFirestoreCollection;
   public refDocs?: Observable<any[]>;
 
-  public production: boolean;
+
   private _collectionName: string = environment.USERS;
   private _ipSubscription?: Subscription;
 
   public userSubject = new Subject<User>();
-  public company: any;
   public user?: User;
   public ipAddress = '';
   public lastOrderID: any;
@@ -34,7 +36,6 @@ export class UserService implements OnDestroy {
   public isPracFound: boolean = false;
 
   constructor(private _firestore: AngularFirestore, private _ipService: IpService, public authService: AuthService) {
-    this.production = environment.production;
     this.getIP();
     this.setUser();
   }
@@ -45,83 +46,75 @@ export class UserService implements OnDestroy {
       this._ipSubscription.unsubscribe();
   }
 
-  public set(user: any) {
-    this.user = user;
-    this.setRoles();
-    this.userSubject.next(this.user);
-  }
-
-  public setRoles(): void {
-    this.setAdmin();
-    this.setPartner();
-    this.setPractitioner();
-  }
 
   private setUser(): void {
     this.authService.loggedInUser.subscribe((firebaseUser) => {
 
-      if (!this.production)
-        console.log("loggedInUser Fired", firebaseUser);
-
       if (firebaseUser) {
         this.getUser()?.valueChanges({ idField: '_id' }).subscribe((u) => {
-          this.user = u;
-          this.setAdmin();
-          this.setPartner();
-          this.setPractitioner();
+
+          this.user = this.checkUserReturned(u, firebaseUser);
           this.userSubject.next(u);
+          if (!environment.production)
+            console.log("loggedInUser Fired", firebaseUser, "User", u);
         });
       }
       else {
         this.user = undefined;
 
-        if (!this.production)
+        if (!environment.production)
           console.log("User Reset", this.user);
       };
     })
   }
 
+
+  checkUserReturned(user: any, firebaseUser: firebase.User) : User {
+    if (user && (!user.email)) {
+      if (!environment.production)
+        console.log("INVALID FOUND USER - CREATE NEW USER");
+      user = this.getNewUserRecordUsingFirebase(firebaseUser);
+      this._firestore.collection(this._collectionName).doc(user._id).set(user, { merge: true });
+    }
+    return user;
+  }
+
+
+
+  setLoggedInUser(user: User): void {
+    if (!environment.production)
+      console.log('setLoggedInUser', user);
+
+    this._firestore.collection(this._collectionName).doc(user._id).set(user, { merge: true });
+    this.notifyListners(user);
+  }
+
+  notifyListners(user: User) : void {
+    this.user = user;
+    this.userSubject.next(user);
+  }
+
+
   getNewUser(uid: any, emailAdderess: string): User {
     return this.user = <User>{
       roles: ['reader'],
       email: emailAdderess,
-      uid: uid
     }
   }
 
   update(): void {
     if (this.user) {
-      this.user.updated_at = new Date().getTime();
-      this.user.browser_ip = this.ipAddress;
+      this.user.lastUpdated = new Date().getTime();
+      this.user.browserIp = this.ipAddress;
       this._firestore.collection(this._collectionName).doc(this.user._id).set(this.user, { merge: true });
     }
   }
 
-  findUserCompany(customer_id: any): void {
-    this._refDocs = this._firestore.collection(this._collectionName, ref => ref.where("customer_id", "==", customer_id));
+  findUserCompany(customerId: any): void {
+    this._refDocs = this._firestore.collection(this._collectionName, ref => ref.where("customerId", "==", customerId));
     this.refDocs = this._refDocs.valueChanges({ idField: '_id' });
   }
 
-  private setAdmin() {
-    if (!this.production)
-      console.log("Admin set");
-
-    this.admin$.next((this.authService.firebaseUser && this.user && this.user.roles && this.user.roles.length) ? this.user.roles.includes('admin') : false);
-  }
-
-  private setPartner() {
-    if (!this.production)
-      console.log("Partner set");
-
-    this.insurancePartner$.next((this.authService.firebaseUser && this.user && this.user.roles && this.user.roles.length) ? this.user.roles.includes('partner') : false);
-  }
-
-  private setPractitioner() {
-    if (!this.production)
-      console.log("Practioner set");
-      
-    this.practitioner$.next((this.authService.firebaseUser && this.user && this.user.user_type) ? (this.user.user_type === 'practitioner') : false);
-  }
 
   get(ID: string) {
     return this._firestore.doc(this._collectionName + '/' + ID);
@@ -132,14 +125,15 @@ export class UserService implements OnDestroy {
   }
 
   getAll() {
-    this._itemDocs = this._firestore.collection(this._collectionName);
+    this._itemDocs = this._firestore.collection(this._collectionName, ref => ref.where("companyId", "==", this.user?._id));
     this.items = this._itemDocs.valueChanges({ idField: '_id' });
   }
 
 
   create(data: any) {
-    data.browser_ip = this.ipAddress;
-    data.created_at = new Date().getTime();
+    data.lastUpdated = new Date().getTime();
+    data.browserIp = this.ipAddress;
+    data.updatedBy = (this.authService.firebaseUser) ? this.authService.firebaseUser.email : '';
     if (this.authService.firebaseUser) {
       data.uid = this.authService.firebaseUser.uid;
       this._firestore.collection(this._collectionName).doc(data.uid).set(data, { merge: true });
@@ -147,7 +141,7 @@ export class UserService implements OnDestroy {
   }
 
   getAllByUserType(userType: string) {
-    this._itemDocs = this._firestore.collection(this._collectionName, ref => ref.where("user_type", "==", userType));
+    this._itemDocs = this._firestore.collection(this._collectionName, ref => ref.where("userType", "==", userType));
     this.items = this._itemDocs.valueChanges({ idField: '_id' });
   }
 
@@ -157,5 +151,18 @@ export class UserService implements OnDestroy {
       this.ipAddress = res.ip;
     })
   }
+
+
+  getNewUserRecordUsingFirebase(firebaseUser: firebase.User): User {
+    return <User>{
+      email: firebaseUser.email,
+      _id: firebaseUser.uid,
+      displayName: firebaseUser.displayName,
+      photoURL: firebaseUser.photoURL,
+      emailVerified: firebaseUser.emailVerified,
+      phoneNumber: firebaseUser.phoneNumber,
+    }
+  }
+
 
 }

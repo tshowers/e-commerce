@@ -11,7 +11,7 @@
           <div class="home__content mx-auto">
             <h1  *ngIf="data" style="text-shadow: 3px 10px 10px #000000;" class="mx-auto">{{data?.title}}</h1>
             <div class="home text-dark" innerHTML="{{data?.description}}"></div>
-            <a *ngIf="data && data.order_button_text" href="#catalog" class="home__btn mx-auto" [ngStyle]="{'background-color': data?.color}">{{data?.order_button_text}}</a>
+            <a *ngIf="data && data.orderButtonText" href="#catalog" class="home__btn mx-auto" [ngStyle]="{'background-color': data?.color}">{{data?.orderButtonText}}</a>
           </div>
         </div>
       </div>

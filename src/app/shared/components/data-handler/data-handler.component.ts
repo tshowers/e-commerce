@@ -16,7 +16,7 @@ export class DataHandlerComponent implements OnInit {
   public transaction_complete: boolean = false;
 
   constructor(protected _dataService: DataService) {
-    this.production = environment.production;
+    
   }
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class DataHandlerComponent implements OnInit {
   }
 
   onSubmit(collectionName: string): void {
-    if (this.data._id)
+    if (this.data._id || this.data.uid)
       this.onUpdate(collectionName);
     else
       this.onAdd(collectionName);

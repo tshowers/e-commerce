@@ -1,4 +1,4 @@
-<form #dataForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="data && data.about_product3">
+<form #dataForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="data && data.aboutProduct3">
     <div class="containter-fluid wow fadeInLeft">
         <div class="card">
             <div class="card-header">
@@ -9,7 +9,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="headerText">Heading</label>
-                            <input [(ngModel)]="data.about_product3.headerText" type="text" name="headerText" id="headerText" class="form-control form-control-lg" required autofocus>
+                            <input [(ngModel)]="data.aboutProduct3.headerText" type="text" name="headerText" id="headerText" class="form-control form-control-lg" required autofocus>
                         </div>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="descriptionText">Description</label>
-                            <textarea [(ngModel)]="data.about_product3.descriptionText" type="text" name="descriptionText" id="descriptionText" class="form-control form-control-lg" cols="30"
+                            <textarea [(ngModel)]="data.aboutProduct3.descriptionText" type="text" name="descriptionText" id="descriptionText" class="form-control form-control-lg" cols="30"
                                 rows="10"></textarea>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="bulletText1">Bullet 1 Text</label>
-                            <input [(ngModel)]="data.about_product3.bulletText1" type="text" name="bulletText1" id="bulletText1" class="form-control form-control-lg">
+                            <input [(ngModel)]="data.aboutProduct3.bulletText1" type="text" name="bulletText1" id="bulletText1" class="form-control form-control-lg">
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="bulletText2">Bullet 2 Text</label>
-                            <input [(ngModel)]="data.about_product3.bulletText2" type="text" name="bulletText2" id="bulletText2" class="form-control form-control-lg">
+                            <input [(ngModel)]="data.aboutProduct3.bulletText2" type="text" name="bulletText2" id="bulletText2" class="form-control form-control-lg">
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="bulletText3">Bullet 3 Text</label>
-                            <input [(ngModel)]="data.about_product3.bulletText3" type="text" name="bulletText3" id="bulletText3" class="form-control form-control-lg">
+                            <input [(ngModel)]="data.aboutProduct3.bulletText3" type="text" name="bulletText3" id="bulletText3" class="form-control form-control-lg">
                         </div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                     <div class="row">
                         <div class="col">
                             <div *ngFor="let f of dropFiles">
-                                <app-image1-upload-task [file]="f" [data]="data.about_product3.imageURL1"></app-image1-upload-task>
+                                <app-image1-upload-task [file]="f" [data]="data.aboutProduct3.imageURL1"></app-image1-upload-task>
                             </div>
                         </div>
                     </div>
@@ -70,9 +70,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" *ngIf="data && data.about_product3 && data.about_product3.imageURL1 && data.about_product3.imageURL1.length">
+                    <div class="row" *ngIf="data && data.aboutProduct3 && data.aboutProduct3.imageURL1 && data.aboutProduct3.imageURL1.length">
                         <div class="col">
-                            <div *ngFor="let e of data.about_product3.imageURL1;let i = index">
+                            <div *ngFor="let e of data.aboutProduct3.imageURL1;let i = index">
                                 <i class="fa fa-times text-danger" aria-hidden="true" (click)="onDeleteImage1File(e, i)" style="cursor: pointer;"></i> &nbsp; <a href="{{e?.url}}" target="_blank"
                                     rel="noopener"> {{e?.name}}</a>
                             </div>
@@ -91,7 +91,7 @@
                     <div class="row">
                         <div class="col">
                             <div *ngFor="let f of dropFiles2">
-                                <app-image1-upload-task [file]="f" [data]="data.about_product3.imageURL2"></app-image1-upload-task>
+                                <app-image1-upload-task [file]="f" [data]="data.aboutProduct3.imageURL2"></app-image1-upload-task>
                             </div>
                         </div>
                     </div>
@@ -103,9 +103,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" *ngIf="data && data.about_product3 && data.about_product3.imageURL2 && data.about_product3.imageURL2.length">
+                    <div class="row" *ngIf="data && data.aboutProduct3 && data.aboutProduct3.imageURL2 && data.aboutProduct3.imageURL2.length">
                         <div class="col">
-                            <div *ngFor="let e of data.about_product3.imageURL2;let i = index">
+                            <div *ngFor="let e of data.aboutProduct3.imageURL2;let i = index">
                                 <i class="fa fa-times text-danger" aria-hidden="true" (click)="onDeleteImage2File(e, i)" style="cursor: pointer;"></i> &nbsp; <a href="{{e?.url}}" target="_blank"
                                     rel="noopener"> {{e?.name}}</a>
                             </div>

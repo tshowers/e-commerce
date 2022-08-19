@@ -17,8 +17,8 @@ export class AboutProduct1EditComponent extends DataHandlerComponent implements 
 
   ngOnInit(): void {
     super.ngOnInit();
-    if (!this.data.about_product1) {
-      this.data.about_product1 = {
+    if (!this.data.aboutProduct1) {
+      this.data.aboutProduct1 = {
         headerText: '',
         descriptionText : '',
         buttonText : '',

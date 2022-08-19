@@ -1,7 +1,7 @@
-<section id="features---7" class="section features features-with-image  pb-5" [ngClass]="{'color-block': (userService.company && userService.company.color_block)}" *ngIf="data && data.features3">
+<section id="features---7" class="section features features-with-image  pb-5" [ngClass]="{'color-block': (settingService.settings && settingService.settings.colorBlock)}" *ngIf="data && data.features3">
     <div class="container">
       <h2 class="section__title mb-2" [ngStyle]="{'color': colorService.secondaryColor}">{{data?.features3?.headerText}}</h2>
-      <div class="row  wow fadeInUp" [ngClass]="{'home2': !(userService.company && userService.company.color_block)}">
+      <div class="row  wow fadeInUp" [ngClass]="{'home2': !(settingService.settings && settingService.settings.colorBlock)}">
   
         <div class="block-desc  text-muted text-center">
           <p>{{data.features3.descriptionText}}</p>

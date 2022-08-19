@@ -19,7 +19,7 @@ export class ProductEditPriceDependenciesComponent extends DataHandlerComponent 
 
   constructor(protected _dataService: DataService, public colorService: ColorsService, public dependencyCodeService: DependencyCodeService) {
     super(_dataService);
-    this.production = environment.production;
+    
     this.dependencyCodeService.getAll();
   }
 
@@ -31,11 +31,11 @@ export class ProductEditPriceDependenciesComponent extends DataHandlerComponent 
   onNew() : void {
     if (!this.data.dependency) {
       this.data.dependency = {
-        price_dependent: false,
-        dependency_code: '',
+        priceDependent: false,
+        dependencyCode: '',
         price: 0.00,
-        sale_price: 0.00,
-        on_sale: false
+        salePrice: 0.00,
+        onSale: false
       };
     }
   }

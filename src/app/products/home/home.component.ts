@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Product } from '../../shared/data/product.model';
 import { ColorsService } from 'src/app/shared/services/colors.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -30,13 +31,17 @@ export class HomeComponent implements OnInit {
   public isProductPriceDepency: boolean = false;
   public isProductSubCategory: boolean = false;
 
-  constructor(private _location: Location, public colorService: ColorsService) { }
+  constructor(private _location: Location, public colorService: ColorsService, private _router:Router) { }
 
   ngOnInit(): void {
   }
 
   back(): void {
     this._location.back();
+  }
+
+  onDashboard() : void {
+    this._router.navigate(['admin']);
   }
 
   list(): void {
@@ -50,6 +55,10 @@ export class HomeComponent implements OnInit {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
+  onSignOut() : void {
+    this._router.navigate(['identity', 'bye']);
+  }
+
   onNew(): void {
     this.isEditMode = true;
     this.data = <Product>{
@@ -58,7 +67,7 @@ export class HomeComponent implements OnInit {
         long: 'No Long Description'
       },
       category: '',
-      product_type: '',
+      productType: '',
       subType: []
     };
   }
@@ -98,7 +107,7 @@ export class HomeComponent implements OnInit {
       case 'stock':
         this.onStock();
         break;
-      case 'product_type':
+      case 'productType':
         this.onProductType();
         break;
       case 'active':

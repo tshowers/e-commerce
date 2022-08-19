@@ -15,15 +15,16 @@ export const environment = {
   billMethod: 'BILL',
   orderedBy: 'tshowers',
   defaultStatus: 0,
-  site_type: undefined,
-  summaryRedirect: 'http://localhost:4200/access/email-check',
-  savedCartRedirect: 'http://localhost:4200/access/saved-cart-check',
+  siteType: undefined,
+  summaryRedirect: 'http://localhost:4200/identity/email-check',
+  savedCartRedirect: 'http://localhost:4200/identity/saved-cart-check',
   localURL: 'http://localhost:4200',
   superDuper: "ty.showers@gmail.com",
   sampleProcessing: undefined,
   CARTS: "carts",
   SAVED_CARTS: "saved-carts",
   CUSTOMERS: "customers",
+  CONTACTS: "contacts",
   LAB_ORDERS: "lab-orders",
   ORDERS: "orders",
   PAYMENTS: "payments",
@@ -40,7 +41,8 @@ export const environment = {
   APPOINTMENTS: "appointments",
   LOGO_PATH: "logo",
   FILE_PATH: "files",
-  RESULTS_PATH: "results"
+  RESULTS_PATH: "results",
+  COMPANY_NAME: "Taliferro Group"
 
 };
 

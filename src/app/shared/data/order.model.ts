@@ -1,23 +1,24 @@
 export interface Order {
   name: string;
   note: string;
-  first_name: string;
-  last_name: string;
+  companyId?: string;
+  firstName: string;
+  lastName: string;
 
-  address1: string;
-  address2: string;
+  streetAddress1: string;
+  streetAddress2: string;
   city: string;
   province: string;
-  province_code: string;
+  provinceCode: string;
   zip: string;
   country: string;
-  shipping_required: boolean;
-  shipping_address: {
-    address1: string;
-    address2: string;
+  shippingRequired: boolean;
+  shippingAddress: {
+    streetAddress1: string;
+    streetAddress2: string;
     city: string;
     province: string;
-    province_code: string;
+    provinceCode: string;
     zip: string;
     country: string;
   }
@@ -27,33 +28,33 @@ export interface Order {
   currency: string;
   status: string;
 
-  line_items: any;
+  lineItems: any;
   gateway: string;
-  fulfillment_status: string;
-  financial_status: string;
+  fulfillmentStatus: string;
+  financialStatus: string;
 
   email: string;
   phone: string;
-  updated_at: number;
-  updated_by: string;
-  created_by: string;
-  created_at: number;
-  browser_ip?: string;
+  lastUpdated: number;
+  updatedBy: string;
+  createdBy: string;
+  createdAt: number;
+  browserIp?: string;
   environment?:string;
 
   discounts: string;
 
-  payment_details: {
-    cc_bin: string;
-    cc_company: string;
-    cc_number: string;
-    cvv_result_code: string;
+  paymentDetails: {
+    ccBin: string;
+    ccCompany: string;
+    ccNumber: string;
+    cvvResultCode: string;
   }
 
   uid: string;
   _id: string;
   cart: any;
   user: any;
-  charge_response: any;
+  chargeResponse: any;
   
 }

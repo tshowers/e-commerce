@@ -14,16 +14,17 @@ export const environment = {
   locPos: 1,
   billMethod: 'BILL',
   orderedBy: 'tshowers',
-  site_type: undefined,
+  siteType: undefined,
   defaultStatus: 0,
-  summaryRedirect: 'https://taliferro-e-commerce.web.app/access/email-check',
-  savedCartRedirect: 'https://taliferro-e-commerce.web.app/access/saved-cart-check',
-  localURL: 'https://taliferro-e-commerce.web.app',
+  summaryRedirect: 'https://e-commerce.taliferro.com/identity/email-check',
+  savedCartRedirect: 'https://e-commerce.taliferro.com/identity/saved-cart-check',
+  localURL: 'https:/e-commerce.taliferro.com',
   superDuper: "ty.showers@gmail.com",
   sampleProcessing: undefined,
   CARTS: "carts",
   SAVED_CARTS: "saved-carts",
   CUSTOMERS: "customers",
+  CONTACTS: "contacts",
   LAB_ORDERS: "lab-orders",
   DAILY_REPORTS: "daily-reports",
   ORDERS: "orders",
@@ -40,6 +41,6 @@ export const environment = {
   APPOINTMENTS: "appointments",
   LOGO_PATH: "logo",
   FILE_PATH: "files",
-  RESULTS_PATH: "results"
-
+  RESULTS_PATH: "results",
+  COMPANY_NAME: "Taliferro Group"
 };

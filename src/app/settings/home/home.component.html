@@ -1,15 +1,17 @@
-<div class="container mt-2">
+<div class="container-fluid mt-2">
       <div class="row">
             <div class="col-md"><span (click)="back()" style="cursor: pointer;"><i class="fa fa-chevron-left  fa-2x text-muted"></i></span> </div>
             <div class="col-md text-center mb-3">
                   <h1 [ngStyle]="{'color': colorService.darkBackground}">Settings</h1>
             </div>
-            <div class="col-md"></div>
+            <div class="col-md text-end">
+                  <button type="button" class="btn btn-danger" (click)="onSignOut()">Sign Out</button>
+
+            </div>
       </div>
       <div class="row">
             <div class="col-md-6 order-sm-first order-last">
-                  <h2 *ngIf="isAdmin" [ngStyle]="{'color': colorService.secondaryColor}">Site Configuration</h2>
-                  <ul class="list-group mb-3" *ngIf="isAdmin">
+                  <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center  wow fadeIn">
                               <img class="p-2 img-fluid" style="cursor: pointer;" (click)="onLogo()" *ngIf="company && company.logos && company.logos[0]" src="{{company.logos[0].url}}"
                                     alt="{{company.logos[0].name}}" style="max-height: 128px;">
@@ -64,19 +66,14 @@
                               <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onOrderButtonText()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                   </ul>
-                  <ul class="list-group mb-3" *ngIf="isAdmin && !site_type">
+                  <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" style="cursor: pointer;" (click)="onSiteType()" *ngIf="company && company.site_type"><strong>Web Site Type:</strong> {{company.site_type}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onSiteType()" *ngIf="company && !company.site_type">No Web Site Type</span>
+                              <span class="p-2" style="cursor: pointer;" (click)="onSiteType()" *ngIf="company && company.siteType"><strong>Web Site Type:</strong> {{company.siteType}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onSiteType()" *ngIf="company && !company.siteType">No Web Site Type</span>
                               <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onSiteType()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                   </ul>
-                  <ul class="list-group mb-3" *ngIf="isAdmin && site_type">
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2"><strong>Web Site Type:</strong> {{site_type}}</span>
-                        </li>
-                  </ul>
-                  <ul class="list-group mb-3" *ngIf="isAdmin && company">
+                  <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">Apple Verification </span>
                               <div class="form-check form-switch">
@@ -97,7 +94,7 @@
                               </div>
                         </li>
                   </ul>
-                  <ul class="list-group mb-3" *ngIf="isAdmin && company">
+                  <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2" style="cursor: pointer;" (click)="onProductCategories()">Product Categories </span>
                               <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onProductCategories()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -115,163 +112,145 @@
                               <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onProductSubCategories()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                   </ul>
-                  <ul class="list-group mb-3" *ngIf="isAdmin && company">
+                  <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2" style="cursor: pointer;" (click)="onStripe()"><i class="fa fa-cc-stripe" aria-hidden="true"></i> Stripe </span>
                               <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onStripe()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                   </ul>
-                  <ul class="list-group mb-3" *ngIf="isAdmin && company">
+                  <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2" style="cursor: pointer;" (click)="onColors()" *ngIf="company && company.color"><strong>Primary Color:</strong> {{company.color}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onColors()" *ngIf="company && !company.color">No primary color chosen</span>
                               <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onColors()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" style="cursor: pointer;" (click)="onColors()" *ngIf="company && company.secondary_color"><strong>Secondary Color:</strong>
-                                    {{company.secondary_color}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onColors()" *ngIf="company && !company.secondary_color">No secondary color
+                              <span class="p-2" style="cursor: pointer;" (click)="onColors()" *ngIf="company && company.secondaryColor"><strong>Secondary Color:</strong>
+                                    {{company.secondaryColor}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onColors()" *ngIf="company && !company.secondaryColor">No secondary color
                                     chosen</span>
                               <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onColors()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">Color Block </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="color_block" name="color_block" [(ngModel)]="company.color_block" (click)="onSection()">
-                              </div>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2">Text Only Catalog </span>
-                              <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="text_only_catalog" name="text_only_catalog" [(ngModel)]="company.text_only_catalog" (click)="onSection()">
+                                    <input class="form-check-input" type="checkbox" id="colorBlock" name="colorBlock" [(ngModel)]="company.colorBlock" (click)="onSection()">
                               </div>
                         </li>
                   </ul>
-                  <ul class="list-group mb-3" *ngIf="isAdmin && company">
+                  <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">Home </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="home_section" name="home_section" [(ngModel)]="company.home_section" (click)="onSection()">
-                              </div>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2">Medical Information Collection (e.g., Covid19) </span>
-                              <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="medical_section" name="medical_section" [(ngModel)]="company.medical_section" (click)="onSection()">
+                                    <input class="form-check-input" type="checkbox" id="homeSection" name="homeSection" [(ngModel)]="company.homeSection" (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">Catalog </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="catalog_section" name="catalog_section" [(ngModel)]="company.catalog_section" (click)="onSection()">
+                                    <input class="form-check-input" type="checkbox" id="catalogSection" name="catalogSection" [(ngModel)]="company.catalogSection" (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">Checkout </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="checkout_section" name="checkout_section" [(ngModel)]="company.checkout_section" (click)="onSection()">
+                                    <input class="form-check-input" type="checkbox" id="checkoutSection" name="checkoutSection" [(ngModel)]="company.checkoutSection" (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">Category </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="category_section" name="category_section" [(ngModel)]="company.category_section" (click)="onSection()">
+                                    <input class="form-check-input" type="checkbox" id="categorySection" name="categorySection" [(ngModel)]="company.categorySection" (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">About </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="about_section" name="about_section" [(ngModel)]="company.about_section" (click)="onSection()">
+                                    <input class="form-check-input" type="checkbox" id="aboutSection" name="aboutSection" [(ngModel)]="company.aboutSection" (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">About Product (1) Section </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="about_product1_section" name="about_product1_section" [(ngModel)]="company.about_product1_section"
+                                    <input class="form-check-input" type="checkbox" id="aboutProduct1Section" name="aboutProduct1Section" [(ngModel)]="company.aboutProduct1Section"
                                           (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">About Product(2) Section </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="about_product2_section" name="about_product2_section" [(ngModel)]="company.about_product2_section"
+                                    <input class="form-check-input" type="checkbox" id="aboutProduct2_section" name="aboutProduct2_section" [(ngModel)]="company.aboutProduct2_section"
                                           (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">About Product(3) Section </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="about_product3_section" name="about_product3_section" [(ngModel)]="company.about_product3_section"
+                                    <input class="form-check-input" type="checkbox" id="aboutProduct3Section" name="aboutProduct3Section" [(ngModel)]="company.aboutProduct3Section"
                                           (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">How To Section </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="how_to1_section" name="how_to1_section" [(ngModel)]="company.how_to1_section" (click)="onSection()">
+                                    <input class="form-check-input" type="checkbox" id="howTo1Section" name="howTo1Section" [(ngModel)]="company.howTo1Section" (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">FAQ (1) Section </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="about_faq1_section" name="about_faq1_section" [(ngModel)]="company.about_faq1_section" (click)="onSection()">
+                                    <input class="form-check-input" type="checkbox" id="aboutFaq1Section" name="aboutFaq1Section" [(ngModel)]="company.aboutFaq1Section" (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">FAQ (2) Section </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="about_faq2_section" name="about_faq2_section" [(ngModel)]="company.about_faq2_section" (click)="onSection()">
+                                    <input class="form-check-input" type="checkbox" id="aboutFaq2Section" name="aboutFaq2Section" [(ngModel)]="company.aboutFaq2Section" (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">FAQ (3) Section </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="about_faq3_section" name="about_faq3_section" [(ngModel)]="company.about_faq3_section" (click)="onSection()">
+                                    <input class="form-check-input" type="checkbox" id="aboutFaq3Section" name="aboutFaq3Section" [(ngModel)]="company.aboutFaq3Section" (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">Features (1) Section </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="about_features1_section" name="about_features1_section" [(ngModel)]="company.about_features1_section"
+                                    <input class="form-check-input" type="checkbox" id="aboutFeatures1Section" name="aboutFeatures1Section" [(ngModel)]="company.aboutFeatures1Section"
                                           (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">Features (2) Section </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="about_features2_section" name="about_features2_section" [(ngModel)]="company.about_features2_section"
+                                    <input class="form-check-input" type="checkbox" id="aboutFeatures2Section" name="aboutFeatures2Section" [(ngModel)]="company.aboutFeatures2Section"
                                           (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">Features (3) Section </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="about_features3_section" name="about_features3_section" [(ngModel)]="company.about_features3_section"
+                                    <input class="form-check-input" type="checkbox" id="aboutFeatures3Section" name="aboutFeatures3Section" [(ngModel)]="company.aboutFeatures3Section"
                                           (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">Video 1 Section <small>at top of page</small> </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="about_video1_section" name="about_video1_section" [(ngModel)]="company.about_video1_section"
+                                    <input class="form-check-input" type="checkbox" id="aboutVideo1Section" name="aboutVideo1Section" [(ngModel)]="company.aboutVideo1Section"
                                           (click)="onSection()">
                               </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">Video 2 Section <small>at bottom of page</small> </span>
                               <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="about_video2_section" name="about_video2_section" [(ngModel)]="company.about_video2_section"
+                                    <input class="form-check-input" type="checkbox" id="aboutVideo2Section" name="aboutVideo2Section" [(ngModel)]="company.aboutVideo2Section"
                                           (click)="onSection()">
                               </div>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2">Footer </span>
-                              <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="footer_section" name="footer_section" [(ngModel)]="company.footer_section" (click)="onSection()">
-                              </div>
-                        </li>
                   </ul>
-                  <ul class="list-group mb-3" *ngIf="isAdmin">
+                  <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2" style="cursor: pointer;" (click)="onAboutProduct1()">About Product (1) Section </span>
                               <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onAboutProduct1()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -321,7 +300,7 @@
                               <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onVideo2()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                   </ul>
-                  <ul class="list-group mb-3" *ngIf="isAdmin">
+                  <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2" style="cursor: pointer;" (click)="onSocial()" *ngIf="company && company.facebook"><a href="{{company.facebook}}" target="_blank"><i
                                                 class="fa fa-facebook-official" aria-hidden="true"></i></a>&nbsp; <strong>Facebook:</strong>
@@ -358,136 +337,6 @@
                               <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onSocial()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                   </ul>
-                  <h2 class=" mt-1">Personal</h2>
-                  <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onName()" *ngIf="userService.user && !userService.user.first_name">No First
-                                    Name</span>
-                              <span class="p-2" style="cursor: pointer;" (click)="onName()" *ngIf="userService.user && userService.user.first_name"><strong>First Name:</strong>
-                                    {{userService.user.first_name}}</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onName()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onName()" *ngIf="userService.user && !userService.user.last_name">No First
-                                    Name</span>
-                              <span class="p-2" style="cursor: pointer;" (click)="onName()" *ngIf="userService.user && userService.user.last_name"><strong>Last Name:</strong>
-                                    {{userService.user.last_name}}</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onName()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                  </ul>
-                  <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onUserCompanyName()"
-                                    *ngIf="userService.user && !userService.user.company_name">No Company Found</span>
-                              <span class="p-2" style="cursor: pointer;" (click)="onUserCompanyName()" *ngIf="userService.user && userService.user.company_name"><strong>Company:</strong>
-                                    {{userService.user.company_name}}</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onUserCompanyName()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onUserEmail()" *ngIf="userService.user && !userService.user.email">No Email
-                                    Address</span>
-                              <span class="p-2" style="cursor: pointer;" (click)="onUserEmail()" *ngIf="userService.user && userService.user.email"><strong>Email:</strong>
-                                    {{userService.user.email}}</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onUserEmail()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onUserPhone()" *ngIf="userService.user && !userService.user.phone_number">No
-                                    Phone Number</span>
-                              <span class="p-2" style="cursor: pointer;" (click)="onUserPhone()" *ngIf="userService.user && userService.user.phone_number"><strong>Phone Number:</strong>
-                                    {{userService.user.phone_number}}</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onUserPhone()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                  </ul>
-                  <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" style="cursor: pointer;" (click)="onAddress()" *ngIf="userService.user && userService.user.address1"><strong>Address 1:</strong>
-                                    {{userService.user.address1}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onAddress()" *ngIf="userService.user && !userService.user.address1">No
-                                    address 1 found</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" *ngIf="userService.user && userService.user.address2"><strong>Address 2:</strong> {{userService.user.address2}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" *ngIf="userService.user && !userService.user.address2">No address 2 found</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" style="cursor: pointer;" (click)="onAddress()" *ngIf="userService.user && userService.user.city"><strong>City:</strong> {{userService.user.city}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onAddress()" *ngIf="userService.user && !userService.user.city">No city
-                                    found</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" style="cursor: pointer;" (click)="onAddress()" *ngIf="userService.user && userService.user.province"><strong>Province:</strong>
-                                    {{userService.user.province}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onAddress()" *ngIf="userService.user && !userService.user.province">No
-                                    province found</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" *ngIf="userService.user && userService.user.zip" style="cursor: pointer;" (click)="onAddress()"><strong>Zip Code:</strong>
-                                    {{userService.user.zip}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onAddress()" *ngIf="userService.user && !userService.user.zip">No zip code
-                                    found</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" style="cursor: pointer;" (click)="onAddress()" *ngIf="userService.user && userService.user.country"><strong>Country:</strong>
-                                    {{userService.user.country}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onAddress()" *ngIf="userService.user && !userService.user.country">No
-                                    country found</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                  </ul>
-                  <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" style="cursor: pointer;" (click)="onDob()" *ngIf="userService.user && userService.user.dob"><strong>Date of Birth:</strong>
-                                    {{userService.user.dob}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onDob()" *ngIf="userService.user && !userService.user.dob">No date of birth
-                                    found</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onDob()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" style="cursor: pointer;" (click)="onGender()" *ngIf="userService.user && userService.user.gender"><strong>Gender at Birth:</strong>
-                                    {{userService.user.gender}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onGender()" *ngIf="userService.user && !userService.user.gender">No gender
-                                    found</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onGender()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                  </ul>
-                  <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <a class="text-dark p-2" style="cursor: pointer;" routerLink="/my/orders">Order History</a>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" routerLink="/my/orders"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <a class="text-dark p-2" style="cursor: pointer;" routerLink="/my/lab-orders">Lab Tests and Results</a>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" routerLink="/my/lab-orders"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                  </ul>
-                  <ul class="list-group mb-3">
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" style="cursor: pointer;" (click)="onPaymentInfo()" *ngIf="userService.user && userService.user.cc_name_on_card"><strong>Name on Card:</strong>
-                                    {{userService.user.cc_name_on_card}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onPaymentInfo()"
-                                    *ngIf="userService.user && !userService.user.cc_name_on_card">No name on card found</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onPaymentInfo()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" style="cursor: pointer;" (click)="onPaymentInfo()" *ngIf="userService.user && userService.user.cc_number"><strong>CC Number:</strong>
-                                    ************{{userService.user.cc_number | slice:-4}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onPaymentInfo()" *ngIf="userService.user && !userService.user.cc_number">No
-                                    credit card number found</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onPaymentInfo()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2" style="cursor: pointer;" (click)="onPaymentInfo()" *ngIf="userService.user && userService.user.cc_exp_date"><strong>CC Expiration:</strong>
-                                    {{userService.user.cc_exp_date}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic" style="cursor: pointer;" (click)="onPaymentInfo()"
-                                    *ngIf="userService.user && !userService.user.cc_exp_date">No expiration found</span>
-                              <a class="text-secondary text-opacity-25" style="cursor: pointer;" (click)="onPaymentInfo()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                  </ul>
                   <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2">Diagnostic </span>
@@ -506,11 +355,6 @@
                   <app-company-title *ngIf="isCompanyTitleEdit" [data]="company" (done)="editReset()"></app-company-title>
                   <app-logo *ngIf="isLogoEdit" [data]="company" (done)="editReset()"></app-logo>
                   <app-company-name *ngIf="isCompanyNameEdit" [data]="company" (done)="editReset()"></app-company-name>
-                  <app-address *ngIf="isAddressEdit" [data]="userService.user" (done)="editReset()"></app-address>
-                  <app-cc-info *ngIf="isPaymentInfoEdit" [data]="userService.user" (done)="editReset()"></app-cc-info>
-                  <app-dob *ngIf="isDOBEdit" [data]="userService.user" (done)="editReset()"></app-dob>
-                  <app-gender *ngIf="isGenderEdit" [data]="userService.user" (done)="editReset()"></app-gender>
-                  <app-user-name *ngIf="isNameEdit" [data]="userService.user" (done)="editReset()"></app-user-name>
                   <app-company-sections *ngIf="isSectionEdit" [data]="company" (done)="editReset()"></app-company-sections>
                   <app-order-button-text *ngIf="isOrderButtonEdit" [data]="company" (done)="editReset()"></app-order-button-text>
                   <app-social *ngIf="isSocial" [data]="company" (done)="editReset()"></app-social>
@@ -535,7 +379,8 @@
                   <app-product-type-edit *ngIf="isProductType"></app-product-type-edit>
                   <app-product-dependency-edit *ngIf="isDependecyCode"></app-product-dependency-edit>
                   <app-sub-category-edit *ngIf="isSubCategories"></app-sub-category-edit>
-                  <pre *ngIf="diagnostic" class="text-light bg-dark p-4">{{company | json}}</pre>
+                  <pre *ngIf="diagnostic">{{company | json}}</pre>
+                  <pre *ngIf="diagnostic">{{authService.firebaseUser | json}} </pre>
             </div>
       </div>
 </div>

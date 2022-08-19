@@ -28,7 +28,7 @@
                     <app-appointment-print-list [data]="data" *ngIf="viewToggle"></app-appointment-print-list>
                 </div>
                 <div class="col-md-6 no-print" [ngStyle]="{'display': colStyle}"> 
-                    <pre *ngIf="isDiagnostic" class="text-light bg-dark p-4">{{data | json}}</pre>
+                    <pre *ngIf="isDiagnostic">{{data | json}}</pre>
                     <app-order-edit-address [data]="data" *ngIf="isOrderAddress" (done)="editReset()"></app-order-edit-address>
                     <app-order-edit-dob [data]="data" *ngIf="isOrderDob" (done)="editReset()"></app-order-edit-dob>
                     <app-order-edit-email [data]="data" *ngIf="isOrderEmail" (done)="editReset()"></app-order-edit-email>

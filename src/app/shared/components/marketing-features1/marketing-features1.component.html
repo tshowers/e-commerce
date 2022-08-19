@@ -1,9 +1,9 @@
 <section id="features---2" class="section features pb-5"
-  [ngClass]="{'color-block': (userService.company && userService.company.color_block)}" *ngIf="data && data.features1">
+  [ngClass]="{'color-block': (settingService.settings && settingService.settings.colorBlock)}" *ngIf="data && data.features1">
   <div class="container">
     <h2 class="section__title pb-2" [ngStyle]="{'color': colorService.secondaryColor}">{{data?.features1?.headerText}}
     </h2>
-    <div class="row wow fadeInUp" [ngClass]="{'home2': !(userService.company && userService.company.color_block)}">
+    <div class="row wow fadeInUp" [ngClass]="{'home2': !(settingService.settings && settingService.settings.colorBlock)}">
       <div class="block-desc text-muted text-center">
         <p>{{data.features1.descriptionText}}</p>
       </div>

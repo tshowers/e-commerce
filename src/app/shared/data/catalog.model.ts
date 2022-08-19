@@ -4,12 +4,12 @@ export interface Catalog  {
   description: string;
   files : string;
   url: string;
-  store_id: string;
-  updated_at: number;
-  updated_by: string;
-  created_by: string;
-  created_at: number;
-  browser_ip?: string;
+  storeId: string;
+  lastUpdated: number;
+  updatedBy: string;
+  createdBy: string;
+  createdAt: number;
+  browserIp?: string;
 
   uid: string;
   _id: string;  

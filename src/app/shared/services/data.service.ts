@@ -6,6 +6,8 @@ import { IpService } from './ip.service';
 import { Subscription } from 'rxjs';
 import { environment } from "../../../environments/environment";
 import { AuthService } from './auth.service';
+import { SettingService } from './setting.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +19,13 @@ export class DataService implements OnDestroy {
 
   private _itemDoc?: AngularFirestoreDocument<any>;
   public item?: Observable<any>;
-  public production: boolean;
+  
 
   private _ipSubscription?: Subscription;
 
   public ipAddress = '';
 
-  constructor(private _firestore: AngularFirestore, private _ipService: IpService, private _authService: AuthService) {
-    this.production = environment.production;
+  constructor(private _firestore: AngularFirestore, private _ipService: IpService, private _authService: AuthService, private _settingService: SettingService, private _userService: UserService) {
     this.getIP();
   }
 
@@ -34,12 +35,20 @@ export class DataService implements OnDestroy {
   }
 
   getAll(collectionName: string) {
-    this._itemDocs = this._firestore.collection(collectionName);
-    this.items = this._itemDocs.valueChanges({ idField: '_id' });
+    try {
+      if (!environment.production) 
+        console.log("Getting all ", collectionName);
+        
+      this._itemDocs = this._firestore.collection(collectionName, ref => ref.where("companyId", "==",this._settingService.settings._id));
+      this.items = this._itemDocs.valueChanges({ idField: '_id' });
+      } catch (error) {
+        console.error("Error On", collectionName, "Settings", this._settingService.settings);
+    }
+
   }
 
   getAllByEmail(collectionName: string, email: string) {
-    this._itemDocs = this._firestore.collection(collectionName, ref => ref.where("email", "==", email));
+    this._itemDocs = this._firestore.collection(collectionName, ref => ref.where("email", "==", email).where("companyId", "==",this._settingService.settings._id));
     this.items = this._itemDocs.valueChanges({ idField: '_id' });
   }
 
@@ -49,8 +58,10 @@ export class DataService implements OnDestroy {
   }
 
   updateByUID(collectionName: string, data: any) {
-    data.updated_at = new Date().getTime();
-    data.browser_ip = this.ipAddress;
+    data.lastUpdated = new Date().getTime();
+    data.companyId = this._settingService.settings._id;
+    data.browserIp = this.ipAddress;
+    data.updatedBy = (this._authService.firebaseUser) ? this._authService.firebaseUser.email : '';
     if (this._authService.firebaseUser) {
       data.uid = this._authService.firebaseUser?.uid;
       this._firestore.collection(collectionName).doc(data.uid).set(data,{merge: true});
@@ -58,33 +69,30 @@ export class DataService implements OnDestroy {
   }
 
   update(collectionName: string, id: string, data: any) {
-    data.updated_at = new Date().getTime();
-    if (this._authService.firebaseUser)
-      data.uid = this._authService.firebaseUser.uid;
-    // data.updated_by = (this._usersService.user && this._usersService.user.email) ? this._usersService.user.email : '';
-    data.browser_ip = this.ipAddress;
+    data.lastUpdated = new Date().getTime();
+    data.companyId = this._settingService.settings._id;
+    data.updatedBy = (this._authService.firebaseUser) ? this._authService.firebaseUser.email : '';
+    data.browserIp = this.ipAddress;
 
     this._firestore.collection(collectionName).doc(id).set(data, { merge: true });
   }
 
   add(collectionName: string, data: any) {
-    data.updated_at = new Date().getTime();
-    data.created_at = new Date().getTime();
-    // data.updated_by = (this._usersService.user && this._usersService.user.email) ? this._usersService.user.email : '';
-    data.browser_ip = this.ipAddress;
-    if (this._authService.firebaseUser)
-      data.uid = this._authService.firebaseUser.uid;
+    data.lastUpdated = new Date().getTime();
+    data.createdAt = new Date().getTime();
+    data.companyId = this._settingService.settings._id;
+    data.updatedBy = (this._authService.firebaseUser) ? this._authService.firebaseUser.email : '';
+    data.browserIp = this.ipAddress;
 
     return this._firestore.collection(collectionName).add(data);
   }
 
   addRecordReturnKey(collectionName: string, data: any) {
-    data.updated_at = new Date().getTime();
-    data.created_at = new Date().getTime();
-    // data.updated_by = (this._usersService.user && this._usersService.user.email) ? this._usersService.user.email : '';
-    data.browser_ip = this.ipAddress;
-    if (this._authService.firebaseUser)
-      data.uid = this._authService.firebaseUser.uid;
+    data.lastUpdated = new Date().getTime();
+    data.createdAt = new Date().getTime();
+    data.companyId = this._settingService.settings._id;
+    data.updatedBy = (this._authService.firebaseUser) ? this._authService.firebaseUser.email : '';
+    data.browserIp = this.ipAddress;
 
     const id = this._firestore.createId();    
     this._firestore.collection(collectionName).doc(id).set(data);
@@ -97,16 +105,16 @@ export class DataService implements OnDestroy {
   }
 
   getByTitle(collectionName: string, title: string) {
-    return this._firestore.collection(collectionName, ref => ref.where('title', '==', title)).get();
+    return this._firestore.collection(collectionName, ref => ref.where('title', '==', title).where("companyId", "==",this._settingService.settings._id)).get();
   }
 
   getByLastUpdated(collectionName: string) {
-    this._itemDocs = this._firestore.collection(collectionName, ref => ref.orderBy('updated_at', "desc"));
+    this._itemDocs = this._firestore.collection(collectionName, ref => ref.orderBy('lastUpdated', "desc").where("companyId", "==",this._settingService.settings._id));
     this.items = this._itemDocs.valueChanges({ idField: '_id' });
   }
 
   getAllByNotThis(collectionName: string, fieldName: string, notThisValue: string) {
-    this._itemDocs = this._firestore.collection(collectionName, ref => ref.where(fieldName, "!=", notThisValue));
+    this._itemDocs = this._firestore.collection(collectionName, ref => ref.where(fieldName, "!=", notThisValue).where("companyId", "==",this._settingService.settings._id));
     this.items = this._itemDocs.valueChanges({ idField: '_id' });
   }
 

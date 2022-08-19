@@ -84,7 +84,7 @@ export class Video2EditComponent extends DataHandlerComponent implements OnInit,
   upload(event: any) {
     try {
       const path = environment.FILE_PATH + `/${Date.now()}_${event.target.files[0].name}`;
-      if (!this.production)
+      if (!environment.production)
         console.log("PATH", path);
 
       this.processUpload(event, path);
@@ -102,17 +102,17 @@ export class Video2EditComponent extends DataHandlerComponent implements OnInit,
       this._taskSubscription = this._task.snapshotChanges().pipe(
         finalize(async () => {
           const downloadURL = await this._storage.ref(path).getDownloadURL().toPromise();
-          if (!this.production)
+          if (!environment.production)
             console.log("Download URL", downloadURL);
 
           this.uploaded = true;
           this.data.video2.imageURL.push({
             'name': event.target.files[0].name,
             'url': downloadURL,
-            'uploaded_at': new Date().getTime()
+            'uploadedAt': new Date().getTime()
           });
           
-          if (!this.production)
+          if (!environment.production)
             console.log(this.data.video2);
         })
       ).subscribe();

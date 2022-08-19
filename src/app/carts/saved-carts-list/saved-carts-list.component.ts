@@ -17,23 +17,23 @@ export class SavedCartsListComponent implements OnInit, OnDestroy {
   public filteredData = '';
   loading: any;
   prac: string;
-  public production: boolean;
+  
 
   constructor(public cartService: CartService, private _userService: UserService) {
-    this.production = environment.production;
+    
 
-    this.prac = (this._userService.user && this._userService.user.customer_id) ? this._userService.user.customer_id : "";
+    this.prac = (this._userService.user && this._userService.user.temp.customerId) ? this._userService.user.temp.customerId : "";
 
-    if (!this.production)
+    if (!environment.production)
       console.log("Practitioner", this.prac)
 
     if (this.prac && (this.prac != '')) {
-      if (!this.production)
+      if (!environment.production)
         console.log("Getting saved carts for ", this.prac)
       this.cartService.getAllPracSavedCarts(this.prac);
     }
     else {
-      if (!this.production)
+      if (!environment.production)
         console.log("Getting all saved carts");
       this.cartService.getAllSavedCarts();
     }

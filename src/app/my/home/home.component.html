@@ -1,67 +1,98 @@
+<app-inline-box-nav *ngIf="(settingService.settings && !settingService.settings.colorBlock)" [data]="settingService.settings" [isHome]="false"></app-inline-box-nav>
+<app-static-top-nav *ngIf="settingService.settings && settingService.settings.colorBlock" [data]="settingService.settings" [isHome]="false"></app-static-top-nav>
+<div *ngIf="!settingService.settings">
+    <nav class="navbar navbar-expand-lg" style="background-color: white;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="https://www.taliferro.com" style="color: #191919;">
+            <img src="https://www.taliferro.com/assets/images/taliferro-group-logo.png" alt="" width="48" height="48" class="d-inline-block align-text-top"> Taliferro Group </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" style="color:#737373" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#737373" href="https://www.taliferro.com/#products">Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#737373" href="https://www.taliferro.com/#services">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#737373" href="https://www.taliferro.com/#about">About</a>
+              </li>
+            </ul>
+            <span class="navbar-text" style="color: #191919;"> 425.305.3748 </span>
+          </div>
+        </div>
+      </nav>
+      
+</div>
 <div class="container mt-2">
     <div class="row">
         <div class="col wow fadeInDown"><span routerLink="/" style="cursor: pointer;"><i
                     class="fa fa-chevron-left  fa-2x text-muted"></i></span> </div>
         <div class="col-md text-center mb-3">
-            <h1 [ngStyle]="{'color': colorService.darkBackground}">Welcome {{userService?.user?.display_name}}</h1>
+            <h1 [ngStyle]="{'color': colorService.darkBackground}">Welcome {{userService.user?.displayName}}</h1>
         </div>
         <div class="col"></div>
     </div>
     <div class="row mb-3">
         <div class="col-md wow fadeInDown">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header" *ngIf="userService.authService.firebaseUser && (userService.authService.firebaseUser.photoURL || userService.user?.firstName)">
                     <img *ngIf="userService.authService.firebaseUser && userService.authService.firebaseUser.photoURL"
                         src="{{userService.authService.firebaseUser.photoURL}}" alt="" class="img-thumbnail"
-                        style="max-height: 32px;"> {{userService?.user?.first_name}}
-                    {{userService?.user?.last_name}}<br>
+                        style="max-height: 32px;"> {{userService.user?.firstName}}
+                    {{userService?.user?.lastName}}<br>
                 </div>
                 <div class="card-body">
-                    <div *ngIf="userService.user && userService.user.user_type && (userService.user.user_type === 'practitioner')"
+                    <div *ngIf="userService.user && userService.user.email">{{userService.user.email}} </div>
+                    <div *ngIf="userService.user && userService.user.temp && userService.user.temp.userType && (userService.user.temp.userType === 'practitioner')"
                         class="alert alert-primary">
-                        <h4 class="alert-heading" *ngIf="userService.user.practitioner_name">
-                            {{userService?.user?.practitioner_name}}</h4>
-                        <div class="text-capitalize" *ngIf="userService.user && userService.user.user_type">
-                            {{userService.user.user_type}} <span *ngIf="userService.user && userService.user.customer_id">{{userService?.user?.customer_id}}
+                        <h4 class="alert-heading" *ngIf="userService.user.temp && userService.user.temp.practitionerName">
+                            {{userService?.user?.temp.practitionerName}}</h4>
+                        <div class="text-capitalize" *ngIf="userService.user && userService.user.temp && userService.user.temp.userType">
+                            {{userService.user.temp.userType}} <span *ngIf="userService.user && userService.user.temp.customerId">{{userService.user.temp.customerId}}
                             </span>
                             <hr>
                         </div>
                         
                         <div>
                             <span
-                                *ngIf="userService.user && userService.user.prac_first_name">{{userService?.user?.prac_first_name}} </span>
+                                *ngIf="userService.user && userService.user.temp && userService.user.temp.pracFirstName">{{userService.user.temp?.pracFirstName}} </span>
                             <span
-                                *ngIf="userService.user && userService.user.prac_last_name">{{userService?.user?.prac_last_name}}</span>
+                                *ngIf="userService.user && userService.user.temp && userService.user.temp.pracLastName">{{userService.user.temp?.pracLastName}}</span>
                         </div>
-                        <div *ngIf="userService.user && userService.user.npi">{{userService?.user?.npi}}</div>
+                        <div *ngIf="userService.user && userService.user.temp.npi">{{userService.user.temp?.npi}}</div>
                     </div>
-                    <div class="fw-bold" *ngIf="userService.user && userService.user.company_name">
-                        {{userService?.user?.company_name}}</div>
-                    <div *ngIf="userService.user && userService.user.email">{{userService?.user?.email}} </div>
-                    <div *ngIf="userService.user && userService.user.phone_number">{{userService?.user?.phone_number}}
+                    <div class="fw-bold" *ngIf="userService.user && userService.user.temp && userService.user.temp.companyName">
+                        {{userService?.user?.temp.companyName}}</div>
+                    <div *ngIf="userService.user && userService.user.temp && userService.user.temp.phoneNumber">{{userService.user.temp.phoneNumber}}
                     </div>
                     <div *ngIf="userService.user && userService.user.roles"> <hr> <span class="text-capitalize text-info" style="font-size: x-small;"> {{userService?.user?.roles}} </span> </div>
                 </div>
             </div>
         </div>
         <div class="col-md wow fadeInDown"
-            *ngIf="userService.user && (userService.user.country || userService.user.address1 || userService.user.address2 || userService.user.city || userService?.user?.province || userService?.user?.zip)">
+            *ngIf="userService.user && userService.user.temp && (userService.user.temp.country || userService.user.temp.streetAddress1 || userService.user.temp.streetAddress2 || userService.user.temp.city || userService?.user?.temp.province || userService?.user?.temp.zip)">
             <div class="card">
                 <div class="card-header">
-                    <div *ngIf="userService.user && userService.user.country">{{userService?.user?.country}}</div>
+                    <div *ngIf="userService.user && userService.user.temp.country">{{userService.user.temp.country}}</div>
                 </div>
                 <div class="card-body">
-                    <div *ngIf="userService.user && userService.user.address1">{{userService?.user?.address1}} <span
-                            *ngIf="userService.user && userService.user.address2">{{userService?.user?.address2}}</span>
+                    <div *ngIf="userService.user && userService.user.temp.streetAddress1">{{userService.user.temp.streetAddress1}} <span
+                            *ngIf="userService.user && userService.user.temp.streetAddress2">{{userService.user.temp.streetAddress2}}</span>
                     </div>
-                    <div *ngIf="userService.user && userService.user.city">{{userService?.user?.city}}
-                        {{userService?.user?.province}} {{userService?.user?.zip}}</div>
+                    <div *ngIf="userService.user && userService.user.temp.city">{{userService.user.temp.city}}
+                        {{userService?.user?.temp.province}} {{userService.user.temp.zip}}</div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row"
-        *ngIf="!(userService.user && userService.user.user_type) && practiceAlert && (settingService.settings && settingService.settings.site_type === 'practitioner')">
+        *ngIf="!(userService.user && userService.user.temp && userService.user.temp.userType) && practiceAlert && (settingService.settings && settingService.settings.siteType === 'practitioner')">
         <div class="col">
             <div class="alert alert-warning" role="alert"> Are you a practitioner? If so, click
                 <strong>Profile</strong>, and "Are you a practice?" and enter your practice information. </div>
@@ -73,7 +104,7 @@
         </div>
     </div>
     <div class="row"
-        *ngIf="userService.user && userService.user.user_type && (userService.user.user_type === 'practitioner')">
+        *ngIf="userService.user && userService.user.temp && userService.user.temp.userType && (userService.user.temp.userType === 'practitioner')">
         <div class="col">
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between align-items-center wow slideInLeft">
@@ -91,7 +122,7 @@
                             class="fa fa-chevron-right fa-1x"></i></a>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center wow slideInLeft"
-                    *ngIf="userService.user  && userService.user.user_type && (userService.user.user_type === 'practitioner')">
+                    *ngIf="userService.user  && userService.user.temp.userType && (userService.user.temp.userType === 'practitioner')">
                     <a class="text-dark p-2" routerLink="/carts/pending"><i class="fa fa-money" aria-hidden="true"></i>
                         Pending Orders</a>
                     <a class="text-secondary text-opacity-25" style="cursor: pointer;" routerLink="/carts/pending"><i
@@ -107,7 +138,7 @@
         </div>
     </div>
     <div class="row"
-        *ngIf="!(userService.user &&  userService.user.user_type && (userService.user.user_type === 'practitioner'))">
+        *ngIf="!(userService.user && userService.user.temp &&  userService.user.temp.userType && (userService.user.temp.userType === 'practitioner'))">
         <div class="col">
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between align-items-center wow slideInLeft">

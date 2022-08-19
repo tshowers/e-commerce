@@ -37,10 +37,10 @@ export class HomeComponent implements OnInit {
   public isAdmin: boolean = false;
 
   public colStyle = 'none';
-  public production: boolean;
+  
 
   constructor(private _location: Location, public userService: UserService) {
-    this.production = environment.production;
+    
   }
 
   ngOnInit(): void {
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
   }
 
   onEdit(event: any): void {
-    if (!this.production)
+    if (!environment.production)
       console.log("onEdit", event);
 
 

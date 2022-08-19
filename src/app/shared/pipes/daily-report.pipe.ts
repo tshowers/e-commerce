@@ -12,7 +12,7 @@ export class DailyReportPipe implements PipeTransform {
     }
     const resultArray = [];
     for (const item of value) {
-      let a = (item && item.created_at) ? String(item.created_at) : '';
+      let a = (item && item.createdAt) ? String(item.createdAt) : '';
       let b = (item && item.url) ? String(item.url) : '';
 
       if (

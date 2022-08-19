@@ -1,6 +1,7 @@
 export interface Product {
   title?: string;
   quantity?: number;
+  companyId?: string;
   discontinued?: boolean;
   active?: boolean;
   images?: any;
@@ -12,34 +13,34 @@ export interface Product {
   manufacturer?: string;
   author?: string;
   category?: string;
-  lead_time?: number;
-  product_type?: string;
-  on_sale?: boolean;
-  sale_price?: number;
+  leadTime?: number;
+  productType?: string;
+  onSale?: boolean;
+  salePrice?: number;
   price?: number;
   calculatedPrice?: number;
-  re_order_level?: number;
+  reOrderLevel?: number;
   sku?: string;
   weight?: number;
   height?: number;
   width?: number;
   length?: number;
-  units_on_order?: number;
-  units_in_stock?: number;
-  updated_at?: number;
-  updated_by?: string;
-  created_by?: string;
-  created_at?: number;
-  browser_ip?: string;
+  unitsOnOrder?: number;
+  unitsInStock?: number;
+  lastUpdated?: number;
+  updatedBy?: string;
+  createdBy?: string;
+  createdAt?: number;
+  browserIp?: string;
   keywords?: string;
   subType?: Array<any>;
   subCategory?: Array<any>;
   dependency?: {
-    price_dependent: boolean,
-    dependency_code: string,
+    priceDependent: boolean,
+    dependencyCode: string,
     price: number,
-    sale_price: number,
-    on_sale: boolean
+    salePrice: number,
+    onSale: boolean
   }
 
   uid?: string;

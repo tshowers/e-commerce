@@ -13,7 +13,7 @@ export class NoteSearchPipe implements PipeTransform {
     const resultArray = [];
     for (const item of value) {
       let a = (item && item.text) ? item.text : '';
-      let b = (item && item.updated_by) ? item.updated_by : '';
+      let b = (item && item.updatedBy) ? item.updatedBy : '';
 
       if ((a.toLowerCase().indexOf(filterName.toLowerCase()) > -1)
         || (b.toLowerCase().indexOf(filterName.toLowerCase()) > -1)

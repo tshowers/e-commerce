@@ -1,25 +1,25 @@
-<section id="about---5" class="section about-5 pb-5" [ngClass]="{'color-block': (userService.company && userService.company.color_block)}" *ngIf="data && data.about_product3">
+<section id="about---5" class="section about-5 pb-5" [ngClass]="{'color-block': (settingService.settings && settingService.settings.colorBlock)}" *ngIf="data && data.aboutProduct3">
   <div class="container">
-    <h2 class="section__title mb-2  wow fadeInUp text-capitalize" [ngStyle]="{'color': colorService.secondaryColor}">{{data.about_product3.headerText}} <span
-        class="badge badge-primary">{{data.about_product3.badgeText}}</span></h2>
+    <h2 class="section__title mb-2  wow fadeInUp text-capitalize" [ngStyle]="{'color': colorService.secondaryColor}">{{data.aboutProduct3.headerText}} <span
+        class="badge badge-primary">{{data.aboutProduct3.badgeText}}</span></h2>
     <div class="row">
-      <div class="col" [ngClass]="{'home2': !(userService.company && userService.company.color_block)}">
+      <div class="col" [ngClass]="{'home2': !(settingService.settings && settingService.settings.colorBlock)}">
         <div class="container">
           <div class="row">
             <div class="col-md-6 col-sm-5 col-xs-12 about-text">
-              <div class="mb-3 text-muted" innerHTML="{{data.about_product3?.descriptionText}}"></div>
+              <div class="mb-3 text-muted" innerHTML="{{data.aboutProduct3?.descriptionText}}"></div>
               <ul>
-                <li><i class="fa fa-check" aria-hidden="true"></i> {{data.about_product3?.bulletText1}}</li>
-                <li><i class="fa fa-check" aria-hidden="true"></i> {{data.about_product3?.bulletText2}}</li>
-                <li><i class="fa fa-check" aria-hidden="true"></i> {{data.about_product3?.bulletText3}}</li>
+                <li><i class="fa fa-check" aria-hidden="true"></i> {{data.aboutProduct3?.bulletText1}}</li>
+                <li><i class="fa fa-check" aria-hidden="true"></i> {{data.aboutProduct3?.bulletText2}}</li>
+                <li><i class="fa fa-check" aria-hidden="true"></i> {{data.aboutProduct3?.bulletText3}}</li>
               </ul>
             </div>
             <div class="col-md-6 col-sm-7 col-xs-12">
               <div class="about-image-block">
                 <div class="about-image">
-                  <img src="{{data.about_product3.imageURL1[0].url}}" alt="{{data.about_product3?.headerText}}">
+                  <img src="{{data.aboutProduct3.imageURL1[0].url}}" alt="{{data.aboutProduct3?.headerText}}">
                   <div class="ui">
-                    <img src="{{data.about_product3.imageURL2[0].url}}" alt="{{data.about_product3?.headerText}}">
+                    <img src="{{data.aboutProduct3.imageURL2[0].url}}" alt="{{data.aboutProduct3?.headerText}}">
                   </div>
                 </div>
               </div>

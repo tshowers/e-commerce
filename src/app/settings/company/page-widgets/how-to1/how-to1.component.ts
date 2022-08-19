@@ -18,8 +18,8 @@ export class HowTo1Component extends DataHandlerComponent implements OnInit {
 
   ngOnInit(): void {
     super.ngOnInit();
-    if (!this.data.how_to) {
-      this.data.how_to = {
+    if (!this.data.howTo) {
+      this.data.howTo = {
         headerText: '',
         descriptionText : '',      
         header1 : '',

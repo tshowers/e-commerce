@@ -39,7 +39,7 @@ export class ProductViewComponent implements OnInit {
   }
 
   onProductType(): void {
-    this.editItem.emit('product_type');
+    this.editItem.emit('productType');
   }
 
   onProductSubType(): void {

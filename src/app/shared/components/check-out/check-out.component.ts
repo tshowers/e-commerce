@@ -11,68 +11,135 @@ import { ColorsService } from '../../services/colors.service';
 import { Subscription } from 'rxjs';
 import { CheckoutService } from '../../services/checkout.service';
 import { UserService } from '../../services/user.service';
+import { ProductService } from '../../services/product.service';
+import { Contact } from '../../data/contact.model';
+import { Address } from '../../data/address.model';
+import { ShoppingCart } from '../../data/shopping-cart.model';
+import { Phone } from '../../data/phone.model';
+import { EmailAddress } from '../../data/email-address.model';
+import { PaymentDetails } from '../../data/payment-details.model';
 
 @Component({
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
   styleUrls: ['./check-out.component.css']
 })
-export class CheckOutComponent extends DataHandlerComponent implements OnInit {
+export class CheckOutComponent extends DataHandlerComponent implements OnInit, OnDestroy {
 
   data: any;
   @Input() companyData: any;
   public diagnostic: boolean = false;
-  public check_out: any = {
-    user_type: 'customer',
-    billing_shipping: true,
-    prac_pay: 'customer',
-    delivery_time: 'No',
-    terms_of_service: false,
-    billing_country: '',
-    billing_province: ''
+  public contact: Contact = {
+    userType: 'customer',
+    addresses: [],
+    phones: [],
+    emails: [],
+    paymentDetails: [],
   };
+  public address: Address = {
+    streetAddress1: '',
+    city: '',
+    province: '',
+    zipCode: '',
+    addressType: 'Home'
+  }
+
+  public shippingAddress: Address = {
+    firstName: '',
+    lastName: '',
+    streetAddress1: '',
+    city: '',
+    province: '',
+    zipCode: '',
+    addressType: 'Shipping'
+  }
+
+  public phone: Phone = {
+    countryCode: '',
+    phoneNumber: '',
+    phoneType: 'Home'
+  }
+
+  public emailAddress: EmailAddress = {
+    emailAddress: '',
+    emailAddressType: 'Personal'
+  }
+
+  public paymentDetails: PaymentDetails = {
+
+  }
+
   public errorMessage: any;
-  public production: boolean;
+
   private _errorSubscription?: Subscription;
 
-  constructor(private _router: Router, protected _dataService: DataService, public cartService: CartService, public colorService: ColorsService, private _checkoutService: CheckoutService, public userService: UserService) {
+  constructor(public productService: ProductService, public authService: AuthService, private _router: Router, protected _dataService: DataService, public cartService: CartService, public colorService: ColorsService, private _checkoutService: CheckoutService, public userService: UserService) {
     super(_dataService);
-    this.production = environment.production;
   }
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.initData();
     this.setAutoFill();
     this._errorSubscription = this._checkoutService.errorMessage.subscribe((message) => {
       this.errorMessage = message;
     });
   }
 
+  ngOnDestroy(): void {
+
+  }
+
+  initData(): void {
+    try {
+      this.contact.addresses?.push(this.address);
+      this.contact.addresses?.push(this.shippingAddress);
+      this.contact.emails?.push(this.emailAddress);
+      this.contact.paymentDetails?.push(this.paymentDetails);
+      this.contact.phones?.push(this.phone);
+      this.cartService.cart.contact = this.contact;
+      if (this.companyData) {
+        this.contact.companyId = this.companyData._id;
+        this.cartService.cart.companyId = this.companyData._id;
+      }
+    } catch (error) {
+      console.error("Could not properly initialize", error);
+    }
+
+  }
+
   onSubmit(): void {
-    this._checkoutService.processOrder(this.check_out);
+    this.cartService.cart.contact = this.contact;
+    this._checkoutService.processOrder();
   }
 
   showContent(): void {
-    let cc_number = document.getElementById("cc_number")
-    let type = cc_number?.getAttribute('type') === 'password' ? 'text' : 'password';
-    cc_number?.setAttribute('type', type);
+    let ccNumber = document.getElementById("ccNumber")
+    let type = ccNumber?.getAttribute('type') === 'password' ? 'text' : 'password';
+    ccNumber?.setAttribute('type', type);
   }
 
 
   setAutoFill(): void {
-    setTimeout(() => {
-      this.cartService.initCheckOutBasedOnUser(this.check_out, false);
-    }, 1000);
+    if (this.authService.firebaseUser && this.authService.firebaseUser.email) {
+      this._dataService.getAllByEmail(environment.CONTACTS, this.authService.firebaseUser.email);
+      this._dataService.items?.subscribe((contacts) => {
+        if (contacts[0] && contacts[0]._id && contacts[0].emails[0] && contacts[0].emails[0].emailAddress) {
+          this.contact = contacts[0];
+        }
+      })
+    }
   }
 
   // Used by other components
-  public refresh(): void {
-    this.cartService.refreshScreen(this.check_out);
-  }
+  // public refresh(): void {
+  //   this.cartService.refreshScreenContact(this.contact);
 
-  public refreshWithOutCardInfo(): void {
-    this.cartService.refreshScreen(this.check_out, true);
-  }
+  // }
+
+  // public refreshWithOutCardInfo(): void {
+  //   this.cartService.refreshScreen(this.check_out, true);
+  // }
 
   setDiagnostic(): void {
     this.diagnostic = !this.diagnostic;

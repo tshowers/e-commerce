@@ -8,6 +8,7 @@ export class ColorsService {
   public darkBackground =  "#000000";
   public secondaryColor = "#6e757c";
   public color = "#000000";
+  public backgroundColor = "#ffffff";
 
   constructor() { }
 

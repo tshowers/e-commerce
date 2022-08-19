@@ -40,7 +40,7 @@ export class KitNumberEditComponent extends DataHandlerComponent implements OnIn
   private async checkIfAlreadyRegistered() {
     let labOrder = await this.getLabOrderByKitNumber();
 
-    if (!this.production)
+    if (!environment.production)
       console.log("LabOrderCheck", labOrder);
 
     if (labOrder != null) {
@@ -53,7 +53,7 @@ export class KitNumberEditComponent extends DataHandlerComponent implements OnIn
 
   private async getLabOrderByKitNumber() {
     return new Promise((resolve, reject) => {
-      this._labOrderService.getAllByKitNumber(this.data.kit_number);
+      this._labOrderService.getAllByKitNumber(this.data.kitNumber);
       this._dataSubscription = this._labOrderService.items?.subscribe((items) => {
         if (items && items.length && (items.length > 0))
           resolve(items[0])

@@ -19,7 +19,6 @@ export class AuthService {
 
   public errorMessage: any;
 
-  public production: boolean = false;
 
   public emailSent: boolean = false;
 
@@ -36,7 +35,6 @@ export class AuthService {
 
 
   constructor(private _afAuth: AngularFireAuth, private _afs: AngularFirestore) {
-    this.production = environment.production;
     this.checkFirebase();
   }
 
@@ -44,7 +42,7 @@ export class AuthService {
     firebase.auth().sendSignInLinkToEmail(emailAddress, this._savedCartCodeSettings)
       .then(() => {
         window.localStorage.setItem('emailForSignIn', emailAddress);
-        if (!this.production)
+        if (!environment.production)
           console.info("Email Sent", emailAddress, new Date().toLocaleTimeString());
         else
           console.info("Email Sent", new Date().toLocaleTimeString())
@@ -127,7 +125,7 @@ export class AuthService {
       firebase.auth().sendSignInLinkToEmail(emailAddress, this._actionCodeSettings)
         .then((result) => {
           window.localStorage.setItem('emailForSignIn', emailAddress);
-          if (!this.production)
+          if (!environment.production)
             console.info("Email Sent", emailAddress, new Date().toLocaleTimeString());
           else
             console.info("Email Sent", new Date().toLocaleTimeString());
@@ -207,7 +205,7 @@ export class AuthService {
         this.firebaseUser = firebaseUser!;
         this.loggedInUser.next(this.firebaseUser);
 
-        if (!this.production)
+        if (!environment.production)
           console.log("Auth State Change", firebaseUser);
 
       });

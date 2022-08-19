@@ -121,7 +121,7 @@ export class LogoComponent implements OnInit, OnDestroy {
           this.data.logos.push({
             'name': event.target.files[0].name,
             'url': downloadURL,
-            'uploaded_at': new Date().getTime()
+            'uploadedAt': new Date().getTime()
           });
         })
       ).subscribe();

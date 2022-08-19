@@ -8,7 +8,9 @@
             <h1 [ngStyle]="{'color': colorService.darkBackground}">Products</h1>
         </div>
         <div class="col-md text-end">
-            <a (click)="onNew()" class="text-primary" style="cursor: pointer;">Create</a>
+            <button type="button" class="btn btn-success" (click)="onDashboard()">Administration</button>
+            <button type="button" class="btn btn-primary" (click)="onNew()">Create</button>
+            <button type="button" class="btn btn-danger" (click)="onSignOut()">Sign Out</button>
         </div>
     </div>
     <div class="row" *ngIf="!isEditMode">
@@ -36,7 +38,7 @@
             <app-product-edit-quantity [data]="data" *ngIf="isProductQuantity" (done)="editReset()"></app-product-edit-quantity>
             <app-product-edit-sku [data]="data" *ngIf="isProductSku" (done)="editReset()"></app-product-edit-sku>
             <app-product-edit-stock [data]="data" *ngIf="isProductStock" (done)="editReset()"></app-product-edit-stock>
-            <pre *ngIf="isDiagnostic" class="text-light bg-dark p-4">{{data | json}}</pre>
+            <pre *ngIf="isDiagnostic" >{{data | json}}</pre>
         </div>
     </div>
 </div>

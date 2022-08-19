@@ -51,6 +51,8 @@ import { SubCategoryEditComponent } from './company/dropdown/sub-category/sub-ca
 import { SubCategoryListComponent } from './company/dropdown/sub-category/sub-category-list/sub-category-list.component';
 import { ProductDependencyEditComponent } from './company/dropdown/product-dependency/product-dependency-edit/product-dependency-edit.component';
 import { ProductDependencyListComponent } from './company/dropdown/product-dependency/product-dependency-list/product-dependency-list.component';
+import { FirstSignInComponent } from './admin-start/first-sign-in/first-sign-in.component';
+import { CreateAccountComponent } from './admin-start/create-account/create-account.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +104,8 @@ import { ProductDependencyListComponent } from './company/dropdown/product-depen
     SubCategoryListComponent,
     ProductDependencyEditComponent,
     ProductDependencyListComponent,
+    FirstSignInComponent,
+    CreateAccountComponent,
   ],
   imports: [
     CommonModule,

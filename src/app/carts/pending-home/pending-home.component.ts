@@ -33,7 +33,7 @@ export class PendingHomeComponent implements OnInit {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 
-    if (!this.production)
+    if (!environment.production)
       console.log("Pending Cart", this.data);
   }
 

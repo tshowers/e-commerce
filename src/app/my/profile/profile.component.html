@@ -1,4 +1,35 @@
-<div class="container mt-2">
+<app-inline-box-nav *ngIf="(settingService.settings && !settingService.settings.colorBlock)" [data]="settingService.settings" [isHome]="false"></app-inline-box-nav>
+<app-static-top-nav *ngIf="settingService.settings && settingService.settings.colorBlock" [data]="settingService.settings" [isHome]="false"></app-static-top-nav>
+<div *ngIf="!settingService.settings">
+      <nav class="navbar navbar-expand-lg" style="background-color: white;">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="https://www.taliferro.com" style="color: #191919;">
+              <img src="https://www.taliferro.com/assets/images/taliferro-group-logo.png" alt="" width="48" height="48" class="d-inline-block align-text-top"> Taliferro Group </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" style="color:#737373" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" style="color:#737373" href="https://www.taliferro.com/#products">Products</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" style="color:#737373" href="https://www.taliferro.com/#services">Services</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" style="color:#737373" href="https://www.taliferro.com/#about">About</a>
+                </li>
+              </ul>
+              <span class="navbar-text" style="color: #191919;"> 425.305.3748 </span>
+            </div>
+          </div>
+        </nav>
+        
+  </div>
+  <div class="container mt-2">
       <div class="row">
             <div class="col"><span (click)="back()"
                         style="cursor: pointer;"><i class="fa fa-chevron-left fa-2x text-muted"></i></span> </div>
@@ -20,12 +51,12 @@
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
                                     style="cursor: pointer;"
                                     (click)="onName()"
-                                    *ngIf="(user && !user.first_name)">No First Name</span>
+                                    *ngIf="(user && !user.firstName)">No First Name</span>
                               <span class="p-2"
                                     style="cursor: pointer;"
                                     (click)="onName()"
-                                    *ngIf="user && user.first_name"><strong>First Name:</strong>
-                                    {{user.first_name}}</span>
+                                    *ngIf="user && user.firstName"><strong>First Name:</strong>
+                                    {{user.firstName}}</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onName()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -34,91 +65,14 @@
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
                                     style="cursor: pointer;"
                                     (click)="onName()"
-                                    *ngIf="user && !user.last_name">No First Name</span>
+                                    *ngIf="user && !user.lastName">No First Name</span>
                               <span class="p-2"
                                     style="cursor: pointer;"
                                     (click)="onName()"
-                                    *ngIf="user && user.last_name"><strong>Last Name:</strong> {{user.last_name}}</span>
+                                    *ngIf="user && user.lastName"><strong>Last Name:</strong> {{user.lastName}}</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onName()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                  </ul>
-                  <ul class="list-group mb-3">
-                        <li *ngIf="user && !(user.user_type == 'practitioner')"
-                            class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    style="cursor: pointer;"
-                                    (click)="onUserType()"
-                                    *ngIf="user && !user.user_type">Are you a practitioner?</span>
-                              <span class="p-2 text-capitalize"
-                                    style="cursor: pointer;"
-                                    (click)="onUserType()"
-                                    *ngIf="user && user.user_type">
-                                    {{user.user_type}}</span>
-                              <a class="text-secondary text-opacity-25"
-                                 style="cursor: pointer;"
-                                 (click)="onUserType()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-
-                        <li *ngIf="user && !(user.user_type == 'practitioner')"
-                            class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    style="cursor: pointer;"
-                                    (click)="onCompanyName()"
-                                    *ngIf="user && !user.company_name">No Company Name</span>
-                              <span class="p-2"
-                                    style="cursor: pointer;"
-                                    (click)="onCompanyName()"
-                                    *ngIf="user && user.company_name"><strong>Company Name:</strong>
-                                    {{user.company_name}}</span>
-                              <a class="text-secondary text-opacity-25"
-                                 style="cursor: pointer;"
-                                 (click)="onCompanyName()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li *ngIf="(settingService.settings.site_type === 'practitioner') && user && (user.user_type === 'practitioner')"
-                            class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    style="cursor: pointer;"
-                                    (click)="onPracName()"
-                                    *ngIf="user && !user.practitioner_name">Practitioner Name</span>
-                              <span class="p-2"
-                                    style="cursor: pointer;"
-                                    (click)="onPracName()"
-                                    *ngIf="user && user.practitioner_name"><strong>Practitioner Name:</strong>
-                                    {{user.practitioner_name}}</span>
-                              <a class="text-secondary text-opacity-25"
-                                 style="cursor: pointer;"
-                                 (click)="onPracName()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li *ngIf="settingService.settings.site_type === 'practitioner' && user && (user.user_type === 'practitioner')"
-                            class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    style="cursor: pointer;"
-                                    (click)="onPracName()"
-                                    *ngIf="user && !(user.user_type == 'practitioner')">Practitioner NPI</span>
-                              <span class="p-2"
-                                    style="cursor: pointer;"
-                                    (click)="onPracName()"
-                                    *ngIf="user && (user.user_type == 'practitioner')"><strong>Practitioner NPI:</strong> {{user.npi}}</span>
-                              <a class="text-secondary text-opacity-25"
-                                 style="cursor: pointer;"
-                                 (click)="onPracName()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li *ngIf="settingService.settings.site_type === 'practitioner' && user && (user.user_type === 'practitioner')"
-                            class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    style="cursor: pointer;"
-                                    (click)="onPracName()"
-                                    *ngIf="user && !user.customer_id">Practitioner Number</span>
-                              <span class="p-2"
-                                    style="cursor: pointer;"
-                                    (click)="onPracName()"
-                                    *ngIf="user && user.customer_id"><strong>Practitioner Number:</strong>
-                                    {{user.customer_id}}</span>
-                              <a class="text-secondary text-opacity-25"
-                                 style="cursor: pointer;"
-                                 (click)="onPracName()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                   </ul>
                   <ul class="list-group mb-3">
@@ -141,12 +95,12 @@
                               <span class="p-2"
                                     style="cursor: pointer;"
                                     (click)="onPhone()"
-                                    *ngIf="user && user.phone_number"><strong>Phone:</strong>
-                                    {{user.phone_number}}</span>
+                                    *ngIf="user && user.phoneNumber"><strong>Phone:</strong>
+                                    {{user.phoneNumber}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
                                     style="cursor: pointer;"
                                     (click)="onPhone()"
-                                    *ngIf="user && !user.phone_number"> No phone number found</span>
+                                    *ngIf="user && !user.phoneNumber"> No phone number found</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onPhone()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -157,33 +111,20 @@
                               <span class="p-2"
                                     style="cursor: pointer;"
                                     (click)="onAddress()"
-                                    *ngIf="user && user.address1"><strong>Address 1:</strong> {{user.address1}}</span>
+                                    *ngIf="user && user.temp && user.temp.streetAddress1"><strong>Address 1:</strong> {{user.temp.streetAddress1}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
                                     style="cursor: pointer;"
                                     (click)="onAddress()"
-                                    *ngIf="user && !user.address1">No address 1 found</span>
+                                    *ngIf="user && user.temp && !user.temp.streetAddress1">No address 1 found</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
                               <span class="p-2"
-                                    *ngIf="user && user.address2"><strong>Address 2:</strong> {{user.address2}}</span>
+                                    *ngIf="user && user.temp && user.temp.streetAddress2"><strong>Address 2:</strong> {{user.temp.streetAddress2}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    *ngIf="user && !user.address2">No address 2 found</span>
-                              <a class="text-secondary text-opacity-25"
-                                 style="cursor: pointer;"
-                                 (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2"
-                                    style="cursor: pointer;"
-                                    (click)="onAddress()"
-                                    *ngIf="user && user.city"><strong>City:</strong> {{user.city}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    style="cursor: pointer;"
-                                    (click)="onAddress()"
-                                    *ngIf="user && !user.city">No city found</span>
+                                    *ngIf="user && user.temp && !user.temp.streetAddress2">No address 2 found</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -192,24 +133,11 @@
                               <span class="p-2"
                                     style="cursor: pointer;"
                                     (click)="onAddress()"
-                                    *ngIf="user && user.province"><strong>Province:</strong> {{user.province}}</span>
+                                    *ngIf="user && user.temp && user.temp.city"><strong>City:</strong> {{user.temp.city}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
                                     style="cursor: pointer;"
                                     (click)="onAddress()"
-                                    *ngIf="user && !user.province">No province found</span>
-                              <a class="text-secondary text-opacity-25"
-                                 style="cursor: pointer;"
-                                 (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
-                              <span class="p-2"
-                                    *ngIf="user && user.zip"
-                                    style="cursor: pointer;"
-                                    (click)="onAddress()"><strong>Zip Code:</strong> {{user.zip}}</span>
-                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
-                                    style="cursor: pointer;"
-                                    (click)="onAddress()"
-                                    *ngIf="user && !user.zip">No zip code found</span>
+                                    *ngIf="user && user.temp && !user.temp.city">No city found</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -218,11 +146,37 @@
                               <span class="p-2"
                                     style="cursor: pointer;"
                                     (click)="onAddress()"
-                                    *ngIf="user && user.country"><strong>Country:</strong> {{user.country}}</span>
+                                    *ngIf="user && user.temp && user.temp.province"><strong>Province:</strong> {{user.temp.province}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
                                     style="cursor: pointer;"
                                     (click)="onAddress()"
-                                    *ngIf="user && !user.country">No country found</span>
+                                    *ngIf="user && user.temp && !user.temp.province">No province found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    *ngIf="user && user.temp && user.temp.zip"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"><strong>Zip Code:</strong> {{user.temp.zip}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"
+                                    *ngIf="user && user.temp && !user.temp.zip">No zip code found</span>
+                              <a class="text-secondary text-opacity-25"
+                                 style="cursor: pointer;"
+                                 (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center wow fadeIn">
+                              <span class="p-2"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"
+                                    *ngIf="user && user.temp && user.temp.country"><strong>Country:</strong> {{user.temp.country}}</span>
+                              <span class="p-2 text-secondary text-opacity-25 fst-italic"
+                                    style="cursor: pointer;"
+                                    (click)="onAddress()"
+                                    *ngIf="user && user.temp && !user.temp.country">No country found</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onAddress()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -233,11 +187,11 @@
                               <span class="p-2"
                                     style="cursor: pointer;"
                                     (click)="onDob()"
-                                    *ngIf="user && user.dob"><strong>Date of Birth:</strong> {{user.dob}}</span>
+                                    *ngIf="user && user.temp && user.temp.dob"><strong>Date of Birth:</strong> {{user.temp.dob}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
                                     style="cursor: pointer;"
                                     (click)="onDob()"
-                                    *ngIf="user && !user.dob">No date of birth found</span>
+                                    *ngIf="user && user.temp && !user.temp.dob">No date of birth found</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onDob()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -246,11 +200,11 @@
                               <span class="p-2"
                                     style="cursor: pointer;"
                                     (click)="onGender()"
-                                    *ngIf="user && user.gender"><strong>Gender at Birth:</strong> {{user.gender}}</span>
+                                    *ngIf="user && user.temp && user.temp.gender"><strong>Gender at Birth:</strong> {{user.temp.gender}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
                                     style="cursor: pointer;"
                                     (click)="onGender()"
-                                    *ngIf="user && !user.gender">No gender found</span>
+                                    *ngIf="user && user.temp && !user.temp.gender">No gender found</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onGender()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -261,12 +215,12 @@
                               <span class="p-2"
                                     style="cursor: pointer;"
                                     (click)="onPaymentInfo()"
-                                    *ngIf="user && user.cc_name_on_card"><strong>Name on Card:</strong>
-                                    {{user.cc_name_on_card}}</span>
+                                    *ngIf="user && user.temp && user.temp.ccNameOnCard"><strong>Name on Card:</strong>
+                                    {{user.temp.ccNameOnCard}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
                                     style="cursor: pointer;"
                                     (click)="onPaymentInfo()"
-                                    *ngIf="user && !user.cc_name_on_card">No name on card found</span>
+                                    *ngIf="user && user.temp && !user.temp.ccNameOnCard">No name on card found</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onPaymentInfo()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -275,12 +229,12 @@
                               <span class="p-2"
                                     style="cursor: pointer;"
                                     (click)="onPaymentInfo()"
-                                    *ngIf="user && user.cc_number"><strong>CC Number:</strong>
-                                    ************{{user.cc_number | slice:-4}}</span>
+                                    *ngIf="user && user.temp && user.temp.ccNumber"><strong>CC Number:</strong>
+                                    ************{{user.temp.ccNumber | slice:-4}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
                                     style="cursor: pointer;"
                                     (click)="onPaymentInfo()"
-                                    *ngIf="user && !user.cc_number">No credit card number found</span>
+                                    *ngIf="user && user.temp && !user.temp.ccNumber">No credit card number found</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onPaymentInfo()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -289,12 +243,12 @@
                               <span class="p-2"
                                     style="cursor: pointer;"
                                     (click)="onPaymentInfo()"
-                                    *ngIf="user && user.cc_exp_date"><strong>CC Expiration:</strong>
-                                    {{user.cc_exp_date}}</span>
+                                    *ngIf="user && user.temp && user.temp.ccExpDate"><strong>CC Expiration:</strong>
+                                    {{user.temp.ccExpDate}}</span>
                               <span class="p-2 text-secondary text-opacity-25 fst-italic"
                                     style="cursor: pointer;"
                                     (click)="onPaymentInfo()"
-                                    *ngIf="user && !user.cc_exp_date">No expiration found</span>
+                                    *ngIf="user && user.temp && !user.temp.ccExpDate">No expiration found</span>
                               <a class="text-secondary text-opacity-25"
                                  style="cursor: pointer;"
                                  (click)="onPaymentInfo()"><i class="fa fa-chevron-right fa-1x"></i></a>
@@ -341,7 +295,9 @@
                   [data]="user"
                   (done)="editReset()"></app-my-company>              
                   <pre *ngIf="diagnostic"
-                       class="text-light bg-dark p-4">{{user | json}}</pre>
+                       >{{user | json}}
+                  
+                  </pre>
             </div>
       </div>
 </div>
