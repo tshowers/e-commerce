@@ -21,28 +21,13 @@ export class OrdersComponent implements OnInit {
   public data: any;
   public production = environment.production;
 
-  public isInsurancePartner: boolean = false;
-  public isAdmin: boolean = false;
 
   constructor(private _location: Location, public orderService: OrderService, public userService: UserService, public colorService: ColorsService, public settingService: SettingService) {
-    this.userService.insurancePartner$.subscribe((result) => {
-      this.isInsurancePartner = result.valueOf();
-    });
-
-    this.userService.admin$.subscribe((result) => {
-      this.isAdmin = result.valueOf();
-    });
   }
 
   ngOnInit(): void {
-    if (!environment.production)
-    console.log("User is a ", this.userService.user?.temp.userType, this.userService.user, "Admin", this.isAdmin, "Partner", this.isInsurancePartner);
-
-    if (this.isInsurancePartner && !this.isAdmin)
-      this.orderService.getInsuranceRelated();
-    else if (this.userService.user && this.userService.user.temp.userType && (this.userService.user.temp.userType == 'practitioner'))
-      this.orderService.getAllByPrac(this.userService.user?.temp.customerId);
-    else
+      if (!environment.production)
+        console.log("Gettng Orders for User", this.userService.user?._id)
       this.orderService.getAllByUser(this.userService.user?._id);
   }
 

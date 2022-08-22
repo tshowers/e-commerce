@@ -9,6 +9,7 @@ import { DataService } from './data.service';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/shared/data/user.model';
+import { SettingService } from './setting.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,10 @@ export class CheckoutService implements OnDestroy {
   private _dataSubscription?: Subscription;
   private _userRetrieved: boolean = false
 
-  constructor(public cartService: CartService, private _authService: AuthService, private _router: Router, private _userService: UserService, private _dataService: DataService) {
+  constructor(public cartService: CartService, private _authService: AuthService, private _router: Router, private _userService: UserService, private _dataService: DataService, private _settinsService: SettingService) {
 
   }
-  
+
   ngOnDestroy(): void {
     if (this._dataSubscription)
       this._dataSubscription.unsubscribe();
@@ -31,27 +32,29 @@ export class CheckoutService implements OnDestroy {
 
   private checkShipping(): void {
     if (this.cartService.cart.billingShipping) {
-      this.cartService.cart.contact.addresses[1].streetAddress1 = this.cartService.cart.contact.addresses[0].streetAddress1
-      this.cartService.cart.contact.addresses[1].streetAddress2 = this.cartService.cart.contact.addresses[0].streetAddress2
-      this.cartService.cart.contact.addresses[1].city = this.cartService.cart.contact.addresses[0].city
-      this.cartService.cart.contact.addresses[1].province = this.cartService.cart.contact.addresses[0].province
-      this.cartService.cart.contact.addresses[1].zipCode = this.cartService.cart.contact.addresses[0].zipCode
-      this.cartService.cart.contact.addresses[1].country = this.cartService.cart.contact.addresses[0].country
+      this.cartService.cart.contact.addresses[1].streetAddress1 = this.cartService.cart.contact.addresses[0].streetAddress1;
+      this.cartService.cart.contact.addresses[1].streetAddress2 = this.cartService.cart.contact.addresses[0].streetAddress2;
+      this.cartService.cart.contact.addresses[1].city = this.cartService.cart.contact.addresses[0].city;
+      this.cartService.cart.contact.addresses[1].province = this.cartService.cart.contact.addresses[0].province;
+      this.cartService.cart.contact.addresses[1].zipCode = this.cartService.cart.contact.addresses[0].zipCode;
+      this.cartService.cart.contact.addresses[1].country = this.cartService.cart.contact.addresses[0].country;
+      this.cartService.cart.contact.addresses[1].firstName = this.cartService.cart.contact.firstName;
+      this.cartService.cart.contact.addresses[1].lastName = this.cartService.cart.contact.lastName;
     }
   }
 
 
-  public processOrder(): void {
+  public async processOrder() {
     if (!environment.production)
       console.log("Contact is", this.cartService.cart.contact);
 
-    this.checkShipping();
+    // this.checkShipping();
 
     if (this.cartService.cart)
       this.cartService.cart.completeOrderUrl = environment.localURL + '/pending?id=';
 
     let email = (this._authService.firebaseUser) ? (this._authService.firebaseUser.email) : this.cartService.cart.contact.emails[0].emailAddress;
-    this.saveContact(email);
+    await this.saveContact(email);
 
     if (!environment.production)
       console.log("Using Email for Checkout", email);
@@ -78,7 +81,7 @@ export class CheckoutService implements OnDestroy {
       this.cartService.cart.status = "Submitted";
       this.appleAuthenticate();
       this.removeTempCart();
-    } else if (this.cartService.cart && this.cartService.cart.contact && this.cartService.cart.contact.emails && this.cartService.cart.contact.emails[0].emailAddress && this.cartService.cart.contact.emails[0].emailAddress.endsWith('gmail.com')) {
+    } else if (email.endsWith('gmail.com')) {
       // Using a gmail account
       if (!environment.production)
         console.log("Gmail Authentication", email);
@@ -103,16 +106,35 @@ export class CheckoutService implements OnDestroy {
 
 
     this.cartService.cart.environment = environment.firebaseConfig.projectId;
+    this.cartService.cart.emailAddress = emailAddress;
+    this.cartService.cart.contact.companyId = this._settinsService.settings._id;
+    this.cartService.cart.contact.email = emailAddress;
 
     if (contactFromDatabaseID != null) {
-      this._dataService.update(environment.CONTACTS, contactFromDatabaseID, this.cartService.cart.contact)
+      this.updateContact(contactFromDatabaseID);
     } else {
-      let contactID = this._dataService.addRecordReturnKey(environment.CONTACTS, this.cartService.cart.contact);
-      this.cartService.cart.contact._id = contactID;
-      this._dataService.update(environment.CONTACTS, contactID, this.cartService.cart.contact)
+      this.addContact();
     }
 
   }
+
+  private updateContact(contactFromDatabaseID: any): void {
+    if (!environment.production)
+      console.log("UPDATING", JSON.stringify(this.cartService.cart.contact, null, 2));
+
+    this._dataService.update(environment.CONTACTS, contactFromDatabaseID, this.cartService.cart.contact)
+  }
+
+  private addContact(): void {
+    if (!environment.production)
+      console.log("ADDING", JSON.stringify(this.cartService.cart.contact, null, 2));
+
+    let contactID = this._dataService.addRecordReturnKey(environment.CONTACTS, this.cartService.cart.contact);
+    this.cartService.cart.contact._id = contactID;
+    this._dataService.update(environment.CONTACTS, contactID, this.cartService.cart.contact)
+  }
+
+
 
   private async checkIfContactAlreadyThere(emailAddress: string) {
     if (!environment.production)

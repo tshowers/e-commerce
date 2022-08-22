@@ -8,7 +8,7 @@ export interface ShoppingCart {
   companyId?: string;
   
   shippingRequired?: boolean;
-
+  emailAddress?: string;
   amount?: any;
   tax?: number;
   currency?: string;

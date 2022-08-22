@@ -66,6 +66,7 @@ import { Image2UploadTaskComponent } from './components/image2-upload-task/image
 import { MarketingCarouselComponent } from './components/marketing-carousel/marketing-carousel.component';
 import { Catalog2Component } from './components/catalog2/catalog2.component';
 import { ConsentAuthorizationComponent } from './components/consent-authorization/consent-authorization.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import { ConsentAuthorizationComponent } from './components/consent-authorizatio
     MarketingCarouselComponent,
     Catalog2Component,
     ConsentAuthorizationComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
@@ -175,7 +177,8 @@ import { ConsentAuthorizationComponent } from './components/consent-authorizatio
     MarketingCarouselComponent,
     Catalog2Component,
     ConsentAuthorizationComponent,
-
+    DashboardComponent,
+    
     AppointmentFilterPipe,
     AppointmentTimeSortPipe,
     CartFilterPipe,

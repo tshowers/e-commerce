@@ -31,7 +31,7 @@ export class OrderService extends GeneralDataService  {
   }
 
   getAllByUser(uid: any) {
-    this._itemDocs = this._firestore.collection(this._collectionName, ref => ref.where('cart.uid', '==', uid).where("companyId", "==", this._settingService.settings._id));
+    this._itemDocs = this._firestore.collection(this._collectionName, ref => ref.where('cart.uid', '==', uid));
     this.items = this._itemDocs.valueChanges({ idField: '_id' });
   }
 

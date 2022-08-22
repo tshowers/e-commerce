@@ -12,22 +12,21 @@ import { Subscription } from 'rxjs';
 })
 export class StoreComponent implements OnInit, OnDestroy {
   private _userSubscription?: Subscription;
+  public storeId: any;
 
   constructor(private _router: Router, private _route: ActivatedRoute, private _settingService: SettingService, private _userService: UserService) {
-    this.listenForUser();
-
   }
 
   ngOnInit(): void {
-    let id = this._route.snapshot.params['id'];
+    this.storeId = this._route.snapshot.params['id'];
 
     if (!environment.production)
-      console.log("Store ID", id);
+      console.log("Store ID", this.storeId);
 
-    if (id)
-      this.findStore(id);
-    else
-      this.listenForUser();
+    if (this.storeId)
+      this.findStore(this.storeId);
+    // else
+    //   this.listenForUser();
   }
 
   ngOnDestroy(): void {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgwWowService } from 'ngx-wow';
 import { DataService } from 'src/app/shared/services/data.service';
 import { environment } from 'src/environments/environment';
@@ -17,7 +17,7 @@ import { SettingService } from './shared/services/setting.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   private _routeSubscription?: Subscription;
   private _dataSubscription?: Subscription;
   private _userSubscription?: Subscription;

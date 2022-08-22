@@ -1,40 +1,11 @@
 <app-inline-box-nav *ngIf="(settingService.settings && !settingService.settings.colorBlock)" [data]="settingService.settings" [isHome]="false"></app-inline-box-nav>
 <app-static-top-nav *ngIf="settingService.settings && settingService.settings.colorBlock" [data]="settingService.settings" [isHome]="false"></app-static-top-nav>
-<div *ngIf="!settingService.settings">
-    <nav class="navbar navbar-expand-lg" style="background-color: white;">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="https://www.taliferro.com" style="color: #191919;">
-            <img src="https://www.taliferro.com/assets/images/taliferro-group-logo.png" alt="" width="48" height="48" class="d-inline-block align-text-top"> Taliferro Group </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" style="color:#737373" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color:#737373" href="https://www.taliferro.com/#products">Products</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color:#737373" href="https://www.taliferro.com/#services">Services</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color:#737373" href="https://www.taliferro.com/#about">About</a>
-              </li>
-            </ul>
-            <span class="navbar-text" style="color: #191919;"> 425.305.3748 </span>
-          </div>
-        </div>
-      </nav>
-      
-</div>
 <div class="container mt-2">
     <div class="row">
         <div class="col wow fadeInDown"><span routerLink="/" style="cursor: pointer;"><i
                     class="fa fa-chevron-left  fa-2x text-muted"></i></span> </div>
         <div class="col-md text-center mb-3">
-            <h1 [ngStyle]="{'color': colorService.darkBackground}">Welcome {{userService.user?.displayName}}</h1>
+            <h1 [ngStyle]="{'color': colorService.darkBackground}">Welcome</h1>
         </div>
         <div class="col"></div>
     </div>
@@ -44,8 +15,11 @@
                 <div class="card-header" *ngIf="userService.authService.firebaseUser && (userService.authService.firebaseUser.photoURL || userService.user?.firstName)">
                     <img *ngIf="userService.authService.firebaseUser && userService.authService.firebaseUser.photoURL"
                         src="{{userService.authService.firebaseUser.photoURL}}" alt="" class="img-thumbnail"
-                        style="max-height: 32px;"> {{userService.user?.firstName}}
-                    {{userService?.user?.lastName}}<br>
+                        style="max-height: 32px;">
+                    <span *ngIf="userService.user && userService.user.displayName"> {{userService.user.displayName}}</span>   
+                    <span *ngIf="!(userService.user && userService.user.displayName)">{{userService.user?.firstName}}
+                        {{userService.user?.lastName}}</span>
+                        
                 </div>
                 <div class="card-body">
                     <div *ngIf="userService.user && userService.user.email">{{userService.user.email}} </div>
@@ -89,13 +63,6 @@
                         {{userService?.user?.temp.province}} {{userService.user.temp.zip}}</div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row"
-        *ngIf="!(userService.user && userService.user.temp && userService.user.temp.userType) && practiceAlert && (settingService.settings && settingService.settings.siteType === 'practitioner')">
-        <div class="col">
-            <div class="alert alert-warning" role="alert"> Are you a practitioner? If so, click
-                <strong>Profile</strong>, and "Are you a practice?" and enter your practice information. </div>
         </div>
     </div>
     <div class="row" *ngIf="userService.lastOrderID">

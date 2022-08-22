@@ -31,7 +31,7 @@
         <div class="card pages-card col-lg-8 col-md-8 col-sm-8">
             <div class="card-body ">
                 <div class="user-img text-center" *ngIf="authService.firebaseUser && authService.firebaseUser.photoURL">
-                    <img src="authService.firebaseUser.photoURL" alt="authService.firebaseUser.displayName" class="text-center">
+                    <img src="{{authService.firebaseUser.photoURL}}" alt="{{authService.firebaseUser.displayName}}" class="text-center">
                 </div>
                 <div class="h4 text-center text-theme wow fadeIn">
                     <strong *ngIf="authService.firebaseUser">{{authService.firebaseUser.displayName}}</strong>
@@ -58,7 +58,8 @@
                         <a *ngIf="!authService.firebaseUser" href="https://passwordless.taliferro.com/sign-up" class="button button-white" title="Sign Up">Sign Up</a>
                         <a *ngIf="!authService.firebaseUser" routerLink="/identity" class="button button-white">Sign In</a> 
                         <a *ngIf="authService.firebaseUser" routerLink="/" class="button button-white">Home</a> 
-                        <a *ngIf="authService.firebaseUser && userService.user" routerLink="/admin" class="button button-white">Admin</a> 
+                        <a *ngIf="authService.firebaseUser && userService.user && userService.user.companyId" routerLink="/admin" class="button button-white">Admin</a> 
+                        <a *ngIf="authService.firebaseUser && userService.user && !userService.user.companyId" routerLink="/my" class="button button-white">Dashboard</a> 
                         <a *ngIf="authService.firebaseUser" routerLink="/identity/bye" class="button button-white">Sign Out</a> 
                     </small>
                     <hr>

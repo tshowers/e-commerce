@@ -13,7 +13,6 @@ import { environment } from 'src/environments/environment';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  public practiceAlert: boolean = true;
   public settings: any;
   private _settingSubscription?: Subscription; 
   
@@ -23,7 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    setTimeout(() => {this.practiceAlert = false}, 20000);
+    // setTimeout(() => {this.practiceAlert = false}, 20000);
   }
 
   ngOnDestroy(): void {
