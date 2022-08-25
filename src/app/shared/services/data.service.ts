@@ -9,6 +9,8 @@ import { AuthService } from './auth.service';
 import { SettingService } from './setting.service';
 import { UserService } from './user.service';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +27,8 @@ export class DataService implements OnDestroy {
 
   public ipAddress = '';
 
-  constructor(private _firestore: AngularFirestore, private _ipService: IpService, private _authService: AuthService, private _settingService: SettingService, private _userService: UserService) {
+
+  constructor( private _firestore: AngularFirestore, private _ipService: IpService, private _authService: AuthService, private _settingService: SettingService, private _userService: UserService) {
     this.getIP();
   }
 
@@ -33,6 +36,7 @@ export class DataService implements OnDestroy {
     if (this._ipSubscription)
       this._ipSubscription.unsubscribe();
   }
+
 
   getAll(collectionName: string) {
     try {
@@ -108,6 +112,10 @@ export class DataService implements OnDestroy {
   get(collectionName: string, id: string) {
     this._itemDoc = this._firestore.doc<any>(collectionName + '/' + id);
     this.item = this._itemDoc.valueChanges({ idField: '_id' });
+  }
+
+  getRecord(collectionName: string, id: string) : Observable<any> {
+    return this._firestore.doc<any>(collectionName + '/' + id).valueChanges({ idField: '_id' });
   }
 
   getByTitle(collectionName: string, title: string) {

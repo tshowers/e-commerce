@@ -85,14 +85,16 @@ export class PageComponent implements OnInit, OnDestroy {
     protected _settingService: SettingService,
     private _router: Router,
     public authService: AuthService) {
+      if (!environment.production)
+      console.log("PageComponent");
   }
 
   ngOnInit(): void {
-    this.listenForUser();
+    // this.listenForUser();
     this.checkSettings();
 
     if (!environment.production)
-      console.log("PAGE and Settings", this._settingService.settings);
+      console.log("PageComponent - Settings", this._settingService.settings);
   }
 
   ngOnDestroy(): void {
@@ -111,7 +113,7 @@ export class PageComponent implements OnInit, OnDestroy {
   private listenForUser(): void {
     this._userSubscription = this.userService.userSubject.subscribe((user) => {
       if (!environment.production)
-        console.log("We have user from firebase", user);
+        console.log("PageComponent - We have user from firebase", user);
 
       if (!this._settingService.settings && user.companyId)  {
         this._settingService.retrieveSettings(user.companyId);  
@@ -131,14 +133,14 @@ export class PageComponent implements OnInit, OnDestroy {
   private checkSettings(): void {
     if (this._settingService.settings && this._settingService.settings.hasOwnProperty('companyName')) {
       if (!environment.production)
-        console.log("checkSettings: Settings are Valid", this._settingService.settings);
+        console.log("PageComponent- checkSettings: Settings are Valid", this._settingService.settings);
 
       this.data = this._settingService.settings;
       this.populate();
       this.checkIfUserSite();
     } else {
       if (!environment.production)
-        console.log("checkSettings: Settings are INVALID");
+        console.log("PageComponent - checkSettings: Settings are INVALID");
 
 
       this.checkPageTypeForValidSetting();
@@ -157,7 +159,7 @@ export class PageComponent implements OnInit, OnDestroy {
       if (!environment.production)
         console.log("Regular User");
 
-      this._router.navigate(['store-under-construction']);  
+      this._router.navigate(['shop', 'store-under-construction']);  
     }
   }
 

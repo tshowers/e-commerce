@@ -126,20 +126,21 @@ export class CheckOutComponent extends DataHandlerComponent implements OnInit, O
       this._dataService.items?.subscribe((contacts) => {
         if (contacts[0] && contacts[0]._id && contacts[0].emails[0] && contacts[0].emails[0].emailAddress) {
           this.contact = contacts[0];
+          if (this.contact.emails && this.contact.emails[0])
+            this.emailAddress = this.contact.emails[0];
+          if (this.contact.addresses && this.contact.addresses[0])
+            this.address = this.contact.addresses[0];
+          if (this.contact.phones && this.contact.phones[0])
+            this.phone = this.contact.phones[0];
+          if (this.contact.paymentDetails && this.contact.paymentDetails[0]) {
+            this.paymentDetails = this.contact.paymentDetails[0];
+            this.paymentDetails.ccSecurityCode = '';
+          }
+            
         }
       })
     }
   }
-
-  // Used by other components
-  // public refresh(): void {
-  //   this.cartService.refreshScreenContact(this.contact);
-
-  // }
-
-  // public refreshWithOutCardInfo(): void {
-  //   this.cartService.refreshScreen(this.check_out, true);
-  // }
 
   setDiagnostic(): void {
     this.diagnostic = !this.diagnostic;

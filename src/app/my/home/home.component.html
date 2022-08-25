@@ -7,7 +7,10 @@
         <div class="col-md text-center mb-3">
             <h1 [ngStyle]="{'color': colorService.darkBackground}">Welcome</h1>
         </div>
-        <div class="col"></div>
+        <div class="col">
+            <button type="button" class="btn btn-danger" (click)="onSignOut()">Sign Out</button>
+
+        </div>
     </div>
     <div class="row mb-3">
         <div class="col-md wow fadeInDown">

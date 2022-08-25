@@ -56,7 +56,7 @@ export class UserService implements OnDestroy {
           this.user = this.checkUserReturned(u, firebaseUser);
           this.userSubject.next(u);
           if (!environment.production)
-            console.log("loggedInUser Fired", firebaseUser, "User", u);
+            console.log("UserService - loggedInUser Fired", firebaseUser, "User", u);
         });
       }
       else {

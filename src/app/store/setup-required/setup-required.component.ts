@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-setup-required',
@@ -8,7 +9,11 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class SetupRequiredComponent implements OnInit {
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService) { 
+    if (!environment.production)
+      console.log("SetupRequiredComponent");
+
+  }
 
   ngOnInit(): void {
   }

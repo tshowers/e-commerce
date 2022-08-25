@@ -45,7 +45,7 @@
 								</ul>
 								<ng-template #userAndSignedIn>
 									<ul class="header-nav-buttons" *ngIf="settingService.settings else noSettings">
-										<li><a *ngIf="(settingService.settings._id === userService.user?.companyId)" routerLink="/store/{{ userService.user?.companyId}}"
+										<li><a *ngIf="(settingService.settings._id === userService.user?.companyId)" routerLink="/shop/store"
 											class="button button-white" title="Slore">Your Store</a></li>
 										<li><a *ngIf="(settingService.settings._id === userService.user?.companyId)" routerLink="/admin" class="button button-white-border"
 												title="Slore">Administration</a></li>
@@ -149,7 +149,7 @@
 								<h2 class="wow fadeInUp">SOMETIME SIMPLICITY IS A GOOD THING</h2>
 								<p class="wow fadeInUp">You won't find a simpler e-commerce platform. We have used and developed many e-commerce platforms, but there was always lingering in the back of our minds, is there
 									an easier way. Well, hear is our attempt at balance and features.</p>
-								<a routerLink="/store/31e2rvCZiYgxf7lEXxX0" class="button button-full wow fadeInUp" title="button">Preview</a>
+								<a routerLink="/shop/store/31e2rvCZiYgxf7lEXxX0" class="button button-full wow fadeInUp" title="button">Preview</a>
 							</div>
 						</div> <!-- .row -->
 					</div> <!-- .container -->

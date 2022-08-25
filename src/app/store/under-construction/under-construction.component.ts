@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-under-construction',
   templateUrl: './under-construction.component.html',
@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UnderConstructionComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    if (!environment.production)
+    console.log("PageComponent");
+
+  }
 
   ngOnInit(): void {
   }

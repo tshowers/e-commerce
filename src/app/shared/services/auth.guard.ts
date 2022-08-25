@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
 
   constructor(private _authService: AuthService, private _router: Router) {
-    
+
   }
 
   canActivate(
@@ -32,6 +32,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     return true;
   }
+
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -40,6 +41,9 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
     // return this.checkLogin(url);
     const ok: boolean = isUser(this._authService.getFirestoreUser());
+
+    if (!environment.production)
+      console.log("AuthGuard", ok, url);
 
     if (!ok) {
       this._router.navigate(['/'])

@@ -18,7 +18,8 @@ export class YourStoreUnderConstructionComponent implements OnInit, OnDestroy {
   public environment = environment;
 
   constructor(public authService: AuthService, public settingService: SettingService, public userService: UserService) { 
-
+    if (!environment.production)
+      console.log("YourStoreUnderConstructionComponent");
   }
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class YourStoreUnderConstructionComponent implements OnInit, OnDestroy {
   private listenForUser(): void {
     this._userSubscription = this.userService.userSubject.subscribe((user) => {
       if (!environment.production)
-        console.log("We have user from firebase", user);
+        console.log("YourStoreUnderConstructionComponent - We have user from firebase", user);
 
       if (!this.settingService.settings && user.companyId)  {
         this.settingService.retrieveSettings(user.companyId);  

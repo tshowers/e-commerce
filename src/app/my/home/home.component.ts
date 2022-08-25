@@ -5,6 +5,7 @@ import { SettingService } from 'src/app/shared/services/setting.service';
 import { Subscription } from 'rxjs';
 import { ColorsService } from 'src/app/shared/services/colors.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,8 +18,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   private _settingSubscription?: Subscription; 
   
 
-  constructor(private _location: Location, public userService: UserService, public settingService: SettingService, public colorService: ColorsService) { 
-    
+  constructor(private _location: Location, public userService: UserService, public settingService: SettingService, public colorService: ColorsService, private _router:Router) { 
+    if (!environment.production)
+      console.log("my HomeComponent");
   }
 
   ngOnInit(): void {
@@ -28,6 +30,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
   }
+
+  onSignOut(): void {
+    this._router.navigate(['identity', 'bye']);
+  }
+
 
   back(): void {
     this._location.back()

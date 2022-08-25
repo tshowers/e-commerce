@@ -44,7 +44,7 @@
         <small>
           <a *ngIf="!authService.firebaseUser" href="https://passwordless.taliferro.com/sign-up" class="btn  btn-theme text-white text-center">Sign Up</a>
           <a *ngIf="!authService.firebaseUser && !settingService.settings" routerLink="/identity" class="btn  btn-theme text-white text-center">Sign In</a>
-          <a *ngIf="authService.firebaseUser && settingService.settings" routerLink="/store/{{settingService.settings._id}}" class="btn  btn-theme text-white text-center">Sign In</a>
+          <a *ngIf="authService.firebaseUser && settingService.settings" routerLink="/shop/store/{{settingService.settings._id}}" class="btn  btn-theme text-white text-center">Sign In</a>
           <a *ngIf="authService.firebaseUser && !settingService.settings" routerLink="/my" class="btn  btn-theme text-white text-center">Dashboard</a>
         </small>
       </div>

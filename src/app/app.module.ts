@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+
 import { SharedModule } from './shared/shared.module';
 import { environment as env } from "src/environments/environment";
 import { AngularFireModule } from "@angular/fire";
@@ -7,7 +9,6 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PageComponent } from './home/page/page.component';
 import { VerifyComponent } from './home/verify/verify.component';
 import { NotFoundComponent } from './home/not-found/not-found.component';
 
@@ -34,37 +35,27 @@ import { SettingService } from './shared/services/setting.service';
 import { SubCategoryService } from './shared/services/sub-category.service';
 import { TestKitService } from './shared/services/test-kit.service';
 import { UserService } from './shared/services/user.service';
-
-import { HeaderComponent } from './home/header/header.component';
-import { FooterComponent } from './home/footer/footer.component';
+import { StoreService } from './shared/services/store.service';
 import { ThankYouComponent } from './home/thank-you/thank-you.component';
-import { UnderConstructionComponent } from './home/under-construction/under-construction.component';
-import { StoreComponent } from './home/store/store.component';
-import { YourStoreUnderConstructionComponent } from './home/your-store-under-construction/your-store-under-construction.component';
-import { SetupRequiredComponent } from './home/setup-required/setup-required.component';
+import { OverviewComponent } from './about/overview/overview.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageComponent,
     VerifyComponent,
     NotFoundComponent,
-    HeaderComponent,
-    FooterComponent,
     ThankYouComponent,
-    UnderConstructionComponent,
-    StoreComponent,
-    YourStoreUnderConstructionComponent,
-    SetupRequiredComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SharedModule,
+    RouterModule,
     AngularFireModule.initializeApp(env.firebaseConfig),
     AngularFirestoreModule,
   ],
-  providers: [AuthService, AppointmentService, CheckoutService, DailyReportService, ProductTypeService, ExtCalService, LisPractitionersService, SubCategoryService, DependencyCodeService, CustomerService, ColorsService, DataService, IpService, LabOrderService, OrderService, PaymentService, ProductService, SettingService, TestKitService, UserService, CartService, CategoryService],
+  providers: [AuthService, StoreService, AppointmentService, CheckoutService, DailyReportService, ProductTypeService, ExtCalService, LisPractitionersService, SubCategoryService, DependencyCodeService, CustomerService, ColorsService, DataService, IpService, LabOrderService, OrderService, PaymentService, ProductService, SettingService, TestKitService, UserService, CartService, CategoryService],
   bootstrap: [AppComponent]
 })
 

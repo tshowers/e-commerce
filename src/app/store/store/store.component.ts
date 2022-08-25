@@ -14,17 +14,25 @@ export class StoreComponent implements OnInit, OnDestroy {
   private _userSubscription?: Subscription;
   public storeId: any;
 
-  constructor(private _router: Router, private _route: ActivatedRoute, private _settingService: SettingService, private _userService: UserService) {
+  constructor(private _activatedRoute: ActivatedRoute, private _router: Router, private _route: ActivatedRoute, private _settingService: SettingService, private _userService: UserService) {
+    if (!environment.production)
+      console.log("StoreComponent");
   }
 
   ngOnInit(): void {
-    this.storeId = this._route.snapshot.params['id'];
-
     if (!environment.production)
-      console.log("Store ID", this.storeId);
+      console.log("StoreComponent - Store ID", this._activatedRoute.data);
+    
 
-    if (this.storeId)
-      this.findStore(this.storeId);
+    this._activatedRoute.data.subscribe((response: any) => {
+      response.setting.subscribe((data: any) => {
+        console.log("RESPONSE2", data);
+      })
+    })
+
+
+    // if (this.storeId)
+    //   this.findStore(this.storeId);
     // else
     //   this.listenForUser();
   }
@@ -38,7 +46,7 @@ export class StoreComponent implements OnInit, OnDestroy {
   private listenForUser(): void {
     this._userSubscription = this._userService.userSubject.subscribe((user) => {
       if (!environment.production)
-        console.log("We have user Store", user);
+        console.log("StoreComponent - We have user Store", user);
 
       if (!this._settingService.settings && user.companyId) {
         this.findStore(user.companyId);
@@ -61,14 +69,14 @@ export class StoreComponent implements OnInit, OnDestroy {
       this._settingService.settings = setting;
 
       if (!environment.production)
-        console.log("Valid record", setting);
+        console.log("StoreComponent - Valid record", setting);
 
-      this._router.navigate(['store']);
+      this._router.navigate(['shop', 'store']);
 
     }
     else {
       if (!environment.production)
-        console.log("Invalid record", setting);
+        console.log("StoreComponent - Invalid record", setting);
 
       this._router.navigate(['error']);
     }
